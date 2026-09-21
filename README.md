@@ -1,30 +1,35 @@
 # SupportTicketSystem
+    //Beskriv applikationens syfte
+       
+# Studenter och Ansvarsområde (Ej tilldelade än)
 
-# Applikationens syfte
-    //Beskriv
+- Love - Kundhantering
 
-                    //  !!! OBS !!!  Ej tilldelade  !!! OBS !!!          
-# Studenter:        # Ansvarsområde          # Exempel arbete  
+      - Kundvyer               []
+      - Validering             []
+      - Service                []
+      - Lagring av kunder      []
+                                             
+- Tomas - Ärenderegistrering
 
-- Love              - Kundhantering          - Kundvyer               []
-                                             - Validering             []
-                                             - Service                []
-                                             - Lagring av kunder      []
+      - Formulär nya ärenden   []
+      - Kundval                []
+      - Registreringsflöde     []
                                              
-- Tomas             - Ärenderegistrering     - Formulär nya ärenden   []
-                                             - Kundval                []
-                                             - Registreringsflöde     []
+- William - Ärendehantering
+
+      - Detaljvy               []
+      - Tilldelning            []
+      - Status                 []
+      - Priopritet             []
+      - Kommentarer            []
                                              
-- William           - Ärendehantering        - Detaljvy               []
-                                             - Tilldelning            []
-                                             - Status                 []
-                                             - Priopritet             []
-                                             - Kommentarer            []
-                                             
-- Emilia            - Överblick              - Ärendelista            []
-                                             - Sökning                []
-                                             - Filtrering             []
-                                             - Sammanställning        []
+- Emilia  - Överblick
+
+      - Ärendelista            []
+      - Sökning                []
+      - Filtrering             []
+      - Sammanställning        []
 
 
 # Projektens ansvar
