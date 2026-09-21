@@ -1,0 +1,16 @@
+<Solution>
+  <Configurations>
+    <Platform Name="ARM64" />
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="SupportTicketSystem.Application/SupportTicketSystem.Application.csproj" Id="60e2842d-5770-43f5-a118-60182ddc8a94" />
+  <Project Path="SupportTicketSystem.Domain/SupportTicketSystem.Domain.csproj" Id="2231dd9c-58de-4624-a37c-67fa28ba6015" />
+  <Project Path="SupportTicketSystem.Infrastructure/SupportTicketSystem.Infrastructure.csproj" Id="69e89e25-414d-4a02-b40f-05552a6036ab" />
+  <Project Path="SupportTicketSystem.Presentation/SupportTicketSystem.Presentation.csproj">
+    <Platform Solution="*|ARM64" Project="ARM64" />
+    <Platform Solution="*|x64" Project="x64" />
+    <Platform Solution="*|x86" Project="x86" />
+    <Deploy />
+  </Project>
+</Solution>
