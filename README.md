@@ -1,3 +1,7 @@
+# Frågor att ställa
+1. Ska våra services utgå från interfaces?
+2. 
+
 # SupportTicketSystem
     //Beskriv applikationens syfte
        
