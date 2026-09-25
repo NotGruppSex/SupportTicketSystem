@@ -42,7 +42,7 @@
 
 # Gruppens regler
 
-***Arbetsflöde**
+**Arbetsflöde**
 
 1. Vi avsätter gemensamma tider att sitta ner tillsammans i gruppen där vi gör följande:
 
@@ -57,12 +57,12 @@
 
 **Katalog och filer**
 
-    Varje indelad uppgift har sin egen katalog per lager för att undvika merge-konflikter
-    Kataloger namnges i plurar, filer i singular
-    Följer DDD enligt uppgiftens beskrivning
-    Filer/klasser/metoder som har med Async, JSON osv att göra har respektive i sina namn
-    Vi använder oss av MVVM
-    + fler regler vi vill ha
+- Varje indelad uppgift har sin egen katalog per lager för att undvika merge-konflikter
+- Kataloger namnges i plurar, filer i singular
+- Följer DDD enligt uppgiftens beskrivning
+- Filer/klasser/metoder som har med Async, JSON osv att göra har respektive i sina namn
+- Vi använder oss av MVVM
++ + fler regler vi vill ha
 
 **Beroenden och ansvar**
 
