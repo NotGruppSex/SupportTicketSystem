@@ -1,3 +1,8 @@
+# Att göra:
+- Installera toolkit
+- ändra från .net8 till .net 10
+
+
 # Frågor att ställa
 1. Ska våra services utgå från interfaces?
 2. 
@@ -7,28 +12,28 @@
        
 # Studenter och Ansvarsområde (Ej tilldelade än)
 
-- Love - Kundhantering
+- William - Kundhantering
 
       - Kundvyer               []
       - Validering             []
       - Service                []
       - Lagring av kunder      []
                                              
-- Tomas - Ärenderegistrering
+- Love - Ärenderegistrering
 
       - Formulär nya ärenden   []
       - Kundval                []
       - Registreringsflöde     []
                                              
-- William - Ärendehantering
+- Emilia - Ärendehantering
 
       - Detaljvy               []
       - Tilldelning            []
       - Status                 []
-      - Priopritet             []
+      - Prioritet             []
       - Kommentarer            []
                                              
-- Emilia  - Överblick
+- Tomas  - Överblick
 
       - Ärendelista            []
       - Sökning                []
@@ -37,12 +42,30 @@
 
 # Gruppens regler
 
+***Arbetsflöde**
+
+1. Vi avsätter gemensamma tider att sitta ner tillsammans i gruppen där vi gör följande:
+
+- Går igenom vart vi är i projektet
+- 
+- Hjälper varandra
+- 
+- Sitter och arbetar tillsammans (t.ex. gör sina delar men hjälper varandra, granskar kod och ger feedback)
+-
+- Tider: Måndagar kl:10-12 / Torsdagar kl. 10-12 
+
+2. Vi försöker använda oss av ticketsystemet i GitHub
+
+ 
+
 **Katalog och filer**
 
-    Förslag: Varje indelad uppgift har sin egen katalog per lager för att undvika merge-konflikter
-    Förslag: Kataloger namnges i plurar, filer i singular
-    Förslag: Följer DDD enligt uppgiftens beskrivning
-    Förslag: Filer som har med Async, JSON osv att göra har respektive i sina namn
+    Varje indelad uppgift har sin egen katalog per lager för att undvika merge-konflikter
+    Kataloger namnges i plurar, filer i singular
+    Följer DDD enligt uppgiftens beskrivning
+    Filer/klasser/metoder som har med Async, JSON osv att göra har respektive i sina namn
+    Vi använder oss av MVVM
+    + fler regler vi vill ha
 
 **Beroenden och ansvar**
 
@@ -53,10 +76,6 @@
     Infrastructure     |    Application + Domain
     Presentation       |    Application + Interface
 
-
-**MVVM**
-
-    Följer vi MVVM? (ej krav)
 
 **LINQ**
 
@@ -70,9 +89,13 @@
 
     Använder vi Records?
 
+    //Ej bestämt än då vi inte förstår detta
+
 **Value Objects**
 
     Använder vi value objects?
+
+    //Ej bestämt än då vi inte förstår detta
 
 # Projektens ansvar
 
