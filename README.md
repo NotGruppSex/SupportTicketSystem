@@ -10,7 +10,7 @@
 # SupportTicketSystem
     //Beskriv applikationens syfte
        
-# Studenter och Ansvarsområde (Ej tilldelade än)
+# Studenter och Ansvarsområde
 
 - William - Kundhantering
 
