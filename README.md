@@ -3,7 +3,7 @@
 - ändra från .net8 till .net 10
 
 
-# Frågor att ställa
+# Frågor att ställa till Hans
 1. Ska våra services utgå från interfaces?
 2. 
 
@@ -47,11 +47,8 @@
 1. Vi avsätter gemensamma tider att sitta ner tillsammans i gruppen där vi gör följande:
 
 - Går igenom vart vi är i projektet
-- 
 - Hjälper varandra
-- 
 - Sitter och arbetar tillsammans (t.ex. gör sina delar men hjälper varandra, granskar kod och ger feedback)
--
 - Tider: Måndagar kl:10-12 / Torsdagar kl. 10-12 
 
 2. Vi försöker använda oss av ticketsystemet i GitHub
@@ -75,6 +72,10 @@
     Application        |    Domain (använd repo-interfce för JSON-implementationerna)
     Infrastructure     |    Application + Domain
     Presentation       |    Application + Interface
+
+
+# FlowChart
+<img width="966" height="821" alt="image" src="https://github.com/user-attachments/assets/ab1e92aa-e976-4790-89d3-390023be4394" />
 
 
 **LINQ**
