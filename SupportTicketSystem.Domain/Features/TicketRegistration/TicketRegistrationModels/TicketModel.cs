@@ -1,11 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿
+using System;
 
-namespace SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationModels
+namespace SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationModels;
+public class TicketModel
 {
-    internal class TicketModel
-    {
-        //Själva ticketmodellen
-    }
+    public Guid TicketID { get; set; }
+    public string TicketTitle { get; set; }
+    public string TicketDescription { get; set; }
+
+    //Lägg till denna 
+    public Customer customerTicket { get; set; }
+    public string Priority { get; set; }
 }
