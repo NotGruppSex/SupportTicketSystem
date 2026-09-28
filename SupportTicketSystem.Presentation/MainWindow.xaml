@@ -7,13 +7,24 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Title="SupportTicketSystem.Presentation">
+    Title="Support Ticket System">
 
     <Window.SystemBackdrop>
         <MicaBackdrop />
     </Window.SystemBackdrop>
 
-    <Grid>
+    <NavigationView x:Name="MainNavigation"
+                    IsBackButtonVisible="Visible"
+                    IsBackEnabled="False"
+                    ItemInvoked="MainNavigation_ItemInvoked"
+                    BackRequested="MainNavigation_BackRequested"
+                   >
+        <NavigationView.MenuItems>
+            <NavigationViewItem x:Name="HomeNavigationItem" Content="Home" Tag="home" Icon="Home"/>
+        </NavigationView.MenuItems>
 
-    </Grid>
+        <Frame x:Name="ContentFrame" Navigated="ContentFrame_Navigated"/>
+
+    </NavigationView>               
+    
 </Window>
