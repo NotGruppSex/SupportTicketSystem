@@ -16,4 +16,7 @@
     <ProjectReference Include="..\SupportTicketSystem.Domain\SupportTicketSystem.Domain.csproj" />
     <ProjectReference Include="..\SupportTicketSystem.Infrastructure\SupportTicketSystem.Infrastructure.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Features\Overviews\" />
+  </ItemGroup>
 </Project>

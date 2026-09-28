@@ -15,4 +15,7 @@
   <ItemGroup>
     <ProjectReference Include="..\SupportTicketSystem.Domain\SupportTicketSystem.Domain.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Features\Overviews\" />
+  </ItemGroup>
 </Project>
