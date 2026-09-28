@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿namespace SupportTicketSystem.Presentation.Navigation;
 
-namespace SupportTicketSystem.Presentation.Navigation
+public enum AppPage
 {
-    internal class AppPage
-    {
-    }
+    Home,
 }

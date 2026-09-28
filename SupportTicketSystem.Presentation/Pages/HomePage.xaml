@@ -9,6 +9,7 @@
     mc:Ignorable="d">
 
     <Grid>
+        <TextBlock Text="{x:Bind ViewModel.Title}"/>
 
     </Grid>
 </Page>

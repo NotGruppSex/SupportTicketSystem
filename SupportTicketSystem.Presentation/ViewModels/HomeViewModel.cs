@@ -1,10 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using SupportTicketSystem.Presentation.Navigation;
 
-namespace SupportTicketSystem.Presentation.ViewModels
+namespace SupportTicketSystem.Presentation.ViewModels;
+
+public partial class HomeViewModel : ObservableObject
 {
-    internal class HomeViewModel
+    private readonly INavigationService _navigationService;
+    public string Title { get; set; } = "Home Page";
+
+    public HomeViewModel(INavigationService navigationService)
     {
+        _navigationService = navigationService;
     }
 }

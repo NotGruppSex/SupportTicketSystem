@@ -2,6 +2,8 @@
 using Microsoft.UI.Xaml;
 using SupportTicketSystem.Application;
 using SupportTicketSystem.Infrastructure;
+using SupportTicketSystem.Presentation.Navigation;
+using SupportTicketSystem.Presentation.ViewModels;
 using System;
 
 namespace SupportTicketSystem.Presentation
@@ -20,6 +22,10 @@ namespace SupportTicketSystem.Presentation
             var services = new ServiceCollection();
             services.AddApplication();
             services.AddInfrastructure();
+
+            services.AddSingleton<INavigationService, NavigationService>();
+
+            services.AddTransient<HomeViewModel>();
 
             services.AddTransient<MainWindow>();
 

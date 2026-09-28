@@ -1,4 +1,5 @@
 using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
 using SupportTicketSystem.Presentation.Navigation;
 
 namespace SupportTicketSystem.Presentation;
@@ -33,11 +34,11 @@ public sealed partial class MainWindow : Window
 
     private void MainNavigation_BackRequested(Microsoft.UI.Xaml.Controls.NavigationView sender, Microsoft.UI.Xaml.Controls.NavigationViewBackRequestedEventArgs args)
     {
-
+        _navigationService.GoBack();
     }
 
     private void ContentFrame_Navigated(object sender, Microsoft.UI.Xaml.Navigation.NavigationEventArgs e)
     {
-
+        MainNavigation.IsBackEnabled = true;
     }
 }
