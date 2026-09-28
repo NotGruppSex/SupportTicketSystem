@@ -1,11 +1,13 @@
 # Att göra:
-- Installera toolkit
-- ändra från .net8 till .net 10
 
 
 # Frågor att ställa till Hans
 1. Ska våra services utgå från interfaces?
-2. 
+
+# !!!OBS!!!
+
+**Det finns kataloger "features" i varje lager. Där skapar VARJE PERSON en egen mapp med sina klasser osv i - på så sätt undviker vi mergekonflikter.**
+
 
 # SupportTicketSystem
     //Beskriv applikationens syfte
