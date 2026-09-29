@@ -11,5 +11,9 @@ namespace SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrat
         //Bra test: "If you deleted the database and UI, this class would still make perfect sense. 
 
         //Bussinessregler, använder sig INTE av repositories, besvarar frågan "HUR räknar businessen ut eller bestämmer x"?
+
+        //____________________________
+
+        
     }
 }

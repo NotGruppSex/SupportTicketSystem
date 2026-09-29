@@ -11,11 +11,30 @@ public class MockCustomer
     public string MockCustomerPhone { get; set; }
 }
 
-public class TicketModel
+//Skapar enum för ticketmodellen så det blir enklare att enbart kunna ändra genom statusarna enbart olika status på status och prioritering. 
+public enum TicketStatus
 {
-    public Guid TicketID { get; set; }
-    public string TicketTitle { get; set; }
-    public string TicketDescription { get; set; }
-    public MockCustomer customerTicket { get; set; } //Ändra denna till rätt customer sen
-    public string Priority { get; set; }
+    New,
+    InProgress,
+    Closed,
 }
+
+public enum TicketPriority
+{
+    Low,
+    Medium,
+    High,
+}
+
+//Modellen, kräver vissa properties vid skapande. Alla nya tickets ska ha status "New" varav det tilldelas inom klassen. Samma för DateTime.  
+public class TicketModel (Guid id, string title, string description, MockCustomer customer, TicketPriority priority) 
+{
+    public Guid TicketID { get; set; } = id;
+    public string TicketTitle { get; set; } = title;
+    public string TicketDescription { get; set; } = description;
+    public MockCustomer customerTicket { get; set; } = customer; //Ändra denna till rätt customer sen
+    public TicketPriority Priority { get; set; } = priority;
+    public TicketStatus TicketStatus { get; set; } = TicketStatus.New;
+    public DateTime TicketCreationDate { get; set; } = DateTime.Now;
+}
+

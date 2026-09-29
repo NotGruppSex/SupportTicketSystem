@@ -1,6 +1,6 @@
 ﻿
 namespace SupportTicketSystem.Infrastructure.Features.TicketRegistration.TicketRegistrationRepositories;
-internal class TickerRegistration_Repository
+internal class JSON_TicketRegistration_Repository
 {
 
     //Create
