@@ -1,4 +1,5 @@
-﻿using SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationModels;
+﻿using SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistration_Interfaces;
+using SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationModels;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -32,9 +33,9 @@ public class Json_TicketRegistration_Repository : IJson_TicketRegistration_Repos
         Converters = { new JsonStringEnumConverter() }
     };
 
+
     //____________________________Save tickets____________________________
 
-    //Create
     public async Task SaveAllTicketsAsync(IEnumerable<TicketModel> tickets)
     {
         //Skapar mappen om den inte finns genom metoden CreatDirectory. Vi stoppar sen in sökvägen till filen i metoden Path.GetDirectoryName som tar bort filnamnet och returnerar mappens sökväg.
@@ -53,8 +54,24 @@ public class Json_TicketRegistration_Repository : IJson_TicketRegistration_Repos
         File.Move(tempFilePath, _filePath, overwrite: true);
     }
 
+
+
+    //____________________________Read tickets____________________________
+
+    public async Task<List<TicketModel>> GetAllTicketsAsync()
+    {
+        //Om filen inte finns, returnera en tom lista.
+        if (!File.Exists(_filePath))
+            return [];
+
+        //Läser in filen och returnerar en lista av TicketModel.
+        string json = await File.ReadAllTextAsync(_filePath);
+
+        //Text om det hela misslyckas. Annars skapar lista av ticketmodel som vi deserialiserat från json. ?? kollar om det är null. Om det är null -> felmeddelande. Om inte null -> returnera listan.
+        var tickets = JsonSerializer.Deserialize<List<TicketModel>>(json, _options)
+            ?? throw new JsonException("The file must contain a valid Json list");
+
+        //Skickar tillbaka listan
+        return tickets;
+    }
 }
-//Read
-
-//Läsa av Customers 
-

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace SupportTicketSystem.Infrastructure.Features.TicketRegistration.TicketRegistrationRepositories
+namespace SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistration_Interfaces
 {
     public interface IJson_TicketRegistration_Repository
     {
