@@ -7,5 +7,7 @@ namespace SupportTicketSystem.Infrastructure.Features.TicketRegistration.TicketR
     public interface IJson_TicketRegistration_Repository
     {
         Task SaveAllTicketsAsync(IEnumerable<TicketModel> tickets);
+
+        Task<List<TicketModel>> GetAllTicketsAsync();
     }
 }

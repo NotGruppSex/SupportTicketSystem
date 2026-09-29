@@ -5,7 +5,9 @@ using System;
 using System.Threading.Tasks;
 
 namespace SupportTicketSystem.Application.Features.TicketRegistration.TicketRegistrationServices;
-public class TicketRegistration_Service
+
+//Hämtar in repot genom dess interface så den kan användas. 
+public class TicketRegistration_Service (IJson_TicketRegistration_Repository ticketRepository)
 {
     //Representerar en sak en användare vill göra. (t.ex. place order, cancel order). Den ska INTE innehålla bussiness logic utan den ska KOORDINERA steg som t.ex. 
 
@@ -15,43 +17,29 @@ public class TicketRegistration_Service
 
 
 
-
-
-
-    //Private för enbar användning här. ReadOnly för oredigerbar repo efter skapande i konstruktorn. Då blir fält enligt norm(?) som kan innehålla object av repoklassen som använder sig av interfacen. 
-    private readonly IJson_TicketRegistration_Repository _ticketRepository;
-
-    //Konstruktor tar in interfacen av repon, döper och tilldelar fältet det innehållet. 
-    public TicketRegistration_Service(IJson_TicketRegistration_Repository ticketRepository)
-    {
-        _ticketRepository = ticketRepository;
-    }
-    //Vi gör såhär pga att skapa utbytbarhet genom att hämta repon genom interfacen. 
-
-
     public async Task RegisterTicket(string inputTitle, string inputDescription, MockCustomer inputCustomer, TicketPriority inputPriority)
     {
-        //Inputs och validering
+        //Inputs och validering på det som måste finnas i en ticket. 
         if (string.IsNullOrWhiteSpace(inputTitle))
             throw new ArgumentException("Title cannot be empty.", nameof(inputTitle));
 
         if (string.IsNullOrWhiteSpace(inputDescription))
             throw new ArgumentException("Description cannot be empty.", nameof(inputDescription));
 
-        if (inputCustomer == null)
+        if (inputCustomer == null) //Ev. lägga till en repo för att hämta alla kunder så användaren kan välja från enlista - KOLLA UPP HUR
             throw new ArgumentNullException(nameof(inputCustomer), "You must choose a customer.");
 
         if (!Enum.IsDefined(inputPriority))
             throw new ArgumentException("You must choose a priority.", nameof(inputPriority));
 
-        //Skapande av ticketobjectet. (inklusive ny guid)
-        TicketModel newTicket = new TicketModel(Guid.NewGuid(), inputTitle, inputDescription, inputCustomer, inputPriority);
+        //Skapande av ticketobjectet. (inklusive ny guid) Status och datum sätts inuti modellen.
+        TicketModel newTicket = new TicketModel(Guid.NewGuid(), inputTitle.Trim(), inputDescription.Trim(), inputCustomer, inputPriority);
 
-        //Status och datum sätts inuti modellen.
+        //Repo för att hämta alla tickets i Json-filen och sen lägger till den nya ticketen i den listan.
+        var allTickets = await ticketRepository.GetAllTicketsAsync();
+        allTickets.Add(newTicket);
 
-        //Use repo to store the finished ticket in JSON file
-        IJson_TicketRegistration_Repository ticketRepository = _ticketRepository;
-
+        //Repo för att spara alla tickets i Json-filen. 
+        await ticketRepository.SaveAllTicketsAsync(allTickets);
     }
-
 }
