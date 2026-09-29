@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SupportTicketSystem.Infrastructure.Features.TicketRegistration.TicketRegistrationRepositories
+﻿
+namespace SupportTicketSystem.Infrastructure.Features.TicketRegistration.TicketRegistrationRepositories;
+internal class TickerRegistration_Repository
 {
-    internal class TickerRegistration_Repository
-    {
 
-        //Create
+    //Create
 
-            //Allokera minne i JSON för själva ticketen
+        //Allokera minne i JSON för själva ticketen
 
-        //Read
+    //Read
 
-            //Läsa av Customers 
-    }
+        //Läsa av Customers 
 }
