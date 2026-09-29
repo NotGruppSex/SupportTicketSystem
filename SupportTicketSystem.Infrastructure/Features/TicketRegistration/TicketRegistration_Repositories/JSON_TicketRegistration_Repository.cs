@@ -1,15 +1,57 @@
-﻿
+﻿using SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationModels;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.Threading.Tasks;
+
 namespace SupportTicketSystem.Infrastructure.Features.TicketRegistration.TicketRegistrationRepositories;
-internal class JSON_TicketRegistration_Repository
+
+public class Json_TicketRegistration_Repository
 {
+    //Skapa sökväg genom att kombinera LocalApplicationData med mappen SupportTicketSystem och filnamnet tickets.json - what
+    private readonly string _filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+        "SupportTicketSystem",
+        "tickets.json"
+        );
+
+    //Förbereder innehållet inför sparande i Json. 
+    private readonly JsonSerializerOptions _options = new JsonSerializerOptions
+    {
+        //Gör utskrift "fin"
+        WriteIndented = true,
+
+        //Gör innehållet case-insensitive
+        PropertyNameCaseInsensitive = true,
+
+        //Konverterar mina enums till text istället för siffror.
+        Converters = { new JsonStringEnumConverter() }
+    };
+
+
 
     //Create
+    public async Task SaveAllTicketsAsync(IEnumerable<TicketModel> tickets)
+    {
+        //Skapar mappen om den inte finns genom metoden CreatDirectory. Vi stoppar sen in sökvägen till filen i metoden Path.GetDirectoryName som tar bort filnamnet och returnerar mappens sökväg.
+        Directory.CreateDirectory(Path.GetDirectoryName(_filePath));
 
-        //Allokera minne i JSON för själva ticketen
+        //Ändrar formatet från c# av listan av tickets till Json text, vi använder formatteringen som vi beskrivit i _options.
+        string json = JsonSerializer.Serialize(tickets, _options);
 
+        //Temporär path för failsafe om något går sönder, så vi inte råkar förstöra grundfilen.
+        string tempFilePath = _filePath + ".tmp";
 
+        //Skriver filen genom metod WriteAllTextAsync genom att skicka in vår temporära filepath och vår serialiserade json text.
+        await File.WriteAllTextAsync(tempFilePath, json);
 
-    //Read
+        //Vi flyttar nu filen från temp. till riktig och skriver över. 
+        File.Move(tempFilePath, _filePath, overwrite: true);
+    }
 
-        //Läsa av Customers 
 }
+//Read
+
+//Läsa av Customers 
+
