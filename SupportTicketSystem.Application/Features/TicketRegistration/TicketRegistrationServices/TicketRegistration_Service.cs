@@ -1,6 +1,8 @@
 ﻿
 using SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationModels;
+using SupportTicketSystem.Infrastructure.Features.TicketRegistration.TicketRegistrationRepositories;
 using System;
+using System.Threading.Tasks;
 
 namespace SupportTicketSystem.Application.Features.TicketRegistration.TicketRegistrationServices;
 public class TicketRegistration_Service
@@ -17,23 +19,30 @@ public class TicketRegistration_Service
 
 
     //Private för enbar användning här. ReadOnly för oredigerbar repo efter skapande i konstruktorn. Då blir fält enligt norm(?) som kan innehålla object av repoklassen som använder sig av interfacen. 
-    private readonly IJSON_TicketRegistration_Repository _ticketRepository; //skapa interfacen!
+    private readonly IJson_TicketRegistration_Repository _ticketRepository;
 
     //Konstruktor tar in interfacen av repon, döper och tilldelar fältet det innehållet. 
-    public TicketRegistration_Service(IJSON_TicketRegistration_Repository ticketRepository)
+    public TicketRegistration_Service(IJson_TicketRegistration_Repository ticketRepository)
     {
         _ticketRepository = ticketRepository;
     }
     //Vi gör såhär pga att skapa utbytbarhet genom att hämta repon genom interfacen. 
 
 
-    public void RegisterTicket()
+    public async Task RegisterTicket(string inputTitle, string inputDescription, MockCustomer inputCustomer, TicketPriority inputPriority)
     {
-        //Inputs
-        string inputTitle = "Tillfällig Title";                 // Ersätt med faktisk input från UI sen
-        string inputDescription = "Tillfällig Description";     // Ersätt med faktisk input från UI sen
-        MockCustomer inputCustomer = new MockCustomer();        // Ersätt med faktisk input från UI sen
-        TicketPriority inputPriority = TicketPriority.Medium;   // Ersätt med faktisk input från UI sen
+        //Inputs och validering
+        if (string.IsNullOrWhiteSpace(inputTitle))
+            throw new ArgumentException("Title cannot be empty.", nameof(inputTitle));
+
+        if (string.IsNullOrWhiteSpace(inputDescription))
+            throw new ArgumentException("Description cannot be empty.", nameof(inputDescription));
+
+        if (inputCustomer == null)
+            throw new ArgumentNullException(nameof(inputCustomer), "You must choose a customer.");
+
+        if (!Enum.IsDefined(inputPriority))
+            throw new ArgumentException("You must choose a priority.", nameof(inputPriority));
 
         //Skapande av ticketobjectet. (inklusive ny guid)
         TicketModel newTicket = new TicketModel(Guid.NewGuid(), inputTitle, inputDescription, inputCustomer, inputPriority);
@@ -41,6 +50,8 @@ public class TicketRegistration_Service
         //Status och datum sätts inuti modellen.
 
         //Use repo to store the finished ticket in JSON file
+        IJson_TicketRegistration_Repository ticketRepository = _ticketRepository;
+
     }
 
 }

@@ -8,8 +8,11 @@ using System.Threading.Tasks;
 
 namespace SupportTicketSystem.Infrastructure.Features.TicketRegistration.TicketRegistrationRepositories;
 
-public class Json_TicketRegistration_Repository
+public class Json_TicketRegistration_Repository : IJson_TicketRegistration_Repository
 {
+
+    //____________________________Prepare the file path and data____________________________
+
     //Skapa sökväg genom att kombinera LocalApplicationData med mappen SupportTicketSystem och filnamnet tickets.json - what
     private readonly string _filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
         "SupportTicketSystem",
@@ -29,7 +32,7 @@ public class Json_TicketRegistration_Repository
         Converters = { new JsonStringEnumConverter() }
     };
 
-
+    //____________________________Save tickets____________________________
 
     //Create
     public async Task SaveAllTicketsAsync(IEnumerable<TicketModel> tickets)

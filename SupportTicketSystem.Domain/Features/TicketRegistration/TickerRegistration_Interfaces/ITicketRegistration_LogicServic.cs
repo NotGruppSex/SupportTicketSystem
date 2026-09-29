@@ -4,7 +4,7 @@ using System.Text;
 
 namespace SupportTicketSystem.Domain.Features.TicketRegistration.TickerRegistrationInterfaces
 {
-    internal interface TicketRegistration_LogicServiceInterface
+    internal interface ITicketRegistration_LogicServic
     {
     }
 }
