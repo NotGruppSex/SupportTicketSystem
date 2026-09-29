@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace SupportTicketSystem.Application.Features.Customers;
 
-public interface ICustomerservice
+public interface ICustomerService
 {
     IReadOnlyList<Customer> GetAll();
 
