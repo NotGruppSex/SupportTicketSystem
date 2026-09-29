@@ -6,9 +6,18 @@
     xmlns:local="using:SupportTicketSystem.Presentation.Features.TicketRegistration.TicketRegistrationPages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
-
-    <Grid>
-
-    </Grid>
+    mc:Ignorable="d"
+    
+    xmlns:models="using:SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationModels"
+    Loaded="Page_Loaded" 
+    IsEnabled="{x:Bind ViewModel.IsNotBusy, Mode=OneWay}">
+    
+    <!--
+    rad 11: hämtar model
+    rad 12: Event som kallas för loaded
+    rad 13: IsEnabled = gör UI element interaktivbar 
+            bind = sammankopplar vår ViewModel till denna page.
+            IsNotBusy = Bool property av ViewModelklassen: Om sann -> blir IsEnabled av UI elementet true osv
+            Mode Oneway = Definierar hur datan flyter mellan UI och källa. Uppdaterar UI när källproperty ändras men ändringar i UI uppdaterar INTE källan-->
+    
 </Page>

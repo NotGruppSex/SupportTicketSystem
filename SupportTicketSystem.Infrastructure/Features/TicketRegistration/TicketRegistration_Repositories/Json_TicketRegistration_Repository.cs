@@ -1,4 +1,5 @@
-﻿using SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationModels;
+﻿using SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistration_Interfaces;
+using SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationModels;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,7 +12,7 @@ namespace SupportTicketSystem.Infrastructure.Features.TicketRegistration.TicketR
 public class Json_TicketRegistration_Repository : IJson_TicketRegistration_Repository
 {
 
-    //____________________________Prepare the file path and data____________________________
+    //____________________________Prepare the file path and data____________________________//
 
     //Skapa sökväg genom att kombinera LocalApplicationData med mappen SupportTicketSystem och filnamnet tickets.json - what
     private readonly string _filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
@@ -32,7 +33,8 @@ public class Json_TicketRegistration_Repository : IJson_TicketRegistration_Repos
         Converters = { new JsonStringEnumConverter() }
     };
 
-    //____________________________Save tickets____________________________
+
+    //____________________________Save tickets____________________________//
 
     public async Task SaveAllTicketsAsync(IEnumerable<TicketModel> tickets)
     {
@@ -52,7 +54,9 @@ public class Json_TicketRegistration_Repository : IJson_TicketRegistration_Repos
         File.Move(tempFilePath, _filePath, overwrite: true);
     }
 
-    //____________________________Read tickets____________________________
+
+
+    //____________________________Read tickets____________________________//
 
     public async Task<List<TicketModel>> GetAllTicketsAsync()
     {
