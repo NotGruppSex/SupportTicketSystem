@@ -7,6 +7,8 @@ internal class JSON_TicketRegistration_Repository
 
         //Allokera minne i JSON för själva ticketen
 
+
+
     //Read
 
         //Läsa av Customers 

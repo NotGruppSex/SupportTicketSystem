@@ -1,4 +1,7 @@
 ﻿
+using SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationModels;
+using System;
+
 namespace SupportTicketSystem.Application.Features.TicketRegistration.TicketRegistrationServices;
 public class TicketRegistration_Service
 {
@@ -26,21 +29,16 @@ public class TicketRegistration_Service
 
     public void RegisterTicket()
     {
-        //Get info from UI for Title
-        
+        //Inputs
+        string inputTitle = "Tillfällig Title";                 // Ersätt med faktisk input från UI sen
+        string inputDescription = "Tillfällig Description";     // Ersätt med faktisk input från UI sen
+        MockCustomer inputCustomer = new MockCustomer();        // Ersätt med faktisk input från UI sen
+        TicketPriority inputPriority = TicketPriority.Medium;   // Ersätt med faktisk input från UI sen
 
-        //Get info from UI for Description
-            //Store in temp variable
+        //Skapande av ticketobjectet. (inklusive ny guid)
+        TicketModel newTicket = new TicketModel(Guid.NewGuid(), inputTitle, inputDescription, inputCustomer, inputPriority);
 
-        //Get info from UI for Customer
-            //Store in temp variable
-
-        //Get info from UI the choice of Priority
-            //Store in temp variable
-
-        //Assign Guid ID to ticket
-        //Assign Date and time to ticket
-        //Assign status "New" to ticket
+        //Status och datum sätts inuti modellen.
 
         //Use repo to store the finished ticket in JSON file
     }
