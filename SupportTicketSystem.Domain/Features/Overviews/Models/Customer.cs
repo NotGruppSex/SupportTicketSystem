@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SupportTicketSystem.Domain.Features.Overviews;
+namespace SupportTicketSystem.Domain.Features.Overviews.Models;
 
 public class Customer
 {
