@@ -34,11 +34,29 @@ public partial class TicketRegistration_ViewModel : ObservableObject
     [ObservableProperty] public partial DateTime? GeneratedDate { get; private set; }
 
 
-    //Listor för Customer och prio så användare kan välja
-    //public List<MockCustomer> CustomerOptions { get; } = [];
+    //TODO - Tillfällig lista med customers så användaren kan välja mellan customers 
+    public ObservableCollection<MockCustomer> CustomerOptions { get; } = [];
 
+    //TODO - Tillfälliga customers i listan
+    public void LoadMockCustomers()
+    {
+        CustomerOptions.Add(new MockCustomer { MockCustomerID = Guid.NewGuid(), MockCustomerName = "Mock Mocksson", MockCustomerEmail = "mock@mock.se", MockCustomerPhone = "073123456789" });
+        CustomerOptions.Add(new MockCustomer { MockCustomerID = Guid.NewGuid(), MockCustomerName = "Möck Möcksson", MockCustomerEmail = "möck@mock.se", MockCustomerPhone = "073123456780" });
+    }
+    
+    
+    //TODO kod när vi har faktiska listan:
 
+    /*
+    public async Task LoadCustomersAsync()
+    {
+        var customers = await _customerService.GetAllCustomersAsync();
+        foreach (var c in customers)
+            CustomerOptions.Add(c);
+    }
+    */
 
+    
 
 
 

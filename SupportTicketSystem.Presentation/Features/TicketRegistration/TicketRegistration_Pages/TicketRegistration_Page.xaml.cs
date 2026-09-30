@@ -18,8 +18,9 @@ public sealed partial class TicketRegistrationPage : Page
         InitializeComponent();
     }
 
+    //Detta är en event handler med ett laddat event som körs när pagen är färdigladdad och redo för interaktion. Denna är void pga event handlers kräver det (kan ej returnera en Task vi normalt skulle använda)
     private async void Page_Loaded(object sender, RoutedEventArgs e)
     {
-        await ViewModel.LoadTicketsAsync();
+        await TicketRegistration_ViewModel.LoadTicketsAsync(); //TODO - skapa denna metod
     }
 }
