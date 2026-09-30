@@ -1,9 +1,11 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationModels;
 using SupportTicketSystem.DOmain.Features.TicketRegistration.TicketRegistration_Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 
 namespace SupportTicketSystem.Presentation.Features.TicketRegistration.TicketRegistrationViewModels;
 
@@ -22,10 +24,9 @@ public partial class TicketRegistration_ViewModel : ObservableObject
 
 
     //synbara properties för användaren att redigera. OP rensar UI automatiskt. 
-
     [ObservableProperty] public partial string InputTitle { get; set; } = string.Empty;
     [ObservableProperty] public partial string InputDescription { get; set; } = string.Empty;
-    [ObservableProperty] public partial MockCustomer InputCustomer { get; set; }
+    [ObservableProperty] public partial MockCustomer? InputCustomer { get; set; } //TODO - behövde göra den nullable - varför
     [ObservableProperty] public partial TicketPriority InputPriority { get; set; } = TicketPriority.Medium; //Standardvärde
 
     //Synbara properties som senare kommer visas vid skapad ticket - därför de ej sätts nu (sätts i modellen) och är nullable här
@@ -33,6 +34,9 @@ public partial class TicketRegistration_ViewModel : ObservableObject
     [ObservableProperty] public partial TicketStatus? DefaultStatus { get; private set; }
     [ObservableProperty] public partial DateTime? GeneratedDate { get; private set; }
 
+
+    //Lista så användaren kan se alla priority:
+    public List<TicketPriority> PriorityOptions { get; } = [TicketPriority.Low, TicketPriority.Medium, TicketPriority.High];
 
     //TODO - Tillfällig lista med customers så användaren kan välja mellan customers 
     public ObservableCollection<MockCustomer> CustomerOptions { get; } = [];
@@ -43,8 +47,8 @@ public partial class TicketRegistration_ViewModel : ObservableObject
         CustomerOptions.Add(new MockCustomer { MockCustomerID = Guid.NewGuid(), MockCustomerName = "Mock Mocksson", MockCustomerEmail = "mock@mock.se", MockCustomerPhone = "073123456789" });
         CustomerOptions.Add(new MockCustomer { MockCustomerID = Guid.NewGuid(), MockCustomerName = "Möck Möcksson", MockCustomerEmail = "möck@mock.se", MockCustomerPhone = "073123456780" });
     }
-    
-    
+
+
     //TODO kod när vi har faktiska listan:
 
     /*
@@ -56,23 +60,22 @@ public partial class TicketRegistration_ViewModel : ObservableObject
     }
     */
 
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     //Relaycommand är handlingar som användaren triggar igång.
+
+    [RelayCommand]
+    private async Task SendInfoToServiceAsync()
+    {
+        try
+        {
+            await _ticketService.RegisterTicket(InputTitle, InputDescription, InputCustomer, InputPriority);
+
+            StatusMessage = "Ticket created!";
+        }
+        //Om det inte funkar så skrivs ett felmeddelande ut beroende på vart felet är. 
+        catch (ArgumentException ex)
+        {
+            StatusMessage = ex.Message;
+        }
+    }
 }

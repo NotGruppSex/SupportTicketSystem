@@ -10,7 +10,7 @@
     
     xmlns:models="using:SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationModels"
     Loaded="Page_Loaded" 
-    IsEnabled="{x:Bind ViewModel.IsNotBusy, Mode=OneWay}">
+    >
     
     <!--
     rad 11: hämtar model
@@ -18,6 +18,51 @@
     rad 13: IsEnabled = gör UI element interaktivbar 
             bind = sammankopplar vår ViewModel till denna page.
             IsNotBusy = Bool property av ViewModelklassen: Om sann -> blir IsEnabled av UI elementet true osv
-            Mode Oneway = Definierar hur datan flyter mellan UI och källa. Uppdaterar UI när källproperty ändras men ändringar i UI uppdaterar INTE källan-->
+            Mode Oneway = Definierar hur datan flyter mellan UI och källa. Uppdaterar UI när källproperty ändras men ändringar i UI uppdaterar INTE källan
+    
+    Lägg eventuellt till denna rad under Loaded: IsEnabled="{x:Bind ViewModel.IsNotBusy, Mode=OneWay}">
+    -->
+
+    
+    
+    <StackPanel Spacing="12" Padding="24" Width="400">
+
+        <!--Rubrik på sidan-->
+        <TextBlock 
+            Style="{StaticResource TitleTextBlockStyle}"
+            Text="Create your ticket"/>
+        
+        <!--Boxar för titel och beskrivning, twoway för att ändra i elementet och UI samtidigt-->
+        <TextBox 
+            Header="Title"
+            PlaceholderText="Enter the title for your ticket"
+            Text="{x:Bind TicketRegistrationViewModel.InputTitle, Mode=TwoWay}"/>
+        <TextBox
+            Header="Description"
+            PlaceholderText="Enter description of your problem"
+            Text="{x:Bind TicketRegistrationViewModel.InputDescription, Mode=TwoWay}"/>
+
+        <!--Boxar för kund och prioritet som användaren ska kunna välja mellan alternativ-->
+        <ComboBox
+            Header="Customer"
+            ItemsSource="{x:Bind TicketRegistrationViewModel.CustomerOptions}"
+            SelectedItem="{x:Bind TicketRegistrationViewModel.InputCustomer, Mode=TwoWay}"/>
+
+        <ComboBox
+            Header="Priority"
+            ItemsSource="{x:Bind TicketRegistrationViewModel.PriorityOptions}"
+            SelectedItem="{x:Bind TicketRegistrationViewModel.InputPriority, Mode=TwoWay}"/>
+
+        <!--Knapp för att skapa ticket -> den går till servicen-->
+        <Button
+            Content="Create this ticket"
+            Command="{x:Bind TicketRegistrationViewModel.SendInfoToServiceCommand}"/>
+
+        <!--Text för statusmeddelanden-->
+        <TextBlock
+            Text="{x:Bind TicketRegistrationViewModel.StatusMessage, Mode=OneWay}"/>
+    </StackPanel>
+    
+    
     
 </Page>

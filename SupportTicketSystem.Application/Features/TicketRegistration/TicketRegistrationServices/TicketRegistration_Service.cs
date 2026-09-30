@@ -1,4 +1,5 @@
 ﻿
+using SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistration_Interfaces;
 using SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationModels;
 using SupportTicketSystem.DOmain.Features.TicketRegistration.TicketRegistration_Interfaces;
 using SupportTicketSystem.Infrastructure.Features.TicketRegistration.TicketRegistrationRepositories;
@@ -27,7 +28,7 @@ public class TicketRegistration_Service(IJson_TicketRegistration_Repository tick
         if (string.IsNullOrWhiteSpace(inputDescription))
             throw new ArgumentException("Description cannot be empty.", nameof(inputDescription));
 
-        if (inputCustomer == null) //Ev. lägga till en repo för att hämta alla kunder så användaren kan välja från enlista - KOLLA UPP HUR
+        if (inputCustomer == null) //TODO - Ev. lägga till en repo för att hämta alla kunder så användaren kan välja från enlista - KOLLA UPP HUR
             throw new ArgumentNullException(nameof(inputCustomer), "You must choose a customer.");
 
         if (!Enum.IsDefined(inputPriority))
