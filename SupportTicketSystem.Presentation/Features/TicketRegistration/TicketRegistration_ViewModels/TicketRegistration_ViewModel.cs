@@ -1,10 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationModels;
+using System.Collections.ObjectModel;
 
-namespace SupportTicketSystem.Presentation.Features.TicketRegistration.TicketRegistrationViewModels
+namespace SupportTicketSystem.Presentation.Features.TicketRegistration.TicketRegistrationViewModels;
+
+//Varför ärver den från observable object?
+public class TicketRegistration_ViewModel : ObservableObject
 {
-    internal class TicketRegistration_ViewModel
-    {
-    }
+    //Klass för att skapa lista av kunder. (kan bara ändras vid skapning av ny ticket)
+    public ObservableCollection<MockCustomer> mockCustomers { get; } = [];
+
+    //Lägger till en observable property:
+    [ObservableProperty]
+    public partial string StatusMessage { get; private set; } = string.Empty;
 }
