@@ -1,6 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using SupportTicketSystem.Application.Features.Overviews;
+using SupportTicketSystem.Application.Features.Overviews.Services;
 using SupportTicketSystem.Domain.Features.Overviews;
 using SupportTicketSystem.Domain.Features.Overviews.Models;
 using SupportTicketSystem.Presentation.Navigation;

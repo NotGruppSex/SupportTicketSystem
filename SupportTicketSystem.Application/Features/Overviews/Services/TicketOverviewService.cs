@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SupportTicketSystem.Application.Features.Overviews;
+namespace SupportTicketSystem.Application.Features.Overviews.Services;
 
 public class TicketOverviewService(ITicketRepository ticketRepository, ICustomerRepository customerRepository) : ITicketOverviewService
 {
