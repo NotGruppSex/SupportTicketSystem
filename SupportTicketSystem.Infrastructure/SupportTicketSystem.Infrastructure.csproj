@@ -13,6 +13,7 @@
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="2.5.1" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SupportTicketSystem.Application\SupportTicketSystem.Application.csproj" />
     <ProjectReference Include="..\SupportTicketSystem.Domain\SupportTicketSystem.Domain.csproj" />
   </ItemGroup>
 </Project>

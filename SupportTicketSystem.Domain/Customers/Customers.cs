@@ -63,4 +63,9 @@ public class Customer
         }
 
     }
+
+    public void Add(Customer customer)
+    {
+        throw new NotImplementedException();
+    }
 }
