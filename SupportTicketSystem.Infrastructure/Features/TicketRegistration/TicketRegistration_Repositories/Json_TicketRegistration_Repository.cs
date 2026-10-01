@@ -9,15 +9,15 @@ using System.Threading.Tasks;
 
 namespace SupportTicketSystem.Infrastructure.Features.TicketRegistration.TicketRegistrationRepositories;
 
-public class Json_TicketRegistration_Repository : IJson_TicketRegistration_Repository
+public class Json_TicketRegistration_Repository : IJson_TicketRegistration_Repository //TODO - lös!
 {
 
-    //____________________________Prepare the file path and data____________________________//
+    //________________________Prepare the file path and data________________________//
 
     //Skapa sökväg genom att kombinera LocalApplicationData med mappen SupportTicketSystem och filnamnet tickets.json - what
     private readonly string _filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
         "SupportTicketSystem",
-        "tickets.json"
+        "tickets.json" //TODO - Ev. ändra namn så vi får samma Json-fil som i andra projektet.
         );
 
     //Förbereder innehållet inför sparande i Json. 
@@ -36,7 +36,7 @@ public class Json_TicketRegistration_Repository : IJson_TicketRegistration_Repos
 
     //____________________________Save tickets____________________________//
 
-    public async Task SaveAllTicketsAsync(IEnumerable<TicketModel> tickets)
+    public async Task SaveAllTicketsAsync(List<TicketModel> tickets) //TODO - denna var tidigare Ienum - varför?
     {
         //Skapar mappen om den inte finns genom metoden CreatDirectory. Vi stoppar sen in sökvägen till filen i metoden Path.GetDirectoryName som tar bort filnamnet och returnerar mappens sökväg.
         Directory.CreateDirectory(Path.GetDirectoryName(_filePath));
@@ -60,7 +60,7 @@ public class Json_TicketRegistration_Repository : IJson_TicketRegistration_Repos
 
     public async Task<List<TicketModel>> GetAllTicketsAsync()
     {
-        //Om filen inte finns, returnera en tom lista.
+        //Om filen inte finns, returnera en tom lista för att förhindra krash
         if (!File.Exists(_filePath))
             return [];
 

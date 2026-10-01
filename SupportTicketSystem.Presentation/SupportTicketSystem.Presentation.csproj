@@ -15,7 +15,6 @@
   
   </PropertyGroup>
   <ItemGroup>
-    <None Remove="Features\TicketRegistration\FakeMainPage\FakeMainWindow.xaml" />
     <None Remove="Pages\HomePage.xaml" />
   </ItemGroup>
 
@@ -58,11 +57,6 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="Features\TicketRegistration\TicketRegistrationPages\TicketRegistrationPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <Page Update="Features\TicketRegistration\FakeMainPage\FakeMainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
