@@ -38,7 +38,7 @@ public class CustomerService : ICustomerService
 
         if (customer is null)
         {
-            throw new ArgumentException("Kunden kunde inte hittas.");
+            throw new ArgumentException("Customer cannot be found.");
         }
 
         customer.UpdateContact(name, email);
