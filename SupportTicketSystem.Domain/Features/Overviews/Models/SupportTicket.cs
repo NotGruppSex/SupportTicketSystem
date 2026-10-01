@@ -2,11 +2,35 @@
 
 namespace SupportTicketSystem.Domain.Features.Overviews.Models;
 
-public class SupportTicket
+public class SupportTicket(Guid customerId, string title, string description)
 {
-    public Guid Id { get; set; }
-    public Guid CustomerId { get; set; }
-    public string Title { get; set; } = string.Empty;
-    public TicketStatus? Status { get; set; }
-    public DateTime CreatedAt { get; set; }
+    public Guid Id { get; init; } = GenerateId();
+    public Guid CustomerId { get; init; } = customerId;
+    public string Title { get; private set; } = NormalizeText(title);
+    public string Description { get; private set; } = NormalizeText(description);
+    public TicketStatus Status { get; private set; } = TicketStatus.New;
+    public DateTime CreatedAt { get; init; } = GenerateDate();
+
+    private static Guid GenerateId() => new();
+    private static DateTime GenerateDate() => new();
+    private static string NormalizeText(string inputText)
+    {
+        if(string.IsNullOrWhiteSpace(inputText))
+            throw new ArgumentNullException("You must enter a valid text.", nameof(inputText));
+
+        inputText = inputText.Trim();
+
+        return inputText;
+    }
+    public void ChangeTicketStatus(TicketStatus newStatus)
+    {
+        if (newStatus == Status)
+            throw new ArgumentException("Ticket already has this status.");
+
+        Status = newStatus;
+    }
+    public void ChangeDescription(string description) => Description = NormalizeText(description);
+
+    public void ChangeTitle(string title) => Title = NormalizeText(title);
+
 }
