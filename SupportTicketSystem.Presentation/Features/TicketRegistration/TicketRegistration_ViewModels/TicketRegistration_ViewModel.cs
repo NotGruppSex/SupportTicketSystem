@@ -27,7 +27,7 @@ public partial class TicketRegistration_ViewModel : ObservableObject
     [ObservableProperty] public partial string InputTitle { get; set; } = string.Empty;
     [ObservableProperty] public partial string InputDescription { get; set; } = string.Empty;
     [ObservableProperty] public partial MockCustomer? InputCustomer { get; set; } //TODO - behövde göra den nullable - varför
-    [ObservableProperty] public partial TicketPriority InputPriority { get; set; } = TicketPriority.Medium; //Standardvärde
+    [ObservableProperty] public partial TicketPriority InputPriority { get; set; } = TicketPriority.Medium;
 
     //Synbara properties som senare kommer visas vid skapad ticket - därför de ej sätts nu (sätts i modellen) och är nullable här
     [ObservableProperty] public partial Guid? GenereatedId { get; private set; }

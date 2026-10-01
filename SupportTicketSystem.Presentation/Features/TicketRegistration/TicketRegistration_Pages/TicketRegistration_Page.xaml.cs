@@ -20,6 +20,8 @@ public sealed partial class TicketRegistrationPage : Page
         InitializeComponent();
     }
 
+    //_____________________________________________________________________________________________//
+
     //TODO - TA BORT DENNA INFÖR MERGE - TILLFÄLLIG FÖR ATT TESTA MIN SIDA
     public TicketRegistrationPage()
         : this(new TicketRegistration_ViewModel(
@@ -27,7 +29,7 @@ public sealed partial class TicketRegistrationPage : Page
     {
     }
 
-
+    //_____________________________________________________________________________________________//
 
     //Detta är en event handler med ett laddat event som körs när pagen är färdigladdad och redo för interaktion. Denna är void pga event handlers kräver det (kan ej returnera en Task vi normalt skulle använda)
     private async void Page_Loaded(object sender, RoutedEventArgs e)
