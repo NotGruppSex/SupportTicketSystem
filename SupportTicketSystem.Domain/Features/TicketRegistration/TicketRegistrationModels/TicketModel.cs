@@ -37,6 +37,8 @@ public class TicketModel
     public TicketStatus TicketStatus { get; private set; }
     public DateTime TicketCreationDate { get; private set; }
 
+    //Parameterlös konstruktor för serialisering av Json - annars funkar den inte och vi får krash.
+    public TicketModel() { } 
 
     //Konstruktor som kräver vissa properties från användaren. Kör också validering, initiering och id generering
     public TicketModel(string title, string description, MockCustomer customer, TicketPriority priority)

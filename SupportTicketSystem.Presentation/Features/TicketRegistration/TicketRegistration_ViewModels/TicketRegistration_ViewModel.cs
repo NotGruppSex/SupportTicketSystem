@@ -59,8 +59,7 @@ public partial class TicketRegistration_ViewModel : ObservableObject
     */
 
 
-    //Relaycommand är handlingar som användaren triggar igång.
-
+    //Relaycommand är handlingar som användaren triggar igång. Denna async körs när användaren trycker på att skapa en ticket. Den tar infon från användaren och skickar vidare till servicen för hantering. Om ej funkar skrivs felmeddelande ut. Om det lyckades rensas alla inputs. 
     [RelayCommand]
     private async Task SendInfoToServiceAsync()
     {
@@ -69,6 +68,11 @@ public partial class TicketRegistration_ViewModel : ObservableObject
             await _ticketService.RegisterTicket(InputTitle, InputDescription, InputCustomer, InputPriority);
 
             StatusMessage = "Ticket created!";
+
+            InputTitle = string.Empty;
+            InputDescription = string.Empty;
+            InputCustomer = null;
+            InputPriority = TicketPriority.Medium;
         }
         //Om det inte funkar så skrivs ett felmeddelande ut beroende på vart felet är. 
         catch (ArgumentException ex)
