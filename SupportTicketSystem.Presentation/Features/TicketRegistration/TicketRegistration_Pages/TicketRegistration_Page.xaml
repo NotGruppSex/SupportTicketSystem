@@ -42,9 +42,10 @@
             PlaceholderText="Enter description of your problem"
             Text="{x:Bind TicketRegistrationViewModel.InputDescription, Mode=TwoWay}"/>
 
-        <!--Boxar för kund och prioritet som användaren ska kunna välja mellan alternativ-->
+        <!--Boxar för kund och prioritet som användaren ska kunna välja mellan alternativ. Måste lägga till DisplayMemberPath för att den ska visa namnen och inte typen av customer-->
         <ComboBox
             Header="Customer"
+            DisplayMemberPath="MockCustomerName"
             ItemsSource="{x:Bind TicketRegistrationViewModel.CustomerOptions}"
             SelectedItem="{x:Bind TicketRegistrationViewModel.InputCustomer, Mode=TwoWay}"/>
 
