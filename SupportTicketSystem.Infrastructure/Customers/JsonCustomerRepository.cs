@@ -105,7 +105,7 @@ public class JsonCustomerRepository : ICustomerRepository
 
             var customer = Customer.Restore(data.Id, data.Name, data.Email);
 
-            customer.Add(customer);
+            customers.Add(customer);
         }
 
         return customers;
