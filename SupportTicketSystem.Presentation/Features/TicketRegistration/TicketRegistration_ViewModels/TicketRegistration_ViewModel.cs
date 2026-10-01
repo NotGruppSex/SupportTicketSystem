@@ -38,11 +38,9 @@ public partial class TicketRegistration_ViewModel : ObservableObject
     //Lista så användaren kan se alla priority:
     public List<TicketPriority> PriorityOptions { get; } = [TicketPriority.Low, TicketPriority.Medium, TicketPriority.High];
 
-    //TODO - Tillfällig lista med customers så användaren kan välja mellan customers 
-    public ObservableCollection<MockCustomer> CustomerOptions { get; } = [];
+    public ObservableCollection<MockCustomer> CustomerOptions { get; } = []; //TODO - Tillfällig lista med customers så användaren kan välja mellan customers 
 
-    //TODO - Tillfälliga customers i listan
-    public void LoadMockCustomers()
+    public void LoadMockCustomers() //TODO - Tillfälliga customers i listan
     {
         CustomerOptions.Add(new MockCustomer { MockCustomerID = Guid.NewGuid(), MockCustomerName = "Mock Mocksson", MockCustomerEmail = "mock@mock.se", MockCustomerPhone = "073123456789" });
         CustomerOptions.Add(new MockCustomer { MockCustomerID = Guid.NewGuid(), MockCustomerName = "Möck Möcksson", MockCustomerEmail = "möck@mock.se", MockCustomerPhone = "073123456780" });
@@ -79,3 +77,16 @@ public partial class TicketRegistration_ViewModel : ObservableObject
         }
     }
 }
+
+
+
+
+
+
+//Måndag 5 oktober kl. 10:00
+        //All funktionalitet (domain, interface och application) ska vara klar.
+        //Vi gör en gemensam grafisk (HomePage) del tillsammans
+        //Vi fördelar buttons, styles osv sen så alla får göra varsin main-grafisk del
+        //Vi skapar knappar som tar oss till alla olika pages för respektive feature (t.ex. Ticketreg, customer osv)
+        
+//Vi gör klart all funktionalitet innan vi skriver testerna. 

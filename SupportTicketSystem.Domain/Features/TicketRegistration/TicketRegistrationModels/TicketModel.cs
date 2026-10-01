@@ -32,9 +32,9 @@ public class TicketModel (Guid id, string title, string description, MockCustome
     public Guid TicketID { get; set; } = id;
     public string TicketTitle { get; set; } = title;
     public string TicketDescription { get; set; } = description;
-    public MockCustomer customerTicket { get; set; } = customer; //Ändra denna till rätt customer sen
+    public MockCustomer customerTicket { get; set; } = customer; //TODO - Ändra denna till rätt customer sen
     public TicketPriority Priority { get; set; } = priority;
     public TicketStatus TicketStatus { get; set; } = TicketStatus.New;
-    public DateTime TicketCreationDate { get; set; } = DateTime.Now;
+    public DateTime TicketCreationDate { get; set; } = DateTime.Now; //private för att denna ska vara statisk. 
 }
 

@@ -35,7 +35,7 @@ public class TicketRegistration_Service(IJson_TicketRegistration_Repository tick
             throw new ArgumentException("You must choose a priority.", nameof(inputPriority));
 
         //Skapande av ticketobjectet. (inklusive ny guid) Status och datum sätts inuti modellen.
-        TicketModel newTicket = new TicketModel(Guid.NewGuid(), inputTitle.Trim(), inputDescription.Trim(), inputCustomer, inputPriority);
+        TicketModel newTicket = new TicketModel(Guid.NewGuid(), inputTitle.Trim(), inputDescription.Trim(), inputCustomer, inputPriority); //TODO - kanske ändra så trim och idgeneration sker i modellen eller repo?
 
         //Repo för att hämta alla tickets i Json-filen och sen lägger till den nya ticketen i den listan.
         var allTickets = await ticketRepository.GetAllTicketsAsync();
