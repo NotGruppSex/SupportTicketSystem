@@ -19,29 +19,14 @@ public class TicketRegistration_Service(IJson_TicketRegistration_Repository tick
 
 
 
+    //Asyncmetod som tar in info från användaren och skapar ticketen. Sen repo för att hämta alla tickets, lägger till nya ticketen och sen sparar alla tickets genom repo. 
     public async Task RegisterTicket(string inputTitle, string inputDescription, MockCustomer inputCustomer, TicketPriority inputPriority)
     {
-        //Inputs och validering på det som måste finnas i en ticket. 
-        if (string.IsNullOrWhiteSpace(inputTitle))
-            throw new ArgumentException("Title cannot be empty.", nameof(inputTitle));
+        TicketModel newTicket = new TicketModel(inputTitle, inputDescription, inputCustomer, inputPriority);
 
-        if (string.IsNullOrWhiteSpace(inputDescription))
-            throw new ArgumentException("Description cannot be empty.", nameof(inputDescription));
-
-        if (inputCustomer == null) //TODO - Ev. lägga till en repo för att hämta alla kunder så användaren kan välja från enlista - KOLLA UPP HUR
-            throw new ArgumentNullException(nameof(inputCustomer), "You must choose a customer.");
-
-        if (!Enum.IsDefined(inputPriority))
-            throw new ArgumentException("You must choose a priority.", nameof(inputPriority));
-
-        //Skapande av ticketobjectet. (inklusive ny guid) Status och datum sätts inuti modellen.
-        TicketModel newTicket = new TicketModel(Guid.NewGuid(), inputTitle.Trim(), inputDescription.Trim(), inputCustomer, inputPriority); //TODO - kanske ändra så trim och idgeneration sker i modellen eller repo?
-
-        //Repo för att hämta alla tickets i Json-filen och sen lägger till den nya ticketen i den listan.
         var allTickets = await ticketRepository.GetAllTicketsAsync();
         allTickets.Add(newTicket);
 
-        //Repo för att spara alla tickets i Json-filen. 
         await ticketRepository.SaveAllTicketsAsync(allTickets);
     }
 }
