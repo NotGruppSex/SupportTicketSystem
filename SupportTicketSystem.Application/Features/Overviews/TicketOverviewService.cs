@@ -3,6 +3,7 @@ using SupportTicketSystem.Domain.Features.Overviews.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace SupportTicketSystem.Application.Features.Overviews;
 
@@ -13,10 +14,10 @@ public class TicketOverviewService(ITicketRepository ticketRepository, ICustomer
 
     
 
-    public IReadOnlyList<SupportTicket> GetAllTickets(string searchText, TicketStatus? status)
+    public async Task<IReadOnlyList<SupportTicket>> GetAllTicketsAsync(string searchText, TicketStatus? status)
     {
-        var tickets = _ticketRepository.GetAllTickets();
-        var customers = _customerRepository.GetAllCustomers();
+        var tickets = await _ticketRepository.GetAllTicketsAsync();
+        var customers = await _customerRepository.GetAllCustomersAsync();
         var result = new List<SupportTicket>();
 
         bool matchesTitle;
@@ -48,13 +49,13 @@ public class TicketOverviewService(ITicketRepository ticketRepository, ICustomer
         return result;
 
     }
-    public TicketStatusCount GetTicketStatusCounts()
+    public async Task <TicketStatusCount> GetTicketStatusCountsAsync()
     {
         int newCount = 0;
         int inProgressCount = 0;
         int resolvedCount = 0;
 
-        var tickets = _ticketRepository.GetAllTickets();
+        var tickets = await _ticketRepository.GetAllTicketsAsync();
 
         foreach (var ticket in tickets)
         {

@@ -5,8 +5,9 @@ using SupportTicketSystem.Domain.Features.Overviews;
 using SupportTicketSystem.Domain.Features.Overviews.Models;
 using SupportTicketSystem.Presentation.Navigation;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
-namespace SupportTicketSystem.Presentation.Features.Overviews.ViewModel;
+namespace SupportTicketSystem.Presentation.ViewModels;
 
 public partial class OverviewViewModel : ObservableObject
 {
@@ -35,13 +36,16 @@ public partial class OverviewViewModel : ObservableObject
         Tickets = [];
         StatusCounts = new (0, 0, 0);
 
-        Search();
     }
     [RelayCommand]
-    private void Search()
+    private async Task Search()
     {
-        Tickets = _ticketOverviewService.GetAllTickets(SearchText, SelectedStatus);
-        StatusCounts = _ticketOverviewService.GetTicketStatusCounts();
+        Tickets = await _ticketOverviewService.GetAllTicketsAsync(SearchText, SelectedStatus);
+        StatusCounts = await _ticketOverviewService.GetTicketStatusCountsAsync();
+    }
+    public async Task LoadAsync()
+    {
+        await Search();
     }
 
 }
