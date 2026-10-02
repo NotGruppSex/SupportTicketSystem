@@ -45,8 +45,8 @@ public class TicketModel
     public TicketModel(string title, string description, MockCustomer customer, TicketPriority priority)
     {
         //Validering och trimning.
-        InputStringValidation(title);
-        InputStringValidation(description);
+        InputTitleValidation(title);
+        InputDescriptionValidation(description);
         InputObjectValidation(customer);
         InputEnumValidation(priority);
 
@@ -63,15 +63,15 @@ public class TicketModel
         TicketCreationDate = DateTime.Now;
     }
 
-    public void InputStringValidation(string valueToValidate)
+    public void InputTitleValidation(string valueToValidate)
     {
         if (string.IsNullOrWhiteSpace(valueToValidate))
-        {
-            if (valueToValidate == TicketTitle)
-                throw new ArgumentException("Title cannot be empty.", nameof(valueToValidate));
-            if (valueToValidate == TicketDescription)
-                throw new ArgumentException("Description cannot be empty.", nameof(valueToValidate));
-        }
+            throw new ArgumentException("Title cannot be empty.", nameof(valueToValidate));
+    }
+    public void InputDescriptionValidation(string valueToValidate)
+    {
+        if (string.IsNullOrWhiteSpace(valueToValidate))
+            throw new ArgumentException("Description cannot be empty.", nameof(valueToValidate));
     }
 
     public void InputObjectValidation(object objectToValidate)
