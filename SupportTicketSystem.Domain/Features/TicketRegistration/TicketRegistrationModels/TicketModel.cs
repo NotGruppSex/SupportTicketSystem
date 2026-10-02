@@ -45,10 +45,10 @@ public class TicketModel
     public TicketModel(string title, string description, MockCustomer customer, TicketPriority priority)
     {
         //Validering och trimning.
-        InputTitleValidation(title);
-        InputDescriptionValidation(description);
-        InputObjectValidation(customer);
-        InputEnumValidation(priority);
+        title = InputTitleValidation(title);
+        description = InputDescriptionValidation(description);
+        customer = InputObjectValidation(customer);
+        priority = InputEnumValidation(priority);
 
         title = TrimInput(title);
         description = TrimInput(description);
@@ -63,30 +63,33 @@ public class TicketModel
         TicketCreationDate = DateTime.Now;
     }
 
-    public void InputTitleValidation(string valueToValidate)
+    public string InputTitleValidation(string titleToValidate)
     {
-        if (string.IsNullOrWhiteSpace(valueToValidate))
-            throw new ArgumentException("Title cannot be empty.", nameof(valueToValidate));
+        if (string.IsNullOrWhiteSpace(titleToValidate))
+            throw new ArgumentException("Title cannot be empty.", nameof(titleToValidate));
+        return titleToValidate;
     }
-    public void InputDescriptionValidation(string valueToValidate)
+    public string InputDescriptionValidation(string descriptionToValidate)
     {
-        if (string.IsNullOrWhiteSpace(valueToValidate))
-            throw new ArgumentException("Description cannot be empty.", nameof(valueToValidate));
+        if (string.IsNullOrWhiteSpace(descriptionToValidate))
+            throw new ArgumentException("Description cannot be empty.", nameof(descriptionToValidate));
+        return descriptionToValidate;
     }
 
-    public void InputObjectValidation(object objectToValidate)
+    public MockCustomer InputObjectValidation(MockCustomer customerToValidate)
     {
-        if (objectToValidate == null)
+        if (customerToValidate == null)
         {
-            if (objectToValidate == CustomerTicket)
-                throw new ArgumentNullException(nameof(objectToValidate), "You must choose a customer.");
+            throw new ArgumentNullException(nameof(customerToValidate   ), "You must choose a customer.");
         }
+        return customerToValidate;
     }
 
-    public void InputEnumValidation(TicketPriority enumToValidate)
+    public TicketPriority InputEnumValidation(TicketPriority enumToValidate)
     {
         if (!Enum.IsDefined(enumToValidate))
             throw new ArgumentException("You must choose a priority.", nameof(enumToValidate));
+        return enumToValidate;
     }
 
     public string TrimInput(string input)
