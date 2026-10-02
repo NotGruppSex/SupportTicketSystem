@@ -1,6 +1,4 @@
-﻿
-using System;
-
+﻿using System;
 namespace SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationModels;
 
 public class MockCustomer //TODO - ta bort denna när vi har en customer
@@ -26,6 +24,9 @@ public enum TicketPriority
     High,
 }
 
+
+//TODO - gör om till record?
+
 //Modellen, kräver vissa properties vid skapande genom konstruktorn nedan. Alla nya tickets ska ha status "New" varav det tilldelas inom klassen. Samma för DateTime.  
 public class TicketModel 
 {
@@ -43,19 +44,15 @@ public class TicketModel
     //Konstruktor som kräver vissa properties från användaren. Kör också validering, initiering och id generering
     public TicketModel(string title, string description, MockCustomer customer, TicketPriority priority)
     {
-        //Inputs och validering på det som måste finnas i en ticket. 
-        if (string.IsNullOrWhiteSpace(title.Trim()))
-            throw new ArgumentException("Title cannot be empty.", nameof(title));
+        //Validering och trimning.
+        InputStringValidation(title);
+        InputStringValidation(description);
+        InputObjectValidation(customer);
+        InputEnumValidation(priority);
 
-        if (string.IsNullOrWhiteSpace(description.Trim()))
-            throw new ArgumentException("Description cannot be empty.", nameof(description  ));
-
-        if (customer == null)
-            throw new ArgumentNullException(nameof(customer), "You must choose a customer.");
-
-        if (!Enum.IsDefined(priority))
-            throw new ArgumentException("You must choose a priority.", nameof(priority));
-
+        TrimInput(title);
+        TrimInput(description);
+        
         //Tilldelning av alla properties.
         TicketID = Guid.NewGuid();
         TicketTitle = title;
@@ -66,5 +63,41 @@ public class TicketModel
         TicketCreationDate = DateTime.Now;
     }
 
-}
+    public void InputStringValidation(string valueToValidate)
+    {
+        if (string.IsNullOrWhiteSpace(valueToValidate))
+        {
+            if (valueToValidate == TicketTitle)
+                throw new ArgumentException("Title cannot be empty.", nameof(valueToValidate));
+            if (valueToValidate == TicketDescription)
+                throw new ArgumentException("Description cannot be empty.", nameof(valueToValidate));
+        }
+    }
 
+    public void InputObjectValidation(object objectToValidate)
+    {
+        if (objectToValidate == null)
+        {
+            if (objectToValidate == CustomerTicket)
+                throw new ArgumentNullException(nameof(objectToValidate), "You must choose a customer.");
+        }
+    }
+
+    public void InputEnumValidation(TicketPriority enumToValidate)
+    {
+        if (!Enum.IsDefined(enumToValidate))
+            throw new ArgumentException("You must choose a priority.", nameof(enumToValidate));
+    }
+
+    public void TrimInput(string input)
+    {
+        if (input == TicketTitle)
+        {
+            TicketTitle = TicketTitle.Trim();
+        }
+        if (input == TicketDescription)
+        {
+            TicketDescription = TicketDescription.Trim();
+        }
+    }
+}

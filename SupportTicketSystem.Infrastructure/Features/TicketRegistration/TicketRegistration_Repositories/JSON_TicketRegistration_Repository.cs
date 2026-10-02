@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SupportTicketSystem.Infrastructure.Features.TicketRegistration.TicketRegistrationRepositories;
 
-public class Json_TicketRegistration_Repository : IJson_TicketRegistration_Repository //TODO - lös!
+public class Json_TicketRegistration_Repository : IJson_TicketRegistration_Repository
 {
 
     //________________________Prepare the file path and data________________________//
@@ -33,7 +33,7 @@ public class Json_TicketRegistration_Repository : IJson_TicketRegistration_Repos
 
 
     //Skapa mappen, stoppa in filpathen i den efter att den tagit bort filnamnet. Returnerar mappens sökväg. Serialiserar listan enligt optionsformatteringen. Skapat empfilpath för failsafe. Skriver själva filen i vår sökväg med info i json. Sist flyttar filen från temp och skriver över den riktigta filen. 
-    public async Task SaveAllTicketsAsync(List<TicketModel> tickets) //TODO - denna var tidigare Ienum - varför?
+    public async Task SaveAllTicketsAsync(List<TicketModel> tickets)
     {
         Directory.CreateDirectory(Path.GetDirectoryName(_filePath));
 
