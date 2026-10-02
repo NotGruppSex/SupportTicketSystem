@@ -2,7 +2,7 @@
 
 namespace SupportTicketSystem.Application.Features.Overviews.Dto.Results;
 
-public record CreateTicketResult
+public record EditSupportTicketResult
 (
     bool Success,
     string? Message,

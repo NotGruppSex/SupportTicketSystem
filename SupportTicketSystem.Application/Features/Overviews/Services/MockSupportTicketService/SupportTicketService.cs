@@ -1,18 +1,25 @@
-﻿using SupportTicketSystem.Domain.Features.Overviews.Models;
+﻿using SupportTicketSystem.Application.Features.Overviews.Dto.Requests;
+using SupportTicketSystem.Application.Features.Overviews.Dto.Results;
+using SupportTicketSystem.Domain.Features.Overviews.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace SupportTicketSystem.Application.Features.Overviews.Services.MockSupportTicketService;
 
-public class SupportTicketService : ISupportTicketRepository
+public class SupportTicketService : ISupportTicketRepository 
 {
-    public Task AddSupportTicketAsync(SupportTicket supportTicket)
+    public async Task<CreateSupportTicketResult> AddSupportTicketAsync(CreateSupportTicketRequest request)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var supportTicket = new SupportTicket(request.CustomerId, request.Title, request.Description);
+
+            
+        }
     }
 
-    public Task EditSupportTicketAsync(SupportTicket supportTicket)
+    public Task<EditSupportTicketResult> EditSupportTicketAsync(EditSupportTicketRequest request)
     {
         throw new NotImplementedException();
     }

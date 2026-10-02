@@ -2,7 +2,7 @@
 
 namespace SupportTicketSystem.Application.Features.Overviews.Dto.Requests;
 
-public record CreateSupporTicketRequest
+public record CreateSupportTicketRequest
 (
     Guid CustomerId,
     string Title,
