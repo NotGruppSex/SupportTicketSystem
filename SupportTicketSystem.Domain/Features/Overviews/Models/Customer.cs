@@ -9,7 +9,7 @@ public class Customer(string name, string email)
     public string Name { get; private set; } = NormalizeName(name);
     public string EmailAddress { get; private set; } = NormalizeEmail(email);
 
-    private static Guid GenerateId() => new();
+    private static Guid GenerateId() => Guid.NewGuid();
 
     private static string NormalizeName(string nameInput)
     {

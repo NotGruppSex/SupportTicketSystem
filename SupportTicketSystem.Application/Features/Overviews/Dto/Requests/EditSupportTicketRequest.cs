@@ -5,9 +5,8 @@ namespace SupportTicketSystem.Application.Features.Overviews.Dto.Requests;
 
 public record EditSupportTicketRequest
 (
-    Guid CustomerId,
+    Guid TicketId,
     string Title,
     string Description,
-    string Email,
-    TicketStatus Status
+    TicketStatus TicketStatus
 );

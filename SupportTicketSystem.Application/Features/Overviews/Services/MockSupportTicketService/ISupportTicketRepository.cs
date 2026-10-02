@@ -1,5 +1,4 @@
-﻿using SupportTicketSystem.Application.Features.Overviews.Dto.Requests;
-using SupportTicketSystem.Application.Features.Overviews.Dto.Results;
+﻿using SupportTicketSystem.Domain.Features.Overviews;
 using SupportTicketSystem.Domain.Features.Overviews.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -9,7 +8,7 @@ namespace SupportTicketSystem.Application.Features.Overviews.Services.MockSuppor
 public interface ISupportTicketRepository
 {
     Task<IReadOnlyList<SupportTicket>> GetAllSupportTicketsAsync();
-    public Task<EditSupportTicketResult> EditSupportTicketAsync(EditSupportTicketRequest request);
-    Task<CreateSupportTicketResult> AddSupportTicketAsync(CreateSupportTicketRequest request);
+    Task EditSupportTicketAsync(SupportTicket supportTicket);
+    Task AddSupportTicketAsync(SupportTicket supportTicket);
 
 }
