@@ -1,4 +1,4 @@
-﻿using SupportTicketSystem.Application.Features.Overviews.Services.MockSupportTicketService;
+﻿using SupportTicketSystem.Application.Features.Overviews.Services.MockSupportTicketService.Interfaces;
 using SupportTicketSystem.Domain.Features.Overviews.Models;
 using System;
 using System.Collections.Generic;

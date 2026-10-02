@@ -5,14 +5,13 @@ namespace SupportTicketSystem.Domain.Features.Overviews.Models;
 public class SupportTicket(Guid customerId, string title, string description)
 {
     public Guid Id { get; init; } = GenerateId();
-    public Guid CustomerId { get; init; } = customerId;
     public string Title { get; private set; } = NormalizeText(title);
     public string Description { get; private set; } = NormalizeText(description);
     public TicketStatus Status { get; private set; } = TicketStatus.New;
-    public DateTime CreatedAt { get; init; } = GenerateDate();
+    public DateTime CreatedAt { get; init; } = DateTime.Now;
 
-    private static Guid GenerateId() => new();
-    private static DateTime GenerateDate() => new();
+    private static Guid GenerateId() => Guid.NewGuid();
+
     private static string NormalizeText(string inputText)
     {
         if(string.IsNullOrWhiteSpace(inputText))

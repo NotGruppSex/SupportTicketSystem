@@ -3,7 +3,7 @@ using SupportTicketSystem.Domain.Features.Overviews.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace SupportTicketSystem.Application.Features.Overviews.Services.MockSupportTicketService;
+namespace SupportTicketSystem.Application.Features.Overviews.Services.MockSupportTicketService.Interfaces;
 
 public interface ISupportTicketRepository
 {
