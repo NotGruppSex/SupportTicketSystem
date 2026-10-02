@@ -41,7 +41,7 @@ public class TicketModel
     //Parameterlös konstruktor för serialisering av Json - annars funkar den inte och vi får krash.
     public TicketModel() { } 
 
-    //Konstruktor som kräver vissa properties från användaren. Kör också validering, initiering och id generering
+    //Konstruktor som kräver vissa properties från användaren. Kör också validering genom metoder initiering och id generering
     public TicketModel(string title, string description, MockCustomer customer, TicketPriority priority)
     {
         //Validering och trimning.
@@ -50,10 +50,10 @@ public class TicketModel
         InputObjectValidation(customer);
         InputEnumValidation(priority);
 
-        TrimInput(title);
-        TrimInput(description);
-        
-        //Tilldelning av alla properties.
+        title = TrimInput(title);
+        description = TrimInput(description);
+
+        //Tilldelning av alla properties. Defaultvärden status + datum
         TicketID = Guid.NewGuid();
         TicketTitle = title;
         TicketDescription = description;
@@ -89,15 +89,9 @@ public class TicketModel
             throw new ArgumentException("You must choose a priority.", nameof(enumToValidate));
     }
 
-    public void TrimInput(string input)
+    public string TrimInput(string input)
     {
-        if (input == TicketTitle)
-        {
-            TicketTitle = TicketTitle.Trim();
-        }
-        if (input == TicketDescription)
-        {
-            TicketDescription = TicketDescription.Trim();
-        }
+        input = input.Trim();
+        return input;
     }
 }
