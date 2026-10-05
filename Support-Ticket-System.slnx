@@ -13,5 +13,4 @@
     <Platform Solution="*|x86" Project="x86" />
     <Deploy />
   </Project>
-  <Project Path="SupportTicketSystem.Tests/SupportTicketSystem.Tests.csproj" Id="bb5725af-27ac-4d11-b491-8086d4b2924a" />
 </Solution>
