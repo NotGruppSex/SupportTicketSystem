@@ -12,7 +12,7 @@ namespace SupportTicketSystem.Presentation.Features.TicketRegistration.TicketReg
 //Observable object uppdaterar automatiskt UI när en property ändras. Partial pga MVVM toolkit som genererar extrakod för denna klass under kompilering och är beroende av ObservableObject(???)
 public partial class TicketRegistration_ViewModel : ObservableObject
 {
-    //För att hämta servicen just i denna klass (privat fält) och läggs till din genom konstruktor
+    //För att hämta servicen just i denna klass (privat fält) och läggs till din genom konstruktor (för att få tillgång till min service)
     private readonly ITicketRegistration_Service _ticketService;
     public TicketRegistration_ViewModel(ITicketRegistration_Service ticketService)
     {

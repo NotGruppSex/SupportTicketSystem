@@ -1,9 +1,7 @@
 ﻿
 using SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistration_Interfaces;
 using SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationModels;
-using SupportTicketSystem.DOmain.Features.TicketRegistration.TicketRegistration_Interfaces;
-using SupportTicketSystem.Infrastructure.Features.TicketRegistration.TicketRegistrationRepositories;
-using System;
+using SupportTicketSystem.DOmain.Features.TicketRegistration.TicketRegistration_Interfaces; //TODO CHECK THIS SHIT OUT
 using System.Threading.Tasks;
 
 namespace SupportTicketSystem.Application.Features.TicketRegistration.TicketRegistrationServices;

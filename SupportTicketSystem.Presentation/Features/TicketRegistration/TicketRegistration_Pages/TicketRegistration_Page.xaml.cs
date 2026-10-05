@@ -14,7 +14,7 @@ public sealed partial class TicketRegistrationPage : Page
     //Page tar emot vår viewmodel
     public TicketRegistrationPage(TicketRegistration_ViewModel ticketViewModel)
     {
-        //Sätter värdet på propertyn med vår viewmodel. FÖR ATT???
+        //Sätter värdet på propertyn med vår viewmodel.
         TicketRegistrationViewModel = ticketViewModel;
 
         InitializeComponent();
