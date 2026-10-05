@@ -1,6 +1,7 @@
 ﻿using SupportTicketSystem.Domain.Customers;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace SupportTicketSystem.Application.Features.Customers;
 
@@ -13,36 +14,41 @@ public class CustomerService : ICustomerService
         _customerRepository = customerRepository;
     }
 
-    public IReadOnlyList<Customer> GetAll()
+    public Task<IReadOnlyList<Customer>> GetAllAsync()
     {
-        return _customerRepository.GetAll();
+        return _customerRepository.GetAllAsync();
     }
 
-    public Customer? GetById(Guid id)
+    public Task<Customer?> GetByIdAsync(Guid id)
     {
-        return _customerRepository.GetById(id);
+        return _customerRepository.GetByIdAsync(id);
     }
 
-    public Customer Register(string name, string email)
+    public async Task<Customer> RegisterAsync(
+        string name,
+        string email)
     {
         var customer = new Customer(name, email);
 
-        _customerRepository.Add(customer);
+        await _customerRepository.AddAsync(customer);
 
         return customer;
     }
 
-    public void UpdateContact(Guid id, string name, string email)
+    public async Task UpdateContactAsync(
+        Guid id,
+        string name,
+        string email)
     {
-        var customer = _customerRepository.GetById(id);
+        var customer = await _customerRepository.GetByIdAsync(id);
 
         if (customer is null)
         {
-            throw new ArgumentException("Customer cannot be found.");
+            throw new ArgumentException("Customer could not be found.");
         }
 
         customer.UpdateContact(name, email);
 
-        _customerRepository.Update(customer);
+        await _customerRepository.UpdateAsync(customer);
     }
 }

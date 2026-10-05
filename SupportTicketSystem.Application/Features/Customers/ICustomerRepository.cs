@@ -1,16 +1,17 @@
 ﻿using SupportTicketSystem.Domain.Customers;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace SupportTicketSystem.Application.Features.Customers;
 
 public interface ICustomerRepository
 {
-    IReadOnlyList<Customer> GetAll();
+    Task<IReadOnlyList<Customer>> GetAllAsync();
 
-    Customer? GetById(Guid id);
+    Task<Customer?> GetByIdAsync(Guid id);
 
-    void Add(Customer customer);
+    Task AddAsync(Customer customer);
 
-    void Update(Customer customer);
+    Task UpdateAsync(Customer customer);
 }

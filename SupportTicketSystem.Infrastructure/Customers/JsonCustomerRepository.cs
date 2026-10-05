@@ -5,8 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
-using System.Text.Json.Serialization;
-using System.Xml.Linq;
+using System.Threading.Tasks;
 
 namespace SupportTicketSystem.Infrastructure.Customers;
 
@@ -19,71 +18,75 @@ public class JsonCustomerRepository : ICustomerRepository
         _filepath = Path.GetFullPath(filepath);
     }
 
-    public IReadOnlyList<Customer> GetAll()
+    public async Task<IReadOnlyList<Customer>> GetAllAsync()
     {
-        return LoadCustomers();
+        return await LoadCustomersAsync();
     }
 
-    public Customer? GetById(Guid id)
+    public async Task<Customer?> GetByIdAsync(Guid id)
     {
-        return LoadCustomers()
-            .FirstOrDefault(customer => customer.Id == id);
+        var customers = await LoadCustomersAsync();
+
+        return customers.FirstOrDefault(
+            customer => customer.Id == id);
     }
 
-    public void Add(Customer customer)
+    public async Task AddAsync(Customer customer)
     {
-        var customers = LoadCustomers();
+        var customers = await LoadCustomersAsync();
 
         if (customers.Any(existing => existing.Id == customer.Id))
         {
-            throw new InvalidOperationException(" A customer with this ID already exists. ");
+            throw new InvalidOperationException("A customer with this ID already exists.");
         }
 
         customers.Add(customer);
-        SaveCustomers(customers);
+
+        await SaveCustomersAsync(customers);
     }
 
-    public void Update (Customer customer)
+    public async Task UpdateAsync(Customer customer)
     {
-        var customers = LoadCustomers();
+        var customers = await LoadCustomersAsync();
 
-        var index = customers.FindIndex(existing  => existing.Id == customer.Id);
+        var index = customers.FindIndex(
+            existing => existing.Id == customer.Id);
 
         if (index == -1)
         {
-            throw new InvalidOperationException(" Customer could not be found. ");
+            throw new InvalidOperationException(
+                "Customer could not be found.");
         }
 
         customers[index] = customer;
 
-        SaveCustomers(customers);
-
+        await SaveCustomersAsync(customers);
     }
 
-    private List<Customer> LoadCustomers()
+    private async Task<List<Customer>> LoadCustomersAsync()
     {
         string json;
 
         try
         {
-            json = File.ReadAllText(_filepath);
+            json = await File.ReadAllTextAsync(_filepath);
         }
         catch (FileNotFoundException)
         {
             return new List<Customer>();
-
         }
         catch (DirectoryNotFoundException)
         {
             return new List<Customer>();
         }
 
-        var storedCustomers = JsonSerializer.Deserialize<List<CustomerData>>(json);
+        var storedCustomers =
+            JsonSerializer.Deserialize<List<CustomerData>>(json);
 
         if (storedCustomers is null)
         {
-            throw new InvalidDataException("The customer file does not contain a customer list. ");
-
+            throw new InvalidDataException(
+                "The customer file does not contain a customer list.");
         }
 
         var customers = new List<Customer>();
@@ -91,19 +94,22 @@ public class JsonCustomerRepository : ICustomerRepository
 
         foreach (var data in storedCustomers)
         {
-            if(data is null)
+            if (data is null)
             {
-                throw new InvalidDataException("The customer file contains an invalid entry. ");
-
+                throw new InvalidDataException(
+                    "The customer file contains an invalid entry.");
             }
 
             if (!usedIds.Add(data.Id))
             {
-                throw new InvalidDataException("The customer file contains duplicate IDs. ");
-
+                throw new InvalidDataException(
+                    "The customer file contains duplicate IDs.");
             }
 
-            var customer = Customer.Restore(data.Id, data.Name, data.Email);
+            var customer = Customer.Restore(
+                data.Id,
+                data.Name,
+                data.Email);
 
             customers.Add(customer);
         }
@@ -111,7 +117,7 @@ public class JsonCustomerRepository : ICustomerRepository
         return customers;
     }
 
-    private void SaveCustomers(List<Customer> customers)
+    private async Task SaveCustomersAsync(List<Customer> customers)
     {
         var storedCustomers = new List<CustomerData>();
 
@@ -121,7 +127,7 @@ public class JsonCustomerRepository : ICustomerRepository
             {
                 Id = customer.Id,
                 Name = customer.Name,
-                Email = customer.Email,
+                Email = customer.Email
             });
         }
 
@@ -136,29 +142,27 @@ public class JsonCustomerRepository : ICustomerRepository
         Directory.CreateDirectory(directory);
 
         var temporaryPath =
-            _filepath + "." + Guid.NewGuid() + "tmp";
-        
+            _filepath + "." + Guid.NewGuid() + ".tmp";
+
         try
         {
-            File.WriteAllText(temporaryPath, json);
+            await File.WriteAllTextAsync(temporaryPath, json);
+
             File.Move(temporaryPath, _filepath, overwrite: true);
         }
-
         finally
         {
+          
             try
             {
                 File.Delete(temporaryPath);
             }
-            
             catch (IOException)
             {
             }
-
             catch (UnauthorizedAccessException)
             {
             }
         }
-    
     }
 }

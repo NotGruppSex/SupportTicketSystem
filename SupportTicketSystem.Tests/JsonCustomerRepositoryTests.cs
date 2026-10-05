@@ -1,18 +1,18 @@
 ﻿using System;
 using System.IO;
+using System.Text.Json;
+using System.Threading.Tasks;
 using SupportTicketSystem.Domain.Customers;
 using SupportTicketSystem.Infrastructure.Customers;
 using Xunit;
-using System.Text.Json;
 
 namespace SupportTicketSystem.Tests.Customers;
 
 public class JsonCustomerRepositoryTests
 {
     [Fact]
-    public void Add_ShouldPreserveCustomerWhenLoadedAgain()
+    public async Task Add_ShouldPreserveCustomerWhenLoadedAgain()
     {
-        // Arrange: skapa en unik testmapp och en kund.
         var folderPath = Path.Combine(
             Path.GetTempPath(),
             "SupportTicketSystem.Tests",
@@ -22,19 +22,22 @@ public class JsonCustomerRepositoryTests
 
         try
         {
+            // Arrange
             var repository = new JsonCustomerRepository(filePath);
 
             var customer = new Customer(
                 "Anna Andersson",
                 "anna@example.com");
 
-            // Act: spara och läs tillbaka med ett nytt repository.
-            repository.Add(customer);
+            // Act
+            await repository.AddAsync(customer);
 
             var newRepository = new JsonCustomerRepository(filePath);
-            var loadedCustomer = newRepository.GetById(customer.Id);
 
-            // Assert: kontrollera att uppgifterna finns kvar.
+            var loadedCustomer =
+                await newRepository.GetByIdAsync(customer.Id);
+
+            // Assert
             Assert.True(File.Exists(filePath));
             Assert.NotNull(loadedCustomer);
             Assert.Equal(customer.Id, loadedCustomer.Id);
@@ -43,17 +46,16 @@ public class JsonCustomerRepositoryTests
         }
         finally
         {
-            // Ta endast bort den unika mapp som testet skapade.
             if (Directory.Exists(folderPath))
             {
                 Directory.Delete(folderPath, recursive: true);
             }
         }
     }
+
     [Fact]
-    public void Update_ShouldSaveContactDetailsAndPreserveId()
+    public async Task Update_ShouldSaveContactDetailsAndPreserveId()
     {
-        // Arrange: skapa en kund och spara den.
         var folderPath = Path.Combine(
             Path.GetTempPath(),
             "SupportTicketSystem.Tests",
@@ -63,28 +65,28 @@ public class JsonCustomerRepositoryTests
 
         try
         {
+            // Arrange
             var repository = new JsonCustomerRepository(filePath);
 
             var customer = new Customer(
                 "Anna Andersson",
                 "anna@example.com");
 
-            repository.Add(customer);
+            await repository.AddAsync(customer);
 
             var originalId = customer.Id;
 
-            // Act: ändra uppgifterna och spara uppdateringen.
+            // Act
             customer.UpdateContact(
                 "Anna Svensson",
                 "anna.svensson@example.com");
 
-            repository.Update(customer);
+            await repository.UpdateAsync(customer);
 
-            // Läs tillbaka från filen med ett nytt repository.
             var newRepository = new JsonCustomerRepository(filePath);
-            var customers = newRepository.GetAll();
+            var customers = await newRepository.GetAllAsync();
 
-            // Assert: uppdateringen ska inte skapa en extra kund.
+            // Assert
             var loadedCustomer = Assert.Single(customers);
 
             Assert.Equal(originalId, loadedCustomer.Id);
@@ -101,10 +103,10 @@ public class JsonCustomerRepositoryTests
             }
         }
     }
+
     [Fact]
-    public void Add_ShouldNotOverwriteInvalidJson()
+    public async Task Add_ShouldNotOverwriteInvalidJson()
     {
-        // Arrange: skapa en fil med ogiltig JSON.
         var folderPath = Path.Combine(
             Path.GetTempPath(),
             "SupportTicketSystem.Tests",
@@ -114,19 +116,21 @@ public class JsonCustomerRepositoryTests
 
         try
         {
+            // Arrange
             Directory.CreateDirectory(folderPath);
 
             var originalContent = "This is not valid JSON.";
-            File.WriteAllText(filePath, originalContent);
+
+            await File.WriteAllTextAsync(filePath, originalContent);
 
             var repository = new JsonCustomerRepository(filePath);
             var customer = new Customer("Anna", "anna@example.com");
 
-            // Act + Assert: inläsningsfelet ska stoppa sparningen.
-            Assert.Throws<JsonException>(() => repository.Add(customer));
+            // Act + Assert
+            await Assert.ThrowsAsync<JsonException>(
+                () => repository.AddAsync(customer));
 
-            // Filens befintliga innehåll ska vara oförändrat.
-            var actualContent = File.ReadAllText(filePath);
+            var actualContent = await File.ReadAllTextAsync(filePath);
 
             Assert.Equal(originalContent, actualContent);
         }

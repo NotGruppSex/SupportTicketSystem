@@ -1,16 +1,17 @@
 ﻿using SupportTicketSystem.Domain.Customers;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace SupportTicketSystem.Application.Features.Customers;
 
 public interface ICustomerService
 {
-    IReadOnlyList<Customer> GetAll();
+    Task<IReadOnlyList<Customer>> GetAllAsync();
 
-    Customer? GetById(Guid id);
+    Task<Customer?> GetByIdAsync(Guid id);
 
-    Customer Register(string name, string email);
+    Task<Customer> RegisterAsync(string name, string email);
 
-    void UpdateContact(Guid id, string name, string email);
+    Task UpdateContactAsync(Guid id, string name, string email);
 }
