@@ -3,15 +3,14 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace SupportTicketSystem.Application.Features.Customers;
-
 public interface ICustomerService
 {
-    Task<IReadOnlyList<Customer>> GetAllAsync();
+    Task<IReadOnlyList<Customer>> GetAllCustomersAsync();
 
-    Task<Customer?> GetByIdAsync(Guid id);
+    Task<Customer?> GetCustomerByIdAsync(Guid customerId);
 
-    Task<Customer> RegisterAsync(string name, string email);
+    Task<Customer> RegisterCustomerAsync(string name, string email);
 
-    Task UpdateContactAsync(Guid id, string name, string email);
+    Task UpdateCustomerDetailsAsync(Guid customerId, string name, string email);
+        
 }

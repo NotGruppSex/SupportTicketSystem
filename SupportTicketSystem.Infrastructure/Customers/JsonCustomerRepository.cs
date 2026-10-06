@@ -18,12 +18,12 @@ public class JsonCustomerRepository : ICustomerRepository
         _filepath = Path.GetFullPath(filepath);
     }
 
-    public async Task<IReadOnlyList<Customer>> GetAllAsync()
+    public async Task<IReadOnlyList<Customer>> GetAllCustomersAsync()
     {
         return await LoadCustomersAsync();
     }
 
-    public async Task<Customer?> GetByIdAsync(Guid id)
+    public async Task<Customer?> GetCustomerByIdAsync(Guid id)
     {
         var customers = await LoadCustomersAsync();
 
@@ -31,7 +31,7 @@ public class JsonCustomerRepository : ICustomerRepository
             customer => customer.Id == id);
     }
 
-    public async Task AddAsync(Customer customer)
+    public async Task AddCustomerAsync(Customer customer)
     {
         var customers = await LoadCustomersAsync();
 
@@ -45,7 +45,7 @@ public class JsonCustomerRepository : ICustomerRepository
         await SaveCustomersAsync(customers);
     }
 
-    public async Task UpdateAsync(Customer customer)
+    public async Task UpdateCustomerAsync(Customer customer)
     {
         var customers = await LoadCustomersAsync();
 

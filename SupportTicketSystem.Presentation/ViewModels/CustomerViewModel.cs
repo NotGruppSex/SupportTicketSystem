@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using SupportTicketSystem.Application.Features.Customers;
 using SupportTicketSystem.Domain.Customers;
 using System;
 using System.Collections.ObjectModel;
@@ -10,39 +9,40 @@ using System.Threading.Tasks;
 
 namespace SupportTicketSystem.Presentation.ViewModels;
 
-public class CustomersViewModel : ObservableObject
+public partial class CustomersViewModel : ObservableObject
 {
     private readonly ICustomerService _customerService;
-
-    public string Title { get; } = "Customers";
-
-    public ObservableCollection<Customer> Customers { get; } = new();
-
     private string _errorMessage = string.Empty;
-
-    public string ErrorMessage
-    {
-        get => _errorMessage;
-        set => SetProperty(ref _errorMessage, value);
-    }
-
-    public IAsyncRelayCommand LoadCustomersCommand { get; }
 
     public CustomersViewModel(ICustomerService customerService)
     {
         _customerService = customerService;
-
-        LoadCustomersCommand =
-            new AsyncRelayCommand(LoadCustomersAsync);
     }
 
+    public ObservableCollection<Customer> Customers { get; } = [];
+
+    public string ErrorMessage
+    {
+        get
+        {
+            return _errorMessage;
+        }
+
+        set
+        {
+            SetProperty(ref _errorMessage, value);
+        }
+    }
+
+    [RelayCommand]
     private async Task LoadCustomersAsync()
     {
         ErrorMessage = string.Empty;
 
         try
         {
-            var customers = await _customerService.GetAllAsync();
+            var customers =
+                await _customerService.GetAllCustomersAsync();
 
             Customers.Clear();
 
@@ -53,22 +53,19 @@ public class CustomersViewModel : ObservableObject
         }
         catch (JsonException)
         {
-            ErrorMessage = "The customer file contains invalid JSON. No data was changed.";
+            ErrorMessage = "The customer file contains invalid JSON or an unexpected data format. No data was changed.";
         }
         catch (IOException)
         {
-            ErrorMessage = "The customer file could not be read. Check the file and try again.";
-
+            ErrorMessage = "The customer file could not be loaded. Check that it is accessible and contains valid customer data.";
         }
         catch (UnauthorizedAccessException)
         {
-            ErrorMessage = "You do not have permission to read the customer file.";
-
+            ErrorMessage = "The app does not have permission to read the customer file.";
         }
         catch (ArgumentException)
         {
             ErrorMessage = "The customer file contains invalid customer details.";
-
         }
     }
 }

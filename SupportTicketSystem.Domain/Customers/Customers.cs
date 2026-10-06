@@ -33,7 +33,7 @@ public class Customer
     {
         return new Customer(id, name, email);
     }
-    public void UpdateContact(string name, string email)
+    public void UpdateDetails(string name, string email)
     {
         Validate(name, email);
 
@@ -53,15 +53,24 @@ public class Customer
         {
             throw new ArgumentException("Customer E-mail is required.");
         }
-
         var trimmedEmail = email.Trim();
 
-        if (!MailAddress.TryCreate(trimmedEmail, out var address)
-            || address.Address != trimmedEmail)
+        bool isValidEmail = MailAddress.TryCreate(
+            trimmedEmail,
+            out var emailAddress);
+
+        if (isValidEmail == false)
         {
-            throw new ArgumentException("E-mailaddress must be a valid format.");
+            throw new ArgumentException(
+                "E-mail address must have a valid format.");
         }
 
-    }
+      
+        bool containsOnlyEmailAddress = emailAddress.Address == trimmedEmail;
 
+        if (containsOnlyEmailAddress == false)
+        {
+            throw new ArgumentException("Enter only the e-mail address, without a display name.");
+        }
+    }
 }

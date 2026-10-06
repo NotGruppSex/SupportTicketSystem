@@ -7,11 +7,11 @@ namespace SupportTicketSystem.Application.Features.Customers;
 
 public interface ICustomerRepository
 {
-    Task<IReadOnlyList<Customer>> GetAllAsync();
+    Task<IReadOnlyList<Customer>> GetAllCustomersAsync();
 
-    Task<Customer?> GetByIdAsync(Guid id);
+    Task<Customer?> GetCustomerByIdAsync(Guid id);
 
-    Task AddAsync(Customer customer);
+    Task AddCustomerAsync(Customer customer);
 
-    Task UpdateAsync(Customer customer);
+    Task UpdateCustomerAsync(Customer customer);
 }
