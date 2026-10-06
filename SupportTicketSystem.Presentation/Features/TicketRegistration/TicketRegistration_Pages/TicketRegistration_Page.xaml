@@ -9,19 +9,16 @@
     mc:Ignorable="d"
     Loaded="Page_Loaded" 
     >
-    
     <!--
-    rad 11: hämtar model
-    rad 12: Event som kallas för loaded
-    rad 13: IsEnabled = gör UI element interaktivbar 
+    rad 6: hämtar model
+    rad 10: Event som kallas för loaded
+    rad se nedan: IsEnabled = gör UI element interaktivbar 
             bind = sammankopplar vår ViewModel till denna page.
             IsNotBusy = Bool property av ViewModelklassen: Om sann -> blir IsEnabled av UI elementet true osv
             Mode Oneway = Definierar hur datan flyter mellan UI och källa. Uppdaterar UI när källproperty ändras men ändringar i UI uppdaterar INTE källan
     
     Lägg eventuellt till denna rad under Loaded: IsEnabled="{x:Bind ViewModel.IsNotBusy, Mode=OneWay}">
     -->
-
-
 
     <Grid Padding="24">
         <StackPanel Spacing="12">
@@ -44,7 +41,6 @@
             AcceptsReturn="True"
             MinHeight="120"
             MaxHeight="200"/>
-            
 
             <!--Boxar för kund och prioritet som användaren ska kunna välja mellan alternativ. Måste lägga till DisplayMemberPath för att den ska visa namnen och inte typen av customer-->
             <ComboBox
@@ -68,8 +64,4 @@
             Text="{x:Bind TicketRegistrationViewModel.StatusMessage, Mode=OneWay}"/>
         </StackPanel>
     </Grid>
-
-
-
-
 </Page>

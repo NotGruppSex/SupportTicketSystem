@@ -28,11 +28,11 @@ public class TicketModel
     //Konstruktor med propertieskrav, validering och trim.
     public TicketModel(string title, string description, MockCustomer customer, TicketPriority priority)
     {
-        //Validering och trimning.
+        //Validering och trimning (ej för priority då den alltid har ett värde)
         InputTitleValidation(title);
         InputDescriptionValidation(description);
         InputCustomerValidation(customer);
-        InputEnumValidation(priority);
+        
 
         title = TrimInput(title);
         description = TrimInput(description);
@@ -53,27 +53,21 @@ public class TicketModel
     public void InputTitleValidation(string titleToValidate)
     {
         if (string.IsNullOrWhiteSpace(titleToValidate))
-            throw new ArgumentException("Title cannot be empty.", nameof(titleToValidate));
+            throw new ArgumentException("Title cannot be empty.");
     }
     public void InputDescriptionValidation(string descriptionToValidate)
     {
         if (string.IsNullOrWhiteSpace(descriptionToValidate))
-            throw new ArgumentException("Description cannot be empty.", nameof(descriptionToValidate));
+            throw new ArgumentException("Description cannot be empty.");
     }
 
     public void InputCustomerValidation(MockCustomer customerToValidate)
     {
         if (customerToValidate == null)
-        {
-            throw new ArgumentNullException(nameof(customerToValidate   ), "You must choose a customer.");
-        }
+            throw new ArgumentException("You must choose a customer.");
     }
 
-    public void InputEnumValidation(TicketPriority enumToValidate)
-    {
-        if (!Enum.IsDefined(enumToValidate))
-            throw new ArgumentException("You must choose a priority.", nameof(enumToValidate));
-    }
+    //No validation for priority as it always will be at least medium and never null or empty.
 
     public string TrimInput(string input)
     {
