@@ -24,20 +24,37 @@ public partial class TicketRegistration_ViewModel : ObservableObject
         _ticketService = ticketService;
     }
 
-    //För meddelande vid olika events senare
-    [ObservableProperty] public partial string StatusMessage { get; private set; } = string.Empty;
+    //-----------För meddelande vid olika events senare-----------//
+    [ObservableProperty] 
+    public partial string StatusMessage { get; private set; } = string.Empty;
 
 
-    //synbara properties för användaren att redigera.
-    [ObservableProperty] public partial string InputTitle { get; set; } = string.Empty;
-    [ObservableProperty] public partial string InputDescription { get; set; } = string.Empty;
-    [ObservableProperty] public partial MockCustomer? InputCustomer { get; set; } //TODO - behövde göra den nullable - varför
-    [ObservableProperty] public partial TicketPriority InputPriority { get; set; } = TicketPriority.Medium;
 
-    //Synbara properties som kanske senare ska visas vid skapad ticket - därför de ej sätts nu (sätts i modellen) och är nullable här
-    [ObservableProperty] public partial Guid? GenereatedId { get; private set; }
-    [ObservableProperty] public partial TicketStatus? DefaultStatus { get; private set; }
-    [ObservableProperty] public partial DateTime? GeneratedDate { get; private set; }
+    //-----------Synbara properties för användaren att redigera-----------//
+
+    [ObservableProperty] 
+    public partial string InputTitle { get; set; } = string.Empty;
+
+    [ObservableProperty] 
+    public partial string InputDescription { get; set; } = string.Empty;
+
+    [ObservableProperty] 
+    public partial MockCustomer? InputCustomer { get; set; } //TODO - behövde göra den nullable - varför
+
+    [ObservableProperty] 
+    public partial TicketPriority InputPriority { get; set; } = TicketPriority.Medium;
+
+
+    //----Synbara properties som kan ses senare - sätts i modellen och är nullable här----//
+
+    [ObservableProperty] 
+    public partial Guid? GeneratedId { get; private set; }
+
+    [ObservableProperty] 
+    public partial TicketStatus? DefaultStatus { get; private set; }
+
+    [ObservableProperty] 
+    public partial DateTime? GeneratedDate { get; private set; }
 
 
     //Lista så användaren kan se alla priority:
