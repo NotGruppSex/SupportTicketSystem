@@ -1,4 +1,6 @@
 ﻿using System;
+using static SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationEnums.TicketPriorityEnum;
+using static SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationEnums.TicketStatusEnum;
 namespace SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationModels;
 
 public class MockCustomer //TODO - ta bort denna när vi har en customer
@@ -8,22 +10,6 @@ public class MockCustomer //TODO - ta bort denna när vi har en customer
     public string MockCustomerEmail { get; set; }
     public string MockCustomerPhone { get; set; }
 }
-
-//Skapar enum för ticketmodellen så det blir enklare att enbart kunna ändra genom statusarna enbart olika status på status och prioritering. 
-public enum TicketStatus
-{
-    New,
-    InProgress,
-    Closed,
-}
-
-public enum TicketPriority
-{
-    Low,
-    Medium,
-    High,
-}
-
 
 //TODO - gör om till record?
 
@@ -62,6 +48,10 @@ public class TicketModel
         TicketStatus = TicketStatus.New;
         TicketCreationDate = DateTime.Now;
     }
+
+
+
+    //Validering- och trimmetoder
 
     public string InputTitleValidation(string titleToValidate)
     {
