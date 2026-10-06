@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistration_dtos;
 using SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistration_Interfaces;
 using SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationModels;
 using System;
@@ -11,10 +12,12 @@ using static SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegist
 
 namespace SupportTicketSystem.Presentation.Features.TicketRegistration.TicketRegistrationViewModels;
 
+
+
 //Observable object uppdaterar automatiskt UI när en property ändras. Partial pga MVVM toolkit som genererar extrakod för denna klass under kompilering och är beroende av ObservableObject(???)
 public partial class TicketRegistration_ViewModel : ObservableObject
 {
-    //För att hämta servicen just i denna klass (privat fält) och läggs till din genom konstruktor (för att få tillgång till min service)
+    //För att hämta servicen just i denna klass (privat fält) och läggs till genom konstruktor (för att få tillgång till min service)
     private readonly ITicketRegistration_Service _ticketService;
     public TicketRegistration_ViewModel(ITicketRegistration_Service ticketService)
     {
@@ -25,13 +28,13 @@ public partial class TicketRegistration_ViewModel : ObservableObject
     [ObservableProperty] public partial string StatusMessage { get; private set; } = string.Empty;
 
 
-    //synbara properties för användaren att redigera. OP rensar UI automatiskt. 
+    //synbara properties för användaren att redigera.
     [ObservableProperty] public partial string InputTitle { get; set; } = string.Empty;
     [ObservableProperty] public partial string InputDescription { get; set; } = string.Empty;
     [ObservableProperty] public partial MockCustomer? InputCustomer { get; set; } //TODO - behövde göra den nullable - varför
     [ObservableProperty] public partial TicketPriority InputPriority { get; set; } = TicketPriority.Medium;
 
-    //Synbara properties som senare kommer visas vid skapad ticket - därför de ej sätts nu (sätts i modellen) och är nullable här
+    //Synbara properties som kanske senare ska visas vid skapad ticket - därför de ej sätts nu (sätts i modellen) och är nullable här
     [ObservableProperty] public partial Guid? GenereatedId { get; private set; }
     [ObservableProperty] public partial TicketStatus? DefaultStatus { get; private set; }
     [ObservableProperty] public partial DateTime? GeneratedDate { get; private set; }
@@ -61,13 +64,14 @@ public partial class TicketRegistration_ViewModel : ObservableObject
     */
 
 
-    //Relaycommand är handlingar som användaren triggar igång. Denna async körs när användaren trycker på att skapa en ticket. Den tar infon från användaren och skickar vidare till servicen för hantering. Om ej funkar skrivs felmeddelande ut. Om det lyckades rensas alla inputs. 
+    //Relaycommand är handlingar som användaren triggar igång. Denna async körs när användaren trycker på "Create ticket". Den tar infon från användaren och skickar vidare till servicen för hantering. Om ej funkar skrivs felmeddelande ut. Om det lyckades rensas alla inputs. 
     [RelayCommand]
     private async Task SendInfoToServiceAsync()
     {
         try
         {
-            await _ticketService.RegisterTicket(InputTitle, InputDescription, InputCustomer, InputPriority);
+            //skapar recordobject som skickas till servicen.
+            await _ticketService.RegisterTicket(new TicketRegistrationRequest(InputTitle, InputDescription, InputCustomer, InputPriority));
 
             StatusMessage = "Ticket created!";
 
@@ -77,9 +81,9 @@ public partial class TicketRegistration_ViewModel : ObservableObject
             InputPriority = TicketPriority.Medium;
         }
         //Om det inte funkar så skrivs ett felmeddelande ut beroende på vart felet är. 
-        catch (ArgumentException ex)
+        catch (ArgumentException exception)
         {
-            StatusMessage = ex.Message;
+            StatusMessage = exception.Message;
         }
     }
 }

@@ -1,12 +1,10 @@
-﻿using SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationModels;
-using System.Threading.Tasks;
-using static SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationEnums.TicketPriorityEnum;
-using static SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationEnums.TicketStatusEnum;
+﻿using System.Threading.Tasks;
+using SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistration_dtos;
 
 namespace SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistration_Interfaces
 {
     public interface ITicketRegistration_Service
     {
-        Task RegisterTicket(string inputTitle, string inputDescription, MockCustomer inputCustomer, TicketPriority inputPriority);
+        Task RegisterTicket(TicketRegistrationRequest ticketRequest);
     }
 }

@@ -11,9 +11,7 @@ public class MockCustomer //TODO - ta bort denna när vi har en customer
     public string MockCustomerPhone { get; set; }
 }
 
-//TODO - gör om till record?
-
-//Modellen, kräver vissa properties vid skapande genom konstruktorn nedan. Alla nya tickets ska ha status "New" varav det tilldelas inom klassen. Samma för DateTime.  
+//Modellen med krav av vissa properties konstruktorn. Nya tickets får defaultvärde status new och dagens datum.  
 public class TicketModel 
 {
     public Guid TicketID { get; private set; }
