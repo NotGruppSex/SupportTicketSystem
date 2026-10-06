@@ -24,17 +24,17 @@ public class TicketModel
     public TicketStatus TicketStatus { get; private set; }
     public DateTime TicketCreationDate { get; private set; }
 
-    //Parameterlös konstruktor för serialisering av Json - annars funkar den inte och vi får krash.
+    //Parameterlös konstruktor för serialisering av Json - annars funkar den inte och vi får krash av någon anledning.
     public TicketModel() { } 
 
-    //Konstruktor som kräver vissa properties från användaren. Kör också validering genom metoder initiering och id generering
+    //Konstruktor med propertieskrav, validering och trim.
     public TicketModel(string title, string description, MockCustomer customer, TicketPriority priority)
     {
         //Validering och trimning.
-        title = InputTitleValidation(title);
-        description = InputDescriptionValidation(description);
-        customer = InputObjectValidation(customer);
-        priority = InputEnumValidation(priority);
+        InputTitleValidation(title);
+        InputDescriptionValidation(description);
+        InputCustomerValidation(customer);
+        InputEnumValidation(priority);
 
         title = TrimInput(title);
         description = TrimInput(description);
@@ -50,36 +50,31 @@ public class TicketModel
     }
 
 
+    //___________________Validerings- och trimmetoder___________________//
 
-    //Validering- och trimmetoder
-
-    public string InputTitleValidation(string titleToValidate)
+    public void InputTitleValidation(string titleToValidate)
     {
         if (string.IsNullOrWhiteSpace(titleToValidate))
             throw new ArgumentException("Title cannot be empty.", nameof(titleToValidate));
-        return titleToValidate;
     }
-    public string InputDescriptionValidation(string descriptionToValidate)
+    public void InputDescriptionValidation(string descriptionToValidate)
     {
         if (string.IsNullOrWhiteSpace(descriptionToValidate))
             throw new ArgumentException("Description cannot be empty.", nameof(descriptionToValidate));
-        return descriptionToValidate;
     }
 
-    public MockCustomer InputObjectValidation(MockCustomer customerToValidate)
+    public void InputCustomerValidation(MockCustomer customerToValidate)
     {
         if (customerToValidate == null)
         {
             throw new ArgumentNullException(nameof(customerToValidate   ), "You must choose a customer.");
         }
-        return customerToValidate;
     }
 
-    public TicketPriority InputEnumValidation(TicketPriority enumToValidate)
+    public void InputEnumValidation(TicketPriority enumToValidate)
     {
         if (!Enum.IsDefined(enumToValidate))
             throw new ArgumentException("You must choose a priority.", nameof(enumToValidate));
-        return enumToValidate;
     }
 
     public string TrimInput(string input)
