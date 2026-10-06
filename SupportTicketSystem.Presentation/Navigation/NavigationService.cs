@@ -27,7 +27,7 @@ public class NavigationService : INavigationService
 
         var nextPage = page switch
         {
-            AppPage.Home => typeof(HomePage),
+            AppPage.Home => typeof(SupportTicketSystem.Presentation.Features.TicketRegistration.TicketRegistrationPages.TicketRegistrationPage),
 
             _ => throw new ArgumentOutOfRangeException($"Unable to navigate to {page}.")
         };

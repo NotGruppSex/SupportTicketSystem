@@ -14,7 +14,7 @@ namespace SupportTicketSystem.Presentation.Features.TicketRegistration.TicketReg
 
 
 
-//Observable object uppdaterar automatiskt UI när en property ändras. Partial pga MVVM toolkit som genererar extrakod för denna klass under kompilering och är beroende av ObservableObject(???)
+//ObsObj uppdaterar automatiskt UI vid propertyändringar. Partial pga MVVM toolkit som genererar extrakod för denna klass under kompilering och är beroende av ObservableObject(???)
 public partial class TicketRegistration_ViewModel : ObservableObject
 {
     //För att hämta servicen just i denna klass (privat fält) och läggs till genom konstruktor (för att få tillgång till min service)
@@ -39,7 +39,7 @@ public partial class TicketRegistration_ViewModel : ObservableObject
     public partial string InputDescription { get; set; } = string.Empty;
 
     [ObservableProperty] 
-    public partial MockCustomer? InputCustomer { get; set; } //TODO - behövde göra den nullable - varför
+    public partial MockCustomer? InputCustomer { get; set; } //nullable vid pageload så är ingen customer vald, alltså null. Därför måste den vara nullable.
 
     [ObservableProperty] 
     public partial TicketPriority InputPriority { get; set; } = TicketPriority.Medium;
