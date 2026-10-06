@@ -1,8 +1,8 @@
 ﻿
 using SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistration_Interfaces;
 using SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationModels;
-using SupportTicketSystem.DOmain.Features.TicketRegistration.TicketRegistration_Interfaces; //TODO CHECK THIS SHIT OUT
 using System.Threading.Tasks;
+using static SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationEnums.TicketPriorityEnum;
 
 namespace SupportTicketSystem.Application.Features.TicketRegistration.TicketRegistrationServices;
 

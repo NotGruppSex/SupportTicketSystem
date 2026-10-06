@@ -1,7 +1,9 @@
 ﻿using SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationModels;
 using System.Threading.Tasks;
+using static SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationEnums.TicketPriorityEnum;
+using static SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationEnums.TicketStatusEnum;
 
-namespace SupportTicketSystem.DOmain.Features.TicketRegistration.TicketRegistration_Interfaces
+namespace SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistration_Interfaces
 {
     public interface ITicketRegistration_Service
     {
