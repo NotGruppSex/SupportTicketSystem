@@ -1,16 +1,14 @@
-﻿
-using SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistration_dtos;
+﻿using SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistration_dtos;
 using SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistration_Interfaces;
 using SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationModels;
 using System.Threading.Tasks;
-using static SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationEnums.TicketPriorityEnum;
 
 namespace SupportTicketSystem.Application.Features.TicketRegistration.TicketRegistrationServices;
 
 //Hämtar in repot genom dess interface så den kan användas. 
 public class TicketRegistration_Service(IJson_TicketRegistration_Repository ticketRepository) : ITicketRegistration_Service
 {
-    //Asyncmetod som tar in info från användaren och skapar ticketen genom record. Sen repo för att hämta alla tickets, lägger till nya ticketen och sen sparar alla tickets genom repo. 
+    //Asyncmetod tar in info från användaren och skapar ticketen genom record. Sen repo för att hämta alla tickets, lägger till nya ticketen och sen sparar alla tickets genom repo. 
     public async Task RegisterTicket(TicketRegistrationRequest ticketRequest)
     {
         TicketModel newTicket = new TicketModel(

@@ -22,7 +22,7 @@ public class TicketModel
     public TicketStatus TicketStatus { get; private set; }
     public DateTime TicketCreationDate { get; private set; }
 
-    //Parameterlös konstruktor för serialisering av Json - annars funkar den inte och vi får krash av någon anledning.
+    //Parameterlös konstruktor för deserialisering av Json - annars krash
     public TicketModel() { } 
 
     //Konstruktor med propertieskrav, validering och trim.

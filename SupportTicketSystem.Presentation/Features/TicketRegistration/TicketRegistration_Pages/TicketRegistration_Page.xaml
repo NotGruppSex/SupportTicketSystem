@@ -33,6 +33,7 @@
             Header="Title"
             PlaceholderText="Enter the title for your ticket"
             Text="{x:Bind TicketRegistrationViewModel.InputTitle, Mode=TwoWay}"/>
+            
             <TextBox
             Header="Description"
             PlaceholderText="Enter description of your problem"
