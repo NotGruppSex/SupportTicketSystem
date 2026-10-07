@@ -7,10 +7,10 @@ namespace SupportTicketSystem.Presentation.Features.TicketRegistration.TicketReg
 public sealed partial class TicketRegistrationPage : Page
 {
     //Property av klassen viewmodel för att kunna hämta den
-    public TicketRegistration_ViewModel TicketRegistrationViewModel { get; }
+    public TicketRegistrationViewModel TicketRegistrationViewModel { get; }
     
     //Page tar emot vår viewmodel
-    public TicketRegistrationPage(TicketRegistration_ViewModel ticketViewModel)
+    public TicketRegistrationPage(TicketRegistrationViewModel ticketViewModel)
     {
         //Sätter värdet på propertyn med vår viewmodel.
         TicketRegistrationViewModel = ticketViewModel;

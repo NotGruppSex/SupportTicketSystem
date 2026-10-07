@@ -1,8 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using SupportTicketSystem.Domain.Features.Customers;
-using SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistration_dtos;
-using SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistration_Interfaces;
+using SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationDtos;
+using SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationInterfaces;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -15,11 +15,11 @@ namespace SupportTicketSystem.Presentation.Features.TicketRegistration.TicketReg
 
 
 //ObsObj uppdaterar automatiskt UI vid propertyändringar. Partial pga MVVM toolkit som genererar extrakod för denna klass under kompilering och är beroende av ObservableObject(???)
-public partial class TicketRegistration_ViewModel : ObservableObject
+public partial class TicketRegistrationViewModel : ObservableObject
 {
     //För att hämta servicen just i denna klass (privat fält) och läggs till genom konstruktor (för att få tillgång till min service)
-    private readonly ITicketRegistration_Service _ticketService;
-    public TicketRegistration_ViewModel(ITicketRegistration_Service ticketService)
+    private readonly ITicketRegistrationService _ticketService;
+    public TicketRegistrationViewModel(ITicketRegistrationService ticketService)
     {
         _ticketService = ticketService;
     }
@@ -44,17 +44,6 @@ public partial class TicketRegistration_ViewModel : ObservableObject
     [ObservableProperty] 
     public partial TicketPriority InputPriority { get; set; } = TicketPriority.Medium;
 
-
-    //----Synbara properties som kan ses senare - sätts i modellen och är nullable här----//
-
-    [ObservableProperty] 
-    public partial Guid? GeneratedId { get; private set; }
-
-    [ObservableProperty] 
-    public partial TicketStatus? DefaultStatus { get; private set; }
-
-    [ObservableProperty] 
-    public partial DateTime? GeneratedDate { get; private set; }
 
 
     //Lista så användaren kan se alla priority:

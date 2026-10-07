@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistration_Interfaces
+namespace SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationInterfaces
 {
-    public interface IJson_TicketRegistration_Repository
+    public interface IJsonTicketRegistrationRepository
     {
         Task SaveAllTicketsAsync(List<TicketModel> tickets);
 
