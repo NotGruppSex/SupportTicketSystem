@@ -1,15 +1,8 @@
-﻿using System;
+﻿using SupportTicketSystem.Domain.Features.Customers;
+using System;
 using static SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationEnums.TicketPriorityEnum;
 using static SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationEnums.TicketStatusEnum;
 namespace SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationModels;
-
-public class MockCustomer //TODO - ta bort denna när vi har en customer
-{
-    public Guid MockCustomerID { get; set; }
-    public string MockCustomerName { get; set; }
-    public string MockCustomerEmail { get; set; }
-    public string MockCustomerPhone { get; set; }
-}
 
 //Modellen med krav av vissa properties konstruktorn. Nya tickets får defaultvärde status new och dagens datum.  
 public class TicketModel 
@@ -17,7 +10,7 @@ public class TicketModel
     public Guid TicketID { get; private set; }
     public string TicketTitle { get; private set; }
     public string TicketDescription { get; private set; }
-    public MockCustomer CustomerTicket { get; private set; } //TODO - Ändra denna till rätt customer sen
+    public Customer CustomerTicket { get; private set; }
     public TicketPriority Priority { get; private set; }
     public TicketStatus TicketStatus { get; private set; }
     public DateTime TicketCreationDate { get; private set; }
@@ -26,13 +19,13 @@ public class TicketModel
     public TicketModel() { } 
 
     //Konstruktor med propertieskrav, validering och trim.
-    public TicketModel(string title, string description, MockCustomer customer, TicketPriority priority)
+    public TicketModel(string title, string description, Customer customer, TicketPriority priority)
     {
         //Validering och trimning (ej för priority då den alltid har ett värde)
         InputTitleValidation(title);
         InputDescriptionValidation(description);
         InputCustomerValidation(customer);
-        
+
 
         title = TrimInput(title);
         description = TrimInput(description);
@@ -61,7 +54,7 @@ public class TicketModel
             throw new ArgumentException("Description cannot be empty.");
     }
 
-    public void InputCustomerValidation(MockCustomer customerToValidate)
+    public void InputCustomerValidation(Customer customerToValidate)
     {
         if (customerToValidate == null)
             throw new ArgumentException("You must choose a customer.");

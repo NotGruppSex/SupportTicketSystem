@@ -1,5 +1,5 @@
 ﻿
-using SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationModels;
+using SupportTicketSystem.Domain.Features.Customers;
 using static SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationEnums.TicketPriorityEnum;
 
 namespace SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistration_dtos;
@@ -9,6 +9,6 @@ public record TicketRegistrationRequest
 (
     string TicketTitle,
     string TicketDescription,
-    MockCustomer TicketCustomer,
+    Customer TicketCustomer,
     TicketPriority TicketPriority
 );

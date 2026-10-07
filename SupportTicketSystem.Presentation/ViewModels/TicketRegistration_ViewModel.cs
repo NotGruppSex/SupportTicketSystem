@@ -1,8 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using SupportTicketSystem.Domain.Features.Customers;
 using SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistration_dtos;
 using SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistration_Interfaces;
-using SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -39,7 +39,7 @@ public partial class TicketRegistration_ViewModel : ObservableObject
     public partial string InputDescription { get; set; } = string.Empty;
 
     [ObservableProperty] 
-    public partial MockCustomer? InputCustomer { get; set; } //nullable vid pageload så är ingen customer vald, alltså null. Därför måste den vara nullable.
+    public partial Customer? InputCustomer { get; set; } //nullable vid pageload så är ingen customer vald, alltså null. Därför måste den vara nullable.
 
     [ObservableProperty] 
     public partial TicketPriority InputPriority { get; set; } = TicketPriority.Medium;
@@ -60,25 +60,7 @@ public partial class TicketRegistration_ViewModel : ObservableObject
     //Lista så användaren kan se alla priority:
     public List<TicketPriority> PriorityOptions { get; } = [TicketPriority.Low, TicketPriority.Medium, TicketPriority.High];
 
-    public ObservableCollection<MockCustomer> CustomerOptions { get; } = []; //TODO - Tillfällig lista med customers så användaren kan välja mellan customers 
-
-    public void LoadMockCustomers() //TODO - Tillfälliga customers i listan
-    {
-        CustomerOptions.Add(new MockCustomer { MockCustomerID = Guid.NewGuid(), MockCustomerName = "Mock Mocksson", MockCustomerEmail = "mock@mock.se", MockCustomerPhone = "073123456789" });
-        CustomerOptions.Add(new MockCustomer { MockCustomerID = Guid.NewGuid(), MockCustomerName = "Möck Möcksson", MockCustomerEmail = "möck@mock.se", MockCustomerPhone = "073123456780" });
-    }
-
-
-    //TODO kod när vi har faktiska listan:
-
-    /*
-    public async Task LoadCustomersAsync()
-    {
-        var customers = await _customerService.GetAllCustomersAsync();
-        foreach (var c in customers)
-            CustomerOptions.Add(c);
-    }
-    */
+    public ObservableCollection<Customer> CustomerOptions { get; } = []; //Lista av customers som blir synbara
 
 
     //Relaycommand är handlingar som användaren triggar igång. Denna async körs när användaren trycker på "Create ticket". Den tar infon från användaren och skickar vidare till servicen för hantering. Om ej funkar skrivs felmeddelande ut. Om det lyckades rensas alla inputs. 
