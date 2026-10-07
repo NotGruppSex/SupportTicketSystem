@@ -1,5 +1,5 @@
 ﻿using SupportTicketSystem.Application.Features.Customers;
-using SupportTicketSystem.Domain.Customers;
+using SupportTicketSystem.Domain.Features.Customers;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace SupportTicketSystem.Infrastructure.Customers;
+namespace SupportTicketSystem.Infrastructure.Features.Customers;
 
 public class JsonCustomerRepository : ICustomerRepository
 {

@@ -1,4 +1,4 @@
-﻿using SupportTicketSystem.Domain.Customers;
+﻿using SupportTicketSystem.Domain.Features.Customers;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;

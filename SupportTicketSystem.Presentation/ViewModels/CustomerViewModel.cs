@@ -1,6 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using SupportTicketSystem.Domain.Customers;
+using SupportTicketSystem.Domain.Features.Customers;
 using System;
 using System.Collections.ObjectModel;
 using System.IO;

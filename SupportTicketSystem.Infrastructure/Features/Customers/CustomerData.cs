@@ -1,7 +1,7 @@
 ﻿using System;
 using Windows.Foundation.Collections;
 
-namespace SupportTicketSystem.Infrastructure.Customers;
+namespace SupportTicketSystem.Infrastructure.Features.Customers;
 
 internal class CustomerData
 {
