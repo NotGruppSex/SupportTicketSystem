@@ -29,6 +29,8 @@ namespace SupportTicketSystem.Presentation
 
             services.AddTransient<MainWindow>();
 
+            services.AddTransient<CustomersViewModel>();
+
             ServiceProvider = services.BuildServiceProvider();
         }
 
