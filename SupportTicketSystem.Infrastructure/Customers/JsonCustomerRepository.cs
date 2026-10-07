@@ -27,8 +27,7 @@ public class JsonCustomerRepository : ICustomerRepository
     {
         var customers = await LoadCustomersAsync();
 
-        return customers.FirstOrDefault(
-            customer => customer.Id == id);
+        return customers.FirstOrDefault(customer => customer.Id == id);
     }
 
     public async Task AddCustomerAsync(Customer customer)
@@ -49,13 +48,11 @@ public class JsonCustomerRepository : ICustomerRepository
     {
         var customers = await LoadCustomersAsync();
 
-        var index = customers.FindIndex(
-            existing => existing.Id == customer.Id);
+        var index = customers.FindIndex(existing => existing.Id == customer.Id);
 
         if (index == -1)
         {
-            throw new InvalidOperationException(
-                "Customer could not be found.");
+            throw new InvalidOperationException("Customer could not be found.");
         }
 
         customers[index] = customer;
@@ -80,13 +77,11 @@ public class JsonCustomerRepository : ICustomerRepository
             return new List<Customer>();
         }
 
-        var storedCustomers =
-            JsonSerializer.Deserialize<List<CustomerData>>(json);
+        var storedCustomers = JsonSerializer.Deserialize<List<CustomerData>>(json);
 
         if (storedCustomers is null)
         {
-            throw new InvalidDataException(
-                "The customer file does not contain a customer list.");
+            throw new InvalidDataException("The customer file does not contain a customer list.");
         }
 
         var customers = new List<Customer>();
@@ -96,20 +91,15 @@ public class JsonCustomerRepository : ICustomerRepository
         {
             if (data is null)
             {
-                throw new InvalidDataException(
-                    "The customer file contains an invalid entry.");
+                throw new InvalidDataException("The customer file contains an invalid entry.");
             }
 
             if (!usedIds.Add(data.Id))
             {
-                throw new InvalidDataException(
-                    "The customer file contains duplicate IDs.");
+                throw new InvalidDataException("The customer file contains duplicate IDs.");
             }
 
-            var customer = Customer.Restore(
-                data.Id,
-                data.Name,
-                data.Email);
+            var customer = Customer.Restore(data.Id, data.Name, data.Email);
 
             customers.Add(customer);
         }
@@ -141,8 +131,7 @@ public class JsonCustomerRepository : ICustomerRepository
         var directory = Path.GetDirectoryName(_filepath)!;
         Directory.CreateDirectory(directory);
 
-        var temporaryPath =
-            _filepath + "." + Guid.NewGuid() + ".tmp";
+        var temporaryPath = _filepath + "." + Guid.NewGuid() + ".tmp";
 
         try
         {

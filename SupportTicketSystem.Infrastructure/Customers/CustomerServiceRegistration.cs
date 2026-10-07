@@ -7,8 +7,7 @@ namespace SupportTicketSystem.Infrastructure.Customers;
 
 public static class CustomerServiceRegistration
 {
-    public static IServiceCollection AddCustomerInfrastructure(
-        this IServiceCollection services)
+    public static IServiceCollection AddCustomerInfrastructure(this IServiceCollection services)
     {
         var folderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"SupportTicketSystem");
 

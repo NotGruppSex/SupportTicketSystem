@@ -55,14 +55,11 @@ public class Customer
         }
         var trimmedEmail = email.Trim();
 
-        bool isValidEmail = MailAddress.TryCreate(
-            trimmedEmail,
-            out var emailAddress);
+        bool isValidEmail = MailAddress.TryCreate(trimmedEmail, out var emailAddress);
 
         if (isValidEmail == false)
         {
-            throw new ArgumentException(
-                "E-mail address must have a valid format.");
+            throw new ArgumentException("E-mail address must have a valid format.");
         }
 
       
