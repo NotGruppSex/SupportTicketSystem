@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SupportTicketSystem.Presentation.Styles.Headings">
+
+    <!--Style för huvudrubriker på våra enskilda sidor. Har kvar basstylen för TitleTextBlock så den följer dess parametrar men testar annorlunda färg för skojsskull-->
+    <Style x:Key="MainHeadingStyle" TargetType="TextBlock"
+        BasedOn="{StaticResource TitleTextBlockStyle}">
+        <Setter Property="Foreground" Value="DarkSeaGreen"/>
+    </Style>
+
+</ResourceDictionary>
