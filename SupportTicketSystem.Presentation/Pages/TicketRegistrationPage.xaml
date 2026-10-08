@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="SupportTicketSystem.Presentation.Features.TicketRegistration.TicketRegistrationPages.TicketRegistrationPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SupportTicketSystem.Presentation.Features.TicketRegistration.TicketRegistrationPages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Loaded="Page_Loaded" 
+    >
+    <!--
+    rad 6: hämtar model
+    rad 10: Event som kallas för loaded
+    rad se nedan: IsEnabled = gör UI element interaktivbar 
+            bind = sammankopplar vår ViewModel till denna page.
+            IsNotBusy = Bool property av ViewModelklassen: Om sann -> blir IsEnabled av UI elementet true osv
+            Mode Oneway = Definierar hur datan flyter mellan UI och källa. Uppdaterar UI när källproperty ändras men ändringar i UI uppdaterar INTE källan
+    
+    Lägg eventuellt till denna rad under Loaded: IsEnabled="{x:Bind ViewModel.IsNotBusy, Mode=OneWay}">
+    -->
+
+    <Grid Padding="24">
+        <StackPanel Spacing="12">
+
+        <!--Rubrik på sidan-->
+            <TextBlock 
+            Style="{StaticResource TitleTextBlockStyle}"
+            Text="Create your ticket"/>
+
+            <!--Boxar för titel och beskrivning, twoway för att ändra i elementet och UI samtidigt-->
+            <TextBox 
+            Header="Title"
+            PlaceholderText="Enter the title for your ticket"
+            Text="{x:Bind TicketRegistrationViewModel.InputTitle, Mode=TwoWay}"/>
+            
+            <TextBox
+            Header="Description"
+            PlaceholderText="Enter description of your problem"
+            Text="{x:Bind TicketRegistrationViewModel.InputDescription, Mode=TwoWay}"
+            TextWrapping="Wrap"
+            AcceptsReturn="True"
+            MinHeight="120"
+            MaxHeight="200"/>
+
+            <!--Boxar för kund och prioritet som användaren ska kunna välja mellan alternativ. Måste lägga till DisplayMemberPath för att den ska visa namnen och inte typen av customer-->
+            <ComboBox
+            Header="Customer"
+            DisplayMemberPath="CustomerName"
+            ItemsSource="{x:Bind TicketRegistrationViewModel.CustomerOptions}"
+            SelectedItem="{x:Bind TicketRegistrationViewModel.InputCustomer, Mode=TwoWay}"/>
+
+            <ComboBox
+            Header="Priority"
+            ItemsSource="{x:Bind TicketRegistrationViewModel.PriorityOptions}"
+            SelectedItem="{x:Bind TicketRegistrationViewModel.InputPriority, Mode=TwoWay}"/>
+
+            <!--Knapp för att skapa ticket -> den går till servicen-->
+            <Button
+            Content="Create this ticket"
+            Command="{x:Bind TicketRegistrationViewModel.SendInfoToServiceCommand}"/>
+
+            <!--Text för statusmeddelanden-->
+            <TextBlock
+            Text="{x:Bind TicketRegistrationViewModel.StatusMessage, Mode=OneWay}"/>
+        </StackPanel>
+    </Grid>
+</Page>
