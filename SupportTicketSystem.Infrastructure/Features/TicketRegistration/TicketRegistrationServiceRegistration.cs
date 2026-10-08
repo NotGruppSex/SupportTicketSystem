@@ -10,11 +10,7 @@ public static class TicketRegistrationServiceRegistration
 {
     public static IServiceCollection AddTicketRegistrationInfrastructure(this IServiceCollection services)
     {
-        var folderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "SupportTicketSystem");
-        var ticketFilePath = Path.Combine(folderPath, "tickets.json");
-
         services.AddTransient<IJsonTicketRegistrationRepository, JsonTicketRegistrationRepository>();
         return services;
     }
-
 }
