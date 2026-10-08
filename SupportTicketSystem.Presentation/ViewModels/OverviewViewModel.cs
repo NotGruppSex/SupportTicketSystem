@@ -21,7 +21,7 @@ public partial class OverviewViewModel : ObservableObject
     public partial string SearchText { get; set; } = string.Empty;
 
     [ObservableProperty]
-    public partial TicketStatusEnum.TicketStatus SelectedStatus { get; set; }
+    public partial TicketStatusEnum.TicketStatus? SelectedStatus { get; set; }
 
     [ObservableProperty]
     public partial IReadOnlyList<TicketModel> Tickets { get; set; }
@@ -41,7 +41,7 @@ public partial class OverviewViewModel : ObservableObject
     [RelayCommand]
     public async Task Search()
     {
-        Tickets = await _ticketOverviewService.SearchTicketsAsync(SearchText);
+        Tickets = await _ticketOverviewService.SearchTicketsAsync(SearchText, SelectedStatus);
         StatusCounts = await _ticketOverviewService.GetTicketStatusCountsAsync();
     }
 

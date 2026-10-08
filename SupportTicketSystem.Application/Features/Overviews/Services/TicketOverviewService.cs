@@ -14,7 +14,7 @@ public class TicketOverviewService(IJsonTicketRegistrationRepository supporticke
 
 
 {
-    public async Task<IReadOnlyList<TicketModel>> SearchTicketsAsync(string searchText)
+    public async Task<IReadOnlyList<TicketModel>> SearchTicketsAsync(string searchText, TicketStatusEnum.TicketStatus? status)
     {
         var tickets = await supporticketRepository.GetAllTicketsAsync();
         var customers = await customerRepository.GetAllCustomersAsync();
@@ -27,6 +27,8 @@ public class TicketOverviewService(IJsonTicketRegistrationRepository supporticke
         {
             //Söka efter status filtert, ej implementerat helt
             //Om ticket status ej stämmer med inmatning, fortsätt
+            if (status.HasValue && ticket.TicketStatus != status.Value)
+                continue;
 
             //Lägger till i listan om ingen inmatning anges
             if (string.IsNullOrWhiteSpace(searchText))

@@ -1,27 +1,39 @@
 
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml;
 using SupportTicketSystem.Presentation.ViewModels;
-
+using SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationEnums;
 
 namespace SupportTicketSystem.Presentation.Pages;
 
-
 public sealed partial class OverviewPage : Page
 {
-    public OverviewViewModel Overview { get; }
+    public OverviewViewModel ViewModel { get; }
 
-    public OverviewPage()
+    public OverviewPage(OverviewViewModel viewModel)
     {
-        Overview = App.ServiceProvider.GetRequiredService<OverviewViewModel>();
-
+        ViewModel = viewModel;
         InitializeComponent();
 
+        StatusFilter.SelectedIndex = 0;
         Loaded += OverviewPage_Loaded;
     }
+
     private async void OverviewPage_Loaded(object sender, RoutedEventArgs e)
     {
-        await Overview.Search();
+        await ViewModel.Search();
+    }
+
+    private void StatusFilter_SelectionChanged(
+        object sender,
+        SelectionChangedEventArgs e)
+    {
+        ViewModel.SelectedStatus = StatusFilter.SelectedIndex switch
+        {
+            1 => TicketStatusEnum.TicketStatus.New,
+            2 => TicketStatusEnum.TicketStatus.InProgress,
+            3 => TicketStatusEnum.TicketStatus.Closed,
+            _ => null
+        };
     }
 }
