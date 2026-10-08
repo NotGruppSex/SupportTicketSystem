@@ -25,7 +25,7 @@
 
         <!--Rubrik på sidan-->
             <TextBlock 
-            Style="{StaticResource TitleTextBlockStyle}"
+            Style="{StaticResource PageHeaderStyle}"
             Text="Create your ticket"/>
 
             <!--Boxar för titel och beskrivning, twoway för att ändra i elementet och UI samtidigt-->
@@ -57,6 +57,7 @@
 
             <!--Knapp för att skapa ticket -> den går till servicen-->
             <Button
+            Style="{StaticResource PageButtonStyle}"
             Content="Create this ticket"
             Command="{x:Bind TicketRegistrationViewModel.SendInfoToServiceCommand}"/>
 
