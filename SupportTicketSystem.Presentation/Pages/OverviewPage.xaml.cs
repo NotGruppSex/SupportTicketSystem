@@ -3,6 +3,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml;
 using SupportTicketSystem.Presentation.ViewModels;
 using SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationEnums;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace SupportTicketSystem.Presentation.Pages;
 
@@ -10,9 +11,9 @@ public sealed partial class OverviewPage : Page
 {
     public OverviewViewModel ViewModel { get; }
 
-    public OverviewPage(OverviewViewModel viewModel)
+    public OverviewPage()
     {
-        ViewModel = viewModel;
+        ViewModel = App.ServiceProvider.GetRequiredService<OverviewViewModel>();
         InitializeComponent();
 
         StatusFilter.SelectedIndex = 0;
@@ -24,9 +25,7 @@ public sealed partial class OverviewPage : Page
         await ViewModel.Search();
     }
 
-    private void StatusFilter_SelectionChanged(
-        object sender,
-        SelectionChangedEventArgs e)
+    private void StatusFilter_SelectionChanged(object sender,SelectionChangedEventArgs e)
     {
         ViewModel.SelectedStatus = StatusFilter.SelectedIndex switch
         {
