@@ -1,5 +1,6 @@
 ﻿using SupportTicketSystem.Domain.Features.Customers;
 using System;
+using System.Collections.Generic;
 using static SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationEnums.TicketPriorityEnum;
 using static SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationEnums.TicketStatusEnum;
 namespace SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationModels;
@@ -14,6 +15,8 @@ public class TicketModel
     public TicketPriority Priority { get; private set; }
     public TicketStatus TicketStatus { get; private set; }
     public DateTime TicketCreationDate { get; private set; }
+    public string TechnichianAssigned { get; private set; }
+    public List<string> TicketComments { get; private set; }
 
     //Parameterlös konstruktor för deserialisering av Json - annars krash
     public TicketModel() { } 
@@ -38,6 +41,8 @@ public class TicketModel
         Priority = priority;
         TicketStatus = TicketStatus.New;
         TicketCreationDate = DateTime.Now;
+        TechnichianAssigned = string.Empty;
+        TicketComments = new List<string>();
     }
 
 

@@ -1,4 +1,4 @@
-﻿using SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistration_Interfaces;
+﻿using SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationInterfaces;
 using SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationModels;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SupportTicketSystem.Infrastructure.Features.TicketRegistration.TicketRegistrationRepositories;
 
-public class Json_TicketRegistration_Repository : IJson_TicketRegistration_Repository
+public class Json_TicketRegistration_Repository : IJsonTicketRegistrationRepository
 {
 
     //________________________Prepare the file path and data________________________//
