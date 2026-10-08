@@ -22,6 +22,6 @@ public sealed partial class OverviewPage : Page
     }
     private async void OverviewPage_Loaded(object sender, RoutedEventArgs e)
     {
-        await Overview.LoadAsync();
+        await Overview.Search();
     }
 }

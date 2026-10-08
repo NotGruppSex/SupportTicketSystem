@@ -1,6 +1,8 @@
-﻿using SupportTicketSystem.Application.Features.Overviews.Services.MockSupportTicketService.Interfaces;
-using SupportTicketSystem.Domain.Features.Overviews;
+﻿using SupportTicketSystem.Application.Features.Customers;
 using SupportTicketSystem.Domain.Features.Overviews.Models;
+using SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationEnums;
+using SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationInterfaces;
+using SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,13 +10,15 @@ using System.Threading.Tasks;
 
 namespace SupportTicketSystem.Application.Features.Overviews.Services;
 
-public class TicketOverviewService(ISupportTicketRepository supporticketRepository, ICustomerRepository customerRepository) : ITicketOverviewService
+public class TicketOverviewService(IJsonTicketRegistrationRepository supporticketRepository, ICustomerRepository customerRepository) : ITicketOverviewService
+
+
 {
-    public async Task<IReadOnlyList<SupportTicket>> SearchTicketsAsync(string searchText, TicketStatus? status)
+    public async Task<IReadOnlyList<TicketModel>> SearchTicketsAsync(string searchText)
     {
-        var tickets = await supporticketRepository.GetAllSupportTicketsAsync();
+        var tickets = await supporticketRepository.GetAllTicketsAsync();
         var customers = await customerRepository.GetAllCustomersAsync();
-        var result = new List<SupportTicket>();
+        var result = new List<TicketModel>();
 
         bool matchesTitle;
         bool matchesCustomer;
@@ -23,9 +27,6 @@ public class TicketOverviewService(ISupportTicketRepository supporticketReposito
         {
             //Söka efter status filtert, ej implementerat helt
             //Om ticket status ej stämmer med inmatning, fortsätt
-            if (status is not null && ticket.Status != status) 
-                continue;
-
 
             //Lägger till i listan om ingen inmatning anges
             if (string.IsNullOrWhiteSpace(searchText))
@@ -34,10 +35,10 @@ public class TicketOverviewService(ISupportTicketRepository supporticketReposito
                 continue;
             }
 
-            matchesTitle = ticket.Title.Contains(searchText, StringComparison.CurrentCultureIgnoreCase);
+            matchesTitle = ticket.TicketTitle.Contains(searchText, StringComparison.CurrentCultureIgnoreCase);
 
             //Detta kan ge null
-            var customer = customers.FirstOrDefault(c => c.Id == ticket.CustomerId);
+            var customer = customers.FirstOrDefault(c => c.Id == ticket.CustomerTicket.Id);
 
             //Alltså behöver 'customer' vara nullable och '==true' gör så att bool-värdet blir false om det är null
             matchesCustomer = customer?.Name.Contains(searchText, StringComparison.CurrentCultureIgnoreCase) == true;
@@ -46,7 +47,7 @@ public class TicketOverviewService(ISupportTicketRepository supporticketReposito
                 result.Add(ticket);
         }
 
-        result.Sort((first, second) => second.CreatedAt.CompareTo(first.CreatedAt));
+        result.Sort((first, second) => second.TicketCreationDate.CompareTo(first.TicketCreationDate));
 
         return result;
 
@@ -58,21 +59,21 @@ public class TicketOverviewService(ISupportTicketRepository supporticketReposito
         int resolvedCount = 0;
 
         //Mer tydlig lösning än med LINQ
-        var tickets = await supporticketRepository.GetAllSupportTicketsAsync();
+        var tickets = await supporticketRepository.GetAllTicketsAsync();
 
         foreach (var ticket in tickets)
         {
-            switch (ticket.Status)
+            switch (ticket.TicketStatus)
             {
-                case TicketStatus.New:
+                case TicketStatusEnum.TicketStatus.New:
                     newCount++;
                     break;
 
-                case TicketStatus.InProgress:
+                case TicketStatusEnum.TicketStatus.InProgress:
                     inProgressCount++;
                     break;
 
-                case TicketStatus.Resolved:
+                case TicketStatusEnum.TicketStatus.Closed:
                     resolvedCount++;
                     break;
             }

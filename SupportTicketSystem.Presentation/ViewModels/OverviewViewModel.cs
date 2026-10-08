@@ -1,8 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using SupportTicketSystem.Application.Features.Overviews.Services;
-using SupportTicketSystem.Domain.Features.Overviews;
 using SupportTicketSystem.Domain.Features.Overviews.Models;
+using SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationEnums;
+using SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationModels;
 using SupportTicketSystem.Presentation.Navigation;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -20,10 +21,10 @@ public partial class OverviewViewModel : ObservableObject
     public partial string SearchText { get; set; } = string.Empty;
 
     [ObservableProperty]
-    public partial TicketStatus SelectedStatus { get; set; }
+    public partial TicketStatusEnum.TicketStatus SelectedStatus { get; set; }
 
     [ObservableProperty]
-    public partial IReadOnlyList<SupportTicket> Tickets { get; set; }
+    public partial IReadOnlyList<TicketModel> Tickets { get; set; }
 
     [ObservableProperty]
     public partial TicketStatusCount StatusCounts { get; set; } 
@@ -38,14 +39,10 @@ public partial class OverviewViewModel : ObservableObject
 
     }
     [RelayCommand]
-    private async Task Search()
+    public async Task Search()
     {
-        Tickets = await _ticketOverviewService.SearchTicketsAsync(SearchText, SelectedStatus);
+        Tickets = await _ticketOverviewService.SearchTicketsAsync(SearchText);
         StatusCounts = await _ticketOverviewService.GetTicketStatusCountsAsync();
-    }
-    public async Task LoadAsync()
-    {
-        await Search();
     }
 
 }

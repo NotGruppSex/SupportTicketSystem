@@ -1,4 +1,4 @@
-﻿namespace SupportTicketSystem.Domain.Features.Overviews;
+﻿namespace SupportTicketSystem.Domain.Features.Overviews.Models;
 
 public record TicketStatusCount
 (
