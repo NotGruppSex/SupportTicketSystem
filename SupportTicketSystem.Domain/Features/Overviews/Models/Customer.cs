@@ -3,11 +3,11 @@ using System.Net.Mail;
 
 namespace SupportTicketSystem.Domain.Features.Overviews.Models;
 
-public class Customer(string name, string email)
+public class Customer(string name, string emailAddress)
 {
     public Guid Id { get; init; } = GenerateId();
     public string Name { get; private set; } = NormalizeName(name);
-    public string EmailAddress { get; private set; } = NormalizeEmail(email);
+    public string EmailAddress { get; private set; } = NormalizeEmail(emailAddress);
 
     private static Guid GenerateId() => Guid.NewGuid();
 

@@ -11,7 +11,7 @@ namespace SupportTicketSystem.Infrastructure.Features.Overviews;
 
 public class JsonSupportTicketRepository : ISupportTicketRepository
 {
-    private readonly string _filePath = "supportTickets.json";
+    private readonly string _filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"supportTickets.json");
 
     private readonly JsonSerializerOptions _options = new()
     {

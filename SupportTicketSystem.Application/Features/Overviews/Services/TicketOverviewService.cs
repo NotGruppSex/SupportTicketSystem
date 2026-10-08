@@ -1,4 +1,5 @@
-﻿using SupportTicketSystem.Domain.Features.Overviews;
+﻿using SupportTicketSystem.Application.Features.Overviews.Services.MockSupportTicketService.Interfaces;
+using SupportTicketSystem.Domain.Features.Overviews;
 using SupportTicketSystem.Domain.Features.Overviews.Models;
 using System;
 using System.Collections.Generic;
@@ -7,17 +8,12 @@ using System.Threading.Tasks;
 
 namespace SupportTicketSystem.Application.Features.Overviews.Services;
 
-public class TicketOverviewService(ITicketRepository ticketRepository, ICustomerRepository customerRepository) : ITicketOverviewService
+public class TicketOverviewService(ISupportTicketRepository supporticketRepository, ICustomerRepository customerRepository) : ITicketOverviewService
 {
-    private readonly ITicketRepository _ticketRepository = ticketRepository;
-    private readonly ICustomerRepository _customerRepository = customerRepository;
-
-    
-
-    public async Task<IReadOnlyList<SupportTicket>> GetAllTicketsAsync(string searchText, TicketStatus? status)
+    public async Task<IReadOnlyList<SupportTicket>> SearchTicketsAsync(string searchText, TicketStatus? status)
     {
-        var tickets = await _ticketRepository.GetAllTicketsAsync();
-        var customers = await _customerRepository.GetAllCustomersAsync();
+        var tickets = await supporticketRepository.GetAllSupportTicketsAsync();
+        var customers = await customerRepository.GetAllCustomersAsync();
         var result = new List<SupportTicket>();
 
         bool matchesTitle;
@@ -25,9 +21,13 @@ public class TicketOverviewService(ITicketRepository ticketRepository, ICustomer
 
         foreach (var ticket in tickets)
         {
-            if (status is not null && ticket.Status != status)
+            //Söka efter status filtert, ej implementerat helt
+            //Om ticket status ej stämmer med inmatning, fortsätt
+            if (status is not null && ticket.Status != status) 
                 continue;
 
+
+            //Lägger till i listan om ingen inmatning anges
             if (string.IsNullOrWhiteSpace(searchText))
             {
                 result.Add(ticket);
@@ -36,11 +36,13 @@ public class TicketOverviewService(ITicketRepository ticketRepository, ICustomer
 
             matchesTitle = ticket.Title.Contains(searchText, StringComparison.CurrentCultureIgnoreCase);
 
+            //Detta kan ge null
             var customer = customers.FirstOrDefault(c => c.Id == ticket.CustomerId);
 
+            //Alltså behöver 'customer' vara nullable och '==true' gör så att bool-värdet blir false om det är null
             matchesCustomer = customer?.Name.Contains(searchText, StringComparison.CurrentCultureIgnoreCase) == true;
 
-            if(matchesTitle || matchesCustomer)
+            if (matchesTitle || matchesCustomer)
                 result.Add(ticket);
         }
 
@@ -55,7 +57,8 @@ public class TicketOverviewService(ITicketRepository ticketRepository, ICustomer
         int inProgressCount = 0;
         int resolvedCount = 0;
 
-        var tickets = await _ticketRepository.GetAllTicketsAsync();
+        //Mer tydlig lösning än med LINQ
+        var tickets = await supporticketRepository.GetAllSupportTicketsAsync();
 
         foreach (var ticket in tickets)
         {

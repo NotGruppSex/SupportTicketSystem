@@ -11,7 +11,7 @@ namespace SupportTicketSystem.Infrastructure.Features.Overviews;
 
 public class JsonCustomerRepository : ICustomerRepository
 {
-    private readonly string _filePath = "customers.json";
+    private readonly string _filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"customers.json");
     public async Task AddCustomerAsync(Customer customer)
     {
         var customers = await GetAllCustomersAsync();

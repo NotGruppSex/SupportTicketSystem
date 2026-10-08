@@ -15,12 +15,12 @@ public partial class OverviewViewModel : ObservableObject
     private readonly ITicketOverviewService _ticketOverviewService;
 
     public string Title { get;} = "Overview Page";
-
+    
     [ObservableProperty]
     public partial string SearchText { get; set; } = string.Empty;
 
     [ObservableProperty]
-    public partial TicketStatus? SelectedStatus { get; set; }
+    public partial TicketStatus SelectedStatus { get; set; }
 
     [ObservableProperty]
     public partial IReadOnlyList<SupportTicket> Tickets { get; set; }
@@ -40,7 +40,7 @@ public partial class OverviewViewModel : ObservableObject
     [RelayCommand]
     private async Task Search()
     {
-        Tickets = await _ticketOverviewService.GetAllTicketsAsync(SearchText, SelectedStatus);
+        Tickets = await _ticketOverviewService.SearchTicketsAsync(SearchText, SelectedStatus);
         StatusCounts = await _ticketOverviewService.GetTicketStatusCountsAsync();
     }
     public async Task LoadAsync()
