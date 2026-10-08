@@ -1,9 +1,10 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using SupportTicketSystem.Application.Features.Customers;
+using SupportTicketSystem.Infrastructure.Features.Customers;
 using System;
 using System.IO;
 
-namespace SupportTicketSystem.Infrastructure.Customers;
+namespace SupportTicketSystem.Infrastructure.Features.Customers;
 
 public static class CustomerServiceRegistration
 {

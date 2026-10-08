@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using SupportTicketSystem.Infrastructure.Customers;
+using SupportTicketSystem.Infrastructure.Features.Customers;
 
 namespace SupportTicketSystem.Infrastructure;
 

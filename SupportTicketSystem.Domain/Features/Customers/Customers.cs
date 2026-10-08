@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net.Mail;
 
-namespace SupportTicketSystem.Domain.Customers;
+namespace SupportTicketSystem.Domain.Features.Customers;
 
 public class Customer
 {
