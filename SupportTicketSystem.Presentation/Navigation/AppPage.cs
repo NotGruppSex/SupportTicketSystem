@@ -2,9 +2,8 @@
 
 public enum AppPage
 {
-    Home,
-    Customers,
     Overview,
+    Customers,
     Tickets,
     EditTicket
 }
