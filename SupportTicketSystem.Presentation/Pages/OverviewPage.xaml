@@ -9,10 +9,11 @@
 
             <StackPanel Spacing="5">
                 <TextBlock Text="Overview"
+                           Style="{StaticResource MainHeadingStyle}"
                            FontSize="28"
                            FontWeight="SemiBold"/>
 
-                <TextBlock Text="Search and handling"
+                <TextBlock Text="Search and view"
                            Opacity="0.7"/>
             </StackPanel>
 
@@ -28,7 +29,7 @@
                         CornerRadius="8"
                         Background="{ThemeResource CardBackgroundFillColorDefaultBrush}">
                     <StackPanel Spacing="8">
-                        <TextBlock Text="Nya ärenden"/>
+                        <TextBlock Text="New Tickets"/>
                         <TextBlock Text="{x:Bind ViewModel.StatusCounts.New, Mode=OneWay}"
                                    FontSize="26"
                                    FontWeight="SemiBold"/>
@@ -52,7 +53,7 @@
                         CornerRadius="8"
                         Background="{ThemeResource CardBackgroundFillColorDefaultBrush}">
                     <StackPanel Spacing="8">
-                        <TextBlock Text="Lösta"/>
+                        <TextBlock Text="Closed"/>
                         <TextBlock Text="{x:Bind ViewModel.StatusCounts.Resolved, Mode=OneWay}"
                                    FontSize="26"
                                    FontWeight="SemiBold"/>
@@ -68,7 +69,7 @@
                 </Grid.ColumnDefinitions>
 
                 <TextBox Grid.Column="0"
-                         Header="Sök ärenden"
+                         Header="Search Tickets"
                          PlaceholderText="Enter customer name or ticket title..."
                          Text="{x:Bind ViewModel.SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
@@ -77,13 +78,14 @@
                           Header="Filter for status"
                           HorizontalAlignment="Stretch"
                           SelectionChanged="StatusFilter_SelectionChanged">
-                    <ComboBoxItem Content="Alla"/>
-                    <ComboBoxItem Content="Nytt"/>
-                    <ComboBoxItem Content="Pågående"/>
-                    <ComboBoxItem Content="Löst"/>
+                    <ComboBoxItem Content="All"/>
+                    <ComboBoxItem Content="New"/>
+                    <ComboBoxItem Content="Inprogress"/>
+                    <ComboBoxItem Content="Closed"/>
                 </ComboBox>
 
                 <Button Grid.Column="2"
+                        Style="{StaticResource PageButtonStyle}"
                         Content="Search"
                         VerticalAlignment="Bottom"
                         Command="{x:Bind ViewModel.SearchCommand}"/>

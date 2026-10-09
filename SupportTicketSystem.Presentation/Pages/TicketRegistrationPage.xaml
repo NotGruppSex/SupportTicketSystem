@@ -25,7 +25,7 @@
 
         <!--Rubrik på sidan-->
             <TextBlock 
-            Style="{StaticResource PageHeaderStyle}"
+            Style="{StaticResource MainHeadingStyle}"
             Text="Create your ticket"/>
 
             <!--Boxar för titel och beskrivning, twoway för att ändra i elementet och UI samtidigt-->

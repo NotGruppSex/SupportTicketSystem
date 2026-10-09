@@ -60,14 +60,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Features\TicketRegistration\TicketRegistrationPages\TicketRegistrationPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Features\TicketRegistration\TicketRegistration_ViewModels\" />
-  </ItemGroup>
-  <ItemGroup>
     <Page Update="Pages\CustomerPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>

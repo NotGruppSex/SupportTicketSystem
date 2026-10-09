@@ -20,8 +20,9 @@
                     BackRequested="MainNavigation_BackRequested"
                    >
         <NavigationView.MenuItems>
-            <NavigationViewItem x:Name="HomeNavigationItem" Content="Home" Tag="home" Icon="Home"/>
-            <NavigationViewItem Content="Customers" Tag="customers" Icon="People"/>
+            <NavigationViewItem x:Name="OverviewNavigationItem" Content="Overview" Tag="overview" Icon="Home"/>
+            <NavigationViewItem x:Name="CustomerNavigationItem" Content="Customers" Tag="customers" Icon="People"/>
+            <NavigationViewItem x:Name="TicketRegistrationNavigationItem" Content="Tickets" Tag="ticketregistration" Icon="Document"/>
         </NavigationView.MenuItems>
 
         <Frame x:Name="ContentFrame" Navigated="ContentFrame_Navigated"/>

@@ -14,7 +14,7 @@ public sealed partial class MainWindow : Window
 
         _navigationService = navigationService;
         _navigationService.Initialize(ContentFrame); //Skapa Initialize
-        _navigationService.Navigate(AppPage.Home); //Skapa Navigate och Home
+        _navigationService.Navigate(AppPage.Overview); //Skapa Navigate och Home
 
     }
 
@@ -25,8 +25,9 @@ public sealed partial class MainWindow : Window
 
         AppPage? page = item.Tag?.ToString() switch
         {
-            "home" => AppPage.Home,
+            "overview" => AppPage.Overview,
             "customers" => AppPage.Customers,
+            "ticketregistration" => AppPage.Tickets,
             _ => null,
         };
         if (page is AppPage destination)
