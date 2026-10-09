@@ -36,9 +36,13 @@
                 Header="Email"
                 Text="{x:Bind ViewModel.CustomerEmail,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
             <Button 
+                Content="New Customer"
+                Style="{StaticResource PageButtonStyle}"
+                Command="{x:Bind ViewModel.NewCustomerCommand}"/>
+            <Button
                 Content="Save Customer"
                 Style="{StaticResource PageButtonStyle}"
-                Command="{x:Bind ViewModel.RegisterCustomerCommand}"/>
+                Command="{x:Bind ViewModel.SaveCustomerCommand}"/>
         </StackPanel>
 
         <TextBlock 
@@ -61,7 +65,8 @@
         <ListView
             Grid.Row="5"
             ItemsSource="{x:Bind ViewModel.Customers}"
-            SelectionMode="None">
+            SelectedItem="{x:Bind ViewModel.SelectedCustomer, Mode=TwoWay}"
+            SelectionMode="Single">
             
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="customers:Customer">

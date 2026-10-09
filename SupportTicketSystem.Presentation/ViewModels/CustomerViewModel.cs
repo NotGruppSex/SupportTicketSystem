@@ -4,6 +4,7 @@ using SupportTicketSystem.Domain.Features.Customers;
 using System;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Runtime.InteropServices.Marshalling;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -16,6 +17,7 @@ public partial class CustomersViewModel : ObservableObject
     private string _customerName = string.Empty;
     private string _customerEmail = string.Empty;
     private string _statusMessage = string.Empty;
+    private Customer? _selectedCustomer;
 
     public CustomersViewModel(ICustomerService customerService)
     {
@@ -61,7 +63,35 @@ public partial class CustomersViewModel : ObservableObject
             SetProperty(ref _customerEmail, value);
         }
     }
+    public Customer? SelectedCustomer
+    {
+        get
+        {
+            return _selectedCustomer;
+        }
 
+        set
+        {
+            bool selectionChanged = SetProperty(ref _selectedCustomer, value);
+
+            if (selectionChanged)
+            {
+                ErrorMessage = string.Empty;
+                StatusMessage = string.Empty;
+
+                if (value is not null)
+                {
+                    CustomerName = value.Name;
+                    CustomerEmail = value.Email;
+                }
+                else
+                {
+                    CustomerName = string.Empty;
+                    CustomerEmail = string.Empty;
+                }
+            }
+        }
+    }
     public string StatusMessage
     {
         get
@@ -114,22 +144,45 @@ public partial class CustomersViewModel : ObservableObject
 
     [RelayCommand]
 
-    private async Task RegisterCustomerAsync()
+    private async Task SaveCustomerAsync()
     {
         ErrorMessage = string.Empty;
         StatusMessage = string.Empty;
 
+        var selectedCustomer = SelectedCustomer;
+        var name = CustomerName;
+        var email = CustomerEmail;
+
         try
         {
-            var customer = await _customerService.RegisterCustomerAsync(CustomerName, CustomerEmail);
+            if (selectedCustomer is null)
+            {
+                var newCustomer = await _customerService.RegisterCustomerAsync(name, email);
 
-            Customers.Add(customer);
+                Customers.Add(newCustomer);
 
+            }
+            else
+            {
+                await _customerService.UpdateCustomerDetailsAsync(selectedCustomer.Id, name, email);
+
+                var updatedCustomer = Customer.Restore(selectedCustomer.Id, name, email);
+
+                int index = Customers.IndexOf(selectedCustomer);
+
+                if (index >= 0)
+                {
+                    Customers[index] = updatedCustomer;
+                }
+            }
+
+            SelectedCustomer = null;
             CustomerName = string.Empty;
             CustomerEmail = string.Empty;
 
-            StatusMessage = "Customer saved.";
+            StatusMessage = "Customer Saved.";
         }
+
         catch (ArgumentException exception)
         {
             ErrorMessage = exception.Message;
@@ -154,6 +207,18 @@ public partial class CustomersViewModel : ObservableObject
             ErrorMessage = exception.Message;
         }
   
+    }
+
+    [RelayCommand]
+    private void NewCustomer()
+    {
+        SelectedCustomer = null;
+
+        CustomerName = string.Empty;
+        CustomerEmail = string.Empty;
+
+        ErrorMessage = string.Empty;
+        StatusMessage = string.Empty;
     }
 
 }
