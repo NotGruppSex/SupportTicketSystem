@@ -1,46 +1,15 @@
-# Att göra:
-
-
-# Frågor att ställa till Hans
-1. Ska våra services utgå från interfaces?
-
-# !!!OBS!!!
-
-**Det finns kataloger "features" i varje lager. Där skapar VARJE PERSON en egen mapp med sina klasser osv i - på så sätt undviker vi mergekonflikter.**
-
-
 # SupportTicketSystem
-    //Beskriv applikationens syfte
+- Applikationen hjälper användaren att registrera kunder och ärenden.
+- De kan skrivas se aktuella ärenden som direkt kopplas till kunderna.
+- De kan redigera ärendena utefter arbetets gång.
+- Underlättar hantering av ärenden och sparar informationen mellan appens användningar. 
        
 # Studenter och Ansvarsområde
 
-- William - Kundhantering
-
-      - Kundvyer               []
-      - Validering             []
-      - Service                []
-      - Lagring av kunder      []
-                                             
-- Love - Ärenderegistrering
-
-      - Formulär nya ärenden   []
-      - Kundval                []
-      - Registreringsflöde     []
-                                             
-- Emilia - Ärendehantering
-
-      - Detaljvy               []
-      - Tilldelning            []
-      - Status                 []
-      - Prioritet             []
-      - Kommentarer            []
-                                             
+- William - Kundhantering                                        
+- Love - Ärenderegistrering                                       
+- Emilia - Ärendehantering                                            
 - Tomas  - Överblick
-
-      - Ärendelista            []
-      - Sökning                []
-      - Filtrering             []
-      - Sammanställning        []
 
 # Gruppens regler
 
@@ -49,29 +18,26 @@
 1. Vi avsätter gemensamma tider att sitta ner tillsammans i gruppen där vi gör följande:
 
 - Går igenom vart vi är i projektet
-- Hjälper varandra
-- Sitter och arbetar tillsammans (t.ex. gör sina delar men hjälper varandra, granskar kod och ger feedback)
+- Går igenom ens kod, frågar och förklarar
+- Hjälper varandra vid behov
 - Tider: Måndagar kl:10-12 / Torsdagar kl. 10-12 
 
-2. Vi försöker använda oss av ticketsystemet i GitHub
+2. Vi försöker använda oss av ticketsystemet i GitHub.
 
- 
-
-**Katalog och filer**
+**Kataloger och filer**
 
 - Varje indelad uppgift har sin egen katalog per lager för att undvika merge-konflikter
-- Kataloger namnges i plurar, filer i singular
+- Kataloger namnges i plural, filer i singular
 - Följer DDD enligt uppgiftens beskrivning
 - Filer/klasser/metoder som har med Async, JSON osv att göra har respektive i sina namn
 - Vi använder oss av MVVM
-+ + fler regler vi vill ha
 
 **Beroenden och ansvar**
 
     Lager              |    Beroende
     -------------------------------------------------------------------------------------
-    Domain             |    Oberoende av övriga projekten, gränssnitt och filhantering
-    Application        |    Domain (använd repo-interfce för JSON-implementationerna)
+    Domain             |    Oberoende av de övriga projekten, gränssnitt och filhantering
+    Application        |    Domain (använd repo-interface för JSON-implementationerna)
     Infrastructure     |    Application + Domain
     Presentation       |    Application + Interface
 
@@ -85,38 +51,38 @@
     använder vi LINQ?
 
 **DI**
+Dependency injection skriver vi per feature. Det kan antingen följa med i samma branch som featuren eller som en separat pull request.
 
-    Skriver vi DI först och fyller på eller i efterhand?
+Vi har använt oss av DI som kontaktnät i vår applikation.
 
-**Records**
-
-    Använder vi Records?
-
-    //Ej bestämt än då vi inte förstår detta
-
-**Value Objects**
-
-    Använder vi value objects?
-
-    //Ej bestämt än då vi inte förstår detta
+**Records och Value Objects**
+Var utvecklare bestämmer om record eller value objects används i sin feature. 
 
 # Projektens ansvar
 
 **Application:** 
 
     ex: "Samordnar applikationens funktioner och beskriver de kontrakt som behövs"
+Samordnar hela applikationens funktioner genom separata services för de olika funktionerna. Den beskriver också vilka interfaces som behövs genom en DI serviceklass.
 
 **Infrastructure:**
 
     "Läser och skriver information i och från JSON-filer
 
+Skriver och läser information till och från JSON-filer. Beskriver vilka interfaces den behöver genom DI serviceklass.
+
+
 **Presentation:**
 
     "Visar information, hanterar anvöndarens inmatning och navigering
 
+Visar all information genom ViewModels och pages. Hanterar inmatning, knappar och design av applikationen. Hanterar även navigeringen mellan de olika sidorna som användaren kan bläddra mellan.
+
 **Domain:**
 
     "Verksamhetens modeller och regler för deras giltiga tillstånd"
+
+Innehåller applikationens modeller, enums, DTOs och applikationens interfaces OBS ÄNDRA EV DENNA BEROENDE PÅ HUR VI GÖR
 
 # JSON-filerna
     //Beskriv var filerna sparas och hur applikationen kan köras med egna exempeldata
@@ -126,5 +92,21 @@
     //Beskriv ???
 
 # AI-användning + kontroll
-      //Beskriv
+
+**Customer**
+ //FYLL PÅ
+
+**TicketRegistration:** 
+
+- Använt som bollande verktyg: "Jag vill göra X, tipsa/guida hur jag kan göra det?"
+- Följdfrågor och specificeringar, förklaringar.
+- Har ej bett AI generera kod inuti vår repo.
+- Bett den gå igenom vilka steg som behövs för funktion x där man behövt komplettera föreläsningarna.
+- Bett den kika på min feature och komma med förbättringsförslag och hitta brister 
+
+**TicketEditing**
+ //FYLL PÅ
+
+**Overview**
+ //FYLL PÅ
 
