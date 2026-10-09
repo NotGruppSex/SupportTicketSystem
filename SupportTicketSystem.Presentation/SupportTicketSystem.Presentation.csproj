@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SupportTicketSystem.Application\SupportTicketSystem.Application.csproj" />
+    <ProjectReference Include="..\SupportTicketSystem.Domain\SupportTicketSystem.Domain.csproj" />
     <ProjectReference Include="..\SupportTicketSystem.Infrastructure\SupportTicketSystem.Infrastructure.csproj" />
   </ItemGroup>
   <ItemGroup>

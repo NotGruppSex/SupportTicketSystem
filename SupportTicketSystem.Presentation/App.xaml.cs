@@ -31,6 +31,7 @@ namespace SupportTicketSystem.Presentation
             services.AddTransient<MainWindow>();
 
             services.AddTransient<CustomersViewModel>();
+            services.AddTransient<OverviewViewModel>();
 
             services.AddTransient<TicketRegistrationViewModel>();
 
