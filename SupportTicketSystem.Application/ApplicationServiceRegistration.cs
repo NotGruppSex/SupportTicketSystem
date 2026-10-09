@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using SupportTicketSystem.Application.Features.Customers;
 using SupportTicketSystem.Application.Features.Overviews.Services;
+using SupportTicketSystem.Application.Features.TicketRegistration.TicketRegistrationServices;
+using SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationInterfaces;
 
 namespace SupportTicketSystem.Application;
 
