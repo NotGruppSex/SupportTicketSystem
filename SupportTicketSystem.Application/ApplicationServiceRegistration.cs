@@ -9,6 +9,7 @@ public static class ApplicationServiceRegistration
     public static IServiceCollection AddApplication(this IServiceCollection services)
     {
         services.AddTransient<ICustomerService, CustomerService>();
+        services.AddTransient<ITicketRegistrationService, TicketRegistrationService>();
 
         services.AddTransient<ITicketOverviewService, TicketOverviewService>();
 

@@ -2,6 +2,7 @@
 using Microsoft.UI.Xaml;
 using SupportTicketSystem.Application;
 using SupportTicketSystem.Infrastructure;
+using SupportTicketSystem.Presentation.Features.TicketRegistration.TicketRegistrationViewModels;
 using SupportTicketSystem.Presentation.Navigation;
 using SupportTicketSystem.Presentation.ViewModels;
 using System;
@@ -31,6 +32,8 @@ namespace SupportTicketSystem.Presentation
 
             services.AddTransient<CustomersViewModel>();
             services.AddTransient<OverviewViewModel>();
+
+            services.AddTransient<TicketRegistrationViewModel>();
 
             ServiceProvider = services.BuildServiceProvider();
         }
