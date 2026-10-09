@@ -26,6 +26,7 @@ public sealed partial class MainWindow : Window
         AppPage? page = item.Tag?.ToString() switch
         {
             "home" => AppPage.Home,
+            "customers" => AppPage.Customers,
             _ => null,
         };
         if (page is AppPage destination)

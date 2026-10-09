@@ -15,6 +15,7 @@
   
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Pages\CustomerPage.xaml" />
     <None Remove="Pages\HomePage.xaml" />
     <None Remove="Styles\Buttons\Buttons.xaml" />
     <None Remove="Styles\Headings\HeadingStyle.xaml" />
@@ -65,6 +66,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Features\TicketRegistration\TicketRegistration_ViewModels\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\CustomerPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Styles\Headings\HeadingStyle.xaml">
