@@ -18,6 +18,7 @@
                     IsBackEnabled="False"
                     ItemInvoked="MainNavigation_ItemInvoked"
                     BackRequested="MainNavigation_BackRequested"
+                    IsSettingsVisible="False"
                    >
         <NavigationView.MenuItems>
             <NavigationViewItem x:Name="OverviewNavigationItem" Content="Overview" Tag="overview" Icon="Home"/>
