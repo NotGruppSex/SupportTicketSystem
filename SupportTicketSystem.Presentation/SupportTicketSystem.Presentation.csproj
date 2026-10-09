@@ -15,7 +15,6 @@
   
   </PropertyGroup>
   <ItemGroup>
-    <None Remove="Pages\CustomersPage.xaml" />
     <None Remove="Pages\CustomerPage.xaml" />
     <None Remove="Pages\HomePage.xaml" />
     <None Remove="Styles\Buttons\Buttons.xaml" />
@@ -53,11 +52,6 @@
   <ItemGroup>
     <ProjectReference Include="..\SupportTicketSystem.Application\SupportTicketSystem.Application.csproj" />
     <ProjectReference Include="..\SupportTicketSystem.Infrastructure\SupportTicketSystem.Infrastructure.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Page Update="Pages\CustomersPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Pages\HomePage.xaml">

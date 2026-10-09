@@ -21,6 +21,7 @@
                    >
         <NavigationView.MenuItems>
             <NavigationViewItem x:Name="HomeNavigationItem" Content="Home" Tag="home" Icon="Home"/>
+            <NavigationViewItem Content="Customers" Tag="customers" Icon="People"/>
         </NavigationView.MenuItems>
 
         <Frame x:Name="ContentFrame" Navigated="ContentFrame_Navigated"/>

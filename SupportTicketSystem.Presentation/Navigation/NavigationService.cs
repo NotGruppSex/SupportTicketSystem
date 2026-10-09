@@ -28,6 +28,7 @@ public class NavigationService : INavigationService
         var nextPage = page switch
         {
             AppPage.Home => typeof(HomePage),
+            AppPage.Customers => typeof(CustomerPage),
 
             _ => throw new ArgumentOutOfRangeException($"Unable to navigate to {page}.")
         };
