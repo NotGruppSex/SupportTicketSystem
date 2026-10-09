@@ -15,27 +15,51 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <TextBlock
             Grid.Row="0"
             Text="Customers"
-             Style="{StaticResource MainHeadingStyle}"/>
+            Style="{StaticResource MainHeadingStyle}"/>
+
+        <StackPanel 
+            Grid.Row="1" Spacing="12">
+
+            <TextBox 
+                Header="Customer name"
+                Text="{x:Bind ViewModel.CustomerName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+
+            <TextBox 
+                Header="Email"
+                Text="{x:Bind ViewModel.CustomerEmail,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+            <Button 
+                Content="Save Customer"
+                Style="{StaticResource PageButtonStyle}"
+                Command="{x:Bind ViewModel.RegisterCustomerCommand}"/>
+        </StackPanel>
+
+        <TextBlock 
+            Grid.Row="2"
+            Text="{x:Bind ViewModel.ErrorMessage, Mode=OneWay}"
+            TextWrapping="Wrap"/>
+
+        <TextBlock 
+            Grid.Row="3"
+            Text="{x:Bind ViewModel.StatusMessage, Mode=OneWay}"
+            TextWrapping="Wrap"/>
+
 
         <Button
-            Grid.Row="1"
+            Grid.Row="4"
             Content="Refresh Customers"
             Style="{StaticResource PageButtonStyle}"
             Command="{x:Bind ViewModel.LoadCustomersCommand}"/>
 
-        <TextBlock
-            Grid.Row="2"
-            Text="{x:Bind ViewModel.ErrorMessage, Mode=OneWay}"
-            TextWrapping="Wrap"/>
-        
         <ListView
-            Grid.Row="3"
+            Grid.Row="5"
             ItemsSource="{x:Bind ViewModel.Customers}"
             SelectionMode="None">
             
@@ -53,11 +77,6 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-
-
-
-
-
 
     </Grid>
 </Page>
