@@ -19,15 +19,16 @@ public partial class TicketRegistrationViewModel : ObservableObject
 {
     //För att hämta servicen just i denna klass (privat fält) och läggs till genom konstruktor (för att få tillgång till min service)
     private readonly ITicketRegistrationService _ticketService;
-    public TicketRegistrationViewModel(ITicketRegistrationService ticketService)
+    private readonly ICustomerService _customerService;
+    public TicketRegistrationViewModel(ITicketRegistrationService ticketService, ICustomerService customerService)
     {
         _ticketService = ticketService;
+        _customerService = customerService;
+        LoadCustomersInBackgroundAsync();
     }
 
-    //-----------För meddelande vid olika events senare-----------//
     [ObservableProperty] 
-    public partial string StatusMessage { get; private set; } = string.Empty;
-
+    public partial string StatusMessage { get; private set; } = string.Empty; //För felmeddelanden
 
 
     //-----------Synbara properties för användaren att redigera-----------//
@@ -43,13 +44,27 @@ public partial class TicketRegistrationViewModel : ObservableObject
 
     [ObservableProperty] 
     public partial TicketPriority InputPriority { get; set; } = TicketPriority.Medium;
+    public List<TicketPriority> PriorityOptions { get; } = [TicketPriority.Low, TicketPriority.Medium, TicketPriority.High]; //Så användaren ser alla priority options
 
-
-
-    //Lista så användaren kan se alla priority:
-    public List<TicketPriority> PriorityOptions { get; } = [TicketPriority.Low, TicketPriority.Medium, TicketPriority.High];
 
     public ObservableCollection<Customer> CustomerOptions { get; } = []; //Lista av customers som blir synbara
+
+    private async void LoadCustomersInBackgroundAsync() //För att hämta alla customers och stoppa in dom i CustomerOptions.
+    {
+        try
+        {
+            var customers = await _customerService.GetAllCustomersAsync();
+            CustomerOptions.Clear();
+            foreach (var customer in customers)
+            {
+                CustomerOptions.Add(customer);
+            }
+        }
+        catch (Exception)
+        {
+            StatusMessage = "Could not load customers. Please add a customer first!";
+        }
+    }
 
 
     //Relaycommand är handlingar som användaren triggar igång. Denna async körs när användaren trycker på "Create ticket". Den tar infon från användaren och skickar vidare till servicen för hantering. Om ej funkar skrivs felmeddelande ut. Om det lyckades rensas alla inputs. 
