@@ -10,10 +10,10 @@ public sealed partial class TicketRegistrationPage : Page
     //Property av klassen viewmodel för att kunna hämta den
     public TicketRegistrationViewModel TicketRegistrationViewModel { get; }
     
-    //Page tar emot vår viewmodel
+    //Parameterlös konstruktor pga Activator.CreativeInstance behöver den
     public TicketRegistrationPage()
     {
-        //Sätter värdet på propertyn med vår viewmodel.
+        //Hämtar viewmodel genom DI
         TicketRegistrationViewModel = App.ServiceProvider.GetRequiredService<TicketRegistrationViewModel>();
 
         InitializeComponent();
