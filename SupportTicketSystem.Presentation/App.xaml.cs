@@ -26,13 +26,10 @@ namespace SupportTicketSystem.Presentation
 
             services.AddSingleton<INavigationService, NavigationService>();
 
-            services.AddTransient<HomeViewModel>();
-
             services.AddTransient<MainWindow>();
 
             services.AddTransient<CustomersViewModel>();
             services.AddTransient<OverviewViewModel>();
-
             services.AddTransient<TicketRegistrationViewModel>();
 
             ServiceProvider = services.BuildServiceProvider();

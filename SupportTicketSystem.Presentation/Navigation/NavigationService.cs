@@ -1,4 +1,5 @@
 ﻿using Microsoft.UI.Xaml.Controls;
+using SupportTicketSystem.Presentation.Features.TicketRegistration.TicketRegistrationPages;
 using SupportTicketSystem.Presentation.Pages;
 using System;
 
@@ -27,8 +28,9 @@ public class NavigationService : INavigationService
 
         var nextPage = page switch
         {
-            AppPage.Home => typeof(HomePage),
+            AppPage.Overview => typeof(OverviewPage),
             AppPage.Customers => typeof(CustomerPage),
+            AppPage.Tickets => typeof(TicketRegistrationPage),
 
             _ => throw new ArgumentOutOfRangeException($"Unable to navigate to {page}.")
         };

@@ -1,3 +1,4 @@
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using SupportTicketSystem.Presentation.Features.TicketRegistration.TicketRegistrationViewModels;
@@ -9,11 +10,11 @@ public sealed partial class TicketRegistrationPage : Page
     //Property av klassen viewmodel för att kunna hämta den
     public TicketRegistrationViewModel TicketRegistrationViewModel { get; }
     
-    //Page tar emot vår viewmodel
-    public TicketRegistrationPage(TicketRegistrationViewModel ticketViewModel)
+    //Parameterlös konstruktor pga Activator.CreativeInstance behöver den
+    public TicketRegistrationPage()
     {
-        //Sätter värdet på propertyn med vår viewmodel.
-        TicketRegistrationViewModel = ticketViewModel;
+        //Hämtar viewmodel genom DI
+        TicketRegistrationViewModel = App.ServiceProvider.GetRequiredService<TicketRegistrationViewModel>();
 
         InitializeComponent();
     }
