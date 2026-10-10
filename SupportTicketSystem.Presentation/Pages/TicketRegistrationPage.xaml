@@ -46,8 +46,8 @@
             <!--Boxar för kund och prioritet som användaren ska kunna välja mellan alternativ. Måste lägga till DisplayMemberPath för att den ska visa namnen och inte typen av customer-->
             <ComboBox
             Header="Customer"
-            DisplayMemberPath="CustomerName"
-            ItemsSource="{x:Bind TicketRegistrationViewModel.CustomerOptions}"
+            DisplayMemberPath="Name"
+            ItemsSource="{x:Bind TicketRegistrationViewModel.CustomerOptions, Mode=OneWay}"
             SelectedItem="{x:Bind TicketRegistrationViewModel.InputCustomer, Mode=TwoWay}"/>
 
             <ComboBox
