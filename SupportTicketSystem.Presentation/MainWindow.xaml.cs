@@ -1,3 +1,4 @@
+using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using SupportTicketSystem.Presentation.Navigation;
@@ -11,6 +12,11 @@ public sealed partial class MainWindow : Window
     public MainWindow(INavigationService navigationService)
     {
         InitializeComponent();
+
+        AppWindow.Resize(new Windows.Graphics.SizeInt32(1300, 900));
+        var area = DisplayArea.GetFromWindowId(AppWindow.Id, DisplayAreaFallback.Primary).WorkArea;
+
+        AppWindow.Move(new(area.X + (area.Width - AppWindow.Size.Width) / 2, area.Y + (area.Height - AppWindow.Size.Height) / 2));
 
         _navigationService = navigationService;
         _navigationService.Initialize(ContentFrame); //Skapa Initialize
