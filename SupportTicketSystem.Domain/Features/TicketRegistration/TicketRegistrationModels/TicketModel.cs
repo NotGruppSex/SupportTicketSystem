@@ -1,21 +1,31 @@
 ﻿using SupportTicketSystem.Domain.Features.Customers;
 using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 using static SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationEnums.TicketPriorityEnum;
 using static SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationEnums.TicketStatusEnum;
 namespace SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationModels;
 
-//Modellen med krav av vissa properties konstruktorn. Nya tickets får defaultvärde status new och dagens datum.  
+//Modellen med krav av vissa properties konstruktorn. Nya tickets får defaultvärde status new och dagens datum. Behövde lägga till JsonInclude för att kunna deserialize, annars funkade det inte.   
 public class TicketModel 
 {
+    [JsonInclude]
     public Guid TicketID { get; private set; }
+    [JsonInclude]
     public string TicketTitle { get; private set; }
+    [JsonInclude]
     public string TicketDescription { get; private set; }
+    [JsonInclude]
     public Customer CustomerTicket { get; private set; }
+    [JsonInclude]
     public TicketPriority Priority { get; private set; }
+    [JsonInclude]
     public TicketStatus TicketStatus { get; private set; }
+    [JsonInclude]
     public DateTime TicketCreationDate { get; private set; }
+    [JsonInclude]
     public string TechnichianAssigned { get; private set; }
+    [JsonInclude]
     public List<string> TicketComments { get; private set; }
 
     //Parameterlös konstruktor för deserialisering av Json - annars krash
