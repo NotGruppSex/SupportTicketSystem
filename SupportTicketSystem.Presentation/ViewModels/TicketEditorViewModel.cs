@@ -52,7 +52,8 @@ namespace SupportTicketSystem.Presentation.ViewModels
         [ObservableProperty]
         public partial string NewComment { get; set; } = string.Empty;
 
-        // Hämtar ett ärende och fyller ViewModelen med ärendets information.
+
+        // Laddar ett ärende med hjälp av dess ID och fyller ViewModelen med ärendets information.
         public async Task LoadTicketAsync(Guid ticketId)
         {
             var ticket = await _ticketEditorService.GetTicketByIdAsync(ticketId);
@@ -72,6 +73,30 @@ namespace SupportTicketSystem.Presentation.ViewModels
                 TicketID,
                 Title,
                 Description);
+        }
+
+        // Uppdaterar ärendets prioritet.
+        public async Task UpdatePriorityAsync()
+        {
+            await _ticketEditorService.UpdatePriorityAsync(
+                TicketID,
+                Priority);
+        }
+
+        // Uppdaterar ärendets status.
+        public async Task UpdateStatusAsync()
+        {
+            await _ticketEditorService.UpdateStatusAsync(
+                TicketID,
+                Status);
+        }
+
+        // Tilldelar eller byter handläggare på ärendet.
+        public async Task UpdateTechnichianAssignedAsync()
+        {
+            await _ticketEditorService.UpdateTechnichianAssignedAsync(
+                TicketID,
+                AssignedTechnichian);
         }
 
     }
