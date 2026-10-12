@@ -70,6 +70,7 @@ namespace SupportTicketSystem.Presentation.ViewModels
             Priority = ticket.Priority;
             Status = ticket.TicketStatus;
             AssignedTechnichian = ticket.TechnichianAssigned;
+            CustomerName = ticket.CustomerTicket.Name;
             Comments = ticket.TicketComments;
         }
 
