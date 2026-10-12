@@ -159,19 +159,26 @@
                             </Grid>
                             <TextBlock Text="Description" FontWeight="SemiBold"/>
                             <TextBlock Text="{x:Bind ViewModel.SelectedTicket.TicketDescription, Mode=OneWay}" TextWrapping="Wrap"/>
-
+                            
                             <TextBlock Text="Ticket ID" FontWeight="SemiBold"/>
                             <TextBlock Text="{x:Bind ViewModel.SelectedTicket.TicketID, Mode=OneWay}" TextWrapping="Wrap"/>
+                            
+                            <TextBlock Text="Comment" FontWeight="SemiBold"/>
                             <ItemsControl ItemsSource="{x:Bind ViewModel.SelectedTicket.TicketComments, Mode=OneWay}">
-                                
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding}"
-                                                   TextWrapping="Wrap"
-                                                   Margin="0,4"/>
+                                        <TextBlock
+                                                Text="{Binding CommentText}"
+                                                TextWrapping="Wrap"
+                                                Margin="0,4"/>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
+                            <Button Content="Edit Ticket"
+        Style="{StaticResource PageButtonStyle}"
+        Command="{x:Bind ViewModel.EditTicketCommand}"
+        HorizontalAlignment="Left"
+        Margin="0,16,0,0"/>
                         </StackPanel>
                     </ScrollViewer>
                 </SplitView.Pane>

@@ -25,7 +25,6 @@
             <NavigationViewItem x:Name="OverviewNavigationItem" Content="Overview" Tag="overview" Icon="Home"/>
             <NavigationViewItem x:Name="CustomerNavigationItem" Content="Customers" Tag="customers" Icon="People"/>
             <NavigationViewItem x:Name="TicketRegistrationNavigationItem" Content="Tickets" Tag="ticketregistration" Icon="Document"/>
-            <NavigationViewItem x:Name="TicketEditorNavigationItem" Content="Edit Ticket" Tag="editticket" Icon="Edit"/>
         </NavigationView.MenuItems>
 
         <Frame x:Name="ContentFrame" Navigated="ContentFrame_Navigated"/>
