@@ -59,6 +59,15 @@ namespace SupportTicketSystem.Presentation.ViewModels
         public partial IReadOnlyList<TicketComment> Comments { get; set; } = [];
 
 
+        // Fördefinierade handläggare som användaren kan välja mellan.
+        public IReadOnlyList<string> Technichians { get; } =
+        [
+            "Emilia",
+            "Love",
+            "Tomas",
+            "William"
+        ];
+
         // Laddar ett ärende med hjälp av dess ID och fyller ViewModelen med ärendets information.
         public async Task LoadTicketAsync(Guid ticketId)
         {
