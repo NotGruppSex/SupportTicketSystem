@@ -94,7 +94,11 @@ Innehåller applikationens modeller, enums, DTOs och applikationens interfaces O
 # AI-användning + kontroll
 
 **Customer**
- //FYLL PÅ
+ Använt Codex som stöd för att förstå och föklara:
+ -Projektets struktur, DDD vs Clean Architecture
+-Kodgranskning för förbättringsförslag
+-Under utvecklingens gång, genererat xUnit tester för att kontrollera så allt fungerar. Disukterat evetuella fel
+-Ingen färdig generad kod
 
 **TicketRegistration:** 
 
