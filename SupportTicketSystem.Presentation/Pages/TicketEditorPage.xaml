@@ -22,6 +22,11 @@
                            FontSize="28"
                            FontWeight="Bold"/>
 
+                <!-- Visar ID för ärendet som redigeras -->
+                <TextBlock Text="{x:Bind ViewModel.TicketID, Mode=OneWay}"
+                           FontSize="14"
+                           Foreground="Gray"/>
+
                 <TextBlock Text="{x:Bind ViewModel.ErrorMessage, Mode=OneWay}"
                            Foreground="Red"
                            TextWrapping="Wrap"/>
