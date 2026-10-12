@@ -4,6 +4,8 @@ using System;
 using System.Threading.Tasks;
 using static SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationEnums.TicketPriorityEnum;
 using static SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationEnums.TicketStatusEnum;
+using SupportTicketSystem.Domain.Features.TicketEditor;
+using System.Collections.Generic;
 
 
 namespace SupportTicketSystem.Presentation.ViewModels
@@ -52,6 +54,10 @@ namespace SupportTicketSystem.Presentation.ViewModels
         [ObservableProperty]
         public partial string NewComment { get; set; } = string.Empty;
 
+        // Kommentarerna som finns på ärendet.
+        [ObservableProperty]
+        public partial IReadOnlyList<TicketComment> Comments { get; set; } = [];
+
 
         // Laddar ett ärende med hjälp av dess ID och fyller ViewModelen med ärendets information.
         public async Task LoadTicketAsync(Guid ticketId)
@@ -64,6 +70,7 @@ namespace SupportTicketSystem.Presentation.ViewModels
             Priority = ticket.Priority;
             Status = ticket.TicketStatus;
             AssignedTechnichian = ticket.TechnichianAssigned;
+            Comments = ticket.TicketComments;
         }
 
         // Sparar ändringar i ärendets titel och beskrivning.
@@ -97,6 +104,19 @@ namespace SupportTicketSystem.Presentation.ViewModels
             await _ticketEditorService.UpdateTechnichianAssignedAsync(
                 TicketID,
                 AssignedTechnichian);
+        }
+
+        // Lägger till en ny kommentar på ärendet.
+        public async Task AddCommentAsync()
+        {
+            await _ticketEditorService.AddCommentAsync(
+                TicketID,
+                NewComment);
+
+            var ticket = await _ticketEditorService.GetTicketByIdAsync(TicketID);
+            Comments = ticket.TicketComments;
+
+            NewComment = string.Empty;
         }
 
     }
