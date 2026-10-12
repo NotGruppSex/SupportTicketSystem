@@ -7,7 +7,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Title="Support Ticket System">
+    Title="Support Ticket System"
+    >
 
     <Window.SystemBackdrop>
         <MicaBackdrop />
@@ -24,11 +25,9 @@
             <NavigationViewItem x:Name="OverviewNavigationItem" Content="Overview" Tag="overview" Icon="Home"/>
             <NavigationViewItem x:Name="CustomerNavigationItem" Content="Customers" Tag="customers" Icon="People"/>
             <NavigationViewItem x:Name="TicketRegistrationNavigationItem" Content="Tickets" Tag="ticketregistration" Icon="Document"/>
-            <NavigationViewItem x:Name="TicketEditorNavigationItem" Content="Edit Ticket" Tag="editticket" Icon="Edit"/>
         </NavigationView.MenuItems>
 
         <Frame x:Name="ContentFrame" Navigated="ContentFrame_Navigated"/>
-
     </NavigationView>               
     
 </Window>

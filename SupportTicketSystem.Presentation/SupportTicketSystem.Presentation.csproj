@@ -19,6 +19,7 @@
     <None Remove="Pages\TicketEditorPage.xaml" />
     <None Remove="Styles\Buttons\Buttons.xaml" />
     <None Remove="Styles\Headings\HeadingStyle.xaml" />
+    <None Remove="Styles\Headings\SubHeadings.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -54,8 +55,13 @@
     <ProjectReference Include="..\SupportTicketSystem.Domain\SupportTicketSystem.Domain.csproj" />
     <ProjectReference Include="..\SupportTicketSystem.Infrastructure\SupportTicketSystem.Infrastructure.csproj" />
   </ItemGroup>
+	<ItemGroup>
+		<Page Update="Pages\TicketEditorPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</Page>
+	</ItemGroup>
   <ItemGroup>
-    <Page Update="Pages\TicketEditorPage.xaml">
+    <Page Update="Styles\Headings\SubHeadings.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

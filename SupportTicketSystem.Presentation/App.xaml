@@ -11,6 +11,7 @@
                 <!-- Other merged dictionaries here -->
                 <ResourceDictionary Source="/Styles/Buttons/Buttons.xaml"/>
                 <ResourceDictionary Source="/Styles/Headings/HeadingStyle.xaml"/>
+                <ResourceDictionary Source="/Styles/Headings/SubHeadings.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <!-- Other app resources here -->
         </ResourceDictionary>

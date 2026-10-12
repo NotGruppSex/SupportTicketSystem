@@ -10,14 +10,11 @@ using System.Threading.Tasks;
 
 namespace SupportTicketSystem.Application.Features.Overviews.Services;
 
-public class TicketOverviewService(IJsonTicketRegistrationRepository supporticketRepository, ICustomerRepository customerRepository) : ITicketOverviewService
-
-
+public class TicketOverviewService(IJsonTicketRegistrationRepository supporticketRepository) : ITicketOverviewService
 {
     public async Task<IReadOnlyList<TicketModel>> SearchTicketsAsync(string searchText, TicketStatusEnum.TicketStatus? status)
     {
         var tickets = await supporticketRepository.GetAllTicketsAsync();
-        var customers = await customerRepository.GetAllCustomersAsync();
         var result = new List<TicketModel>();
 
         bool matchesTitle;
@@ -39,11 +36,8 @@ public class TicketOverviewService(IJsonTicketRegistrationRepository supporticke
 
             matchesTitle = ticket.TicketTitle.Contains(searchText, StringComparison.CurrentCultureIgnoreCase);
 
-            //Detta kan ge null
-            var customer = customers.FirstOrDefault(c => c.Id == ticket.CustomerTicket.Id);
-
             //Alltså behöver 'customer' vara nullable och '==true' gör så att bool-värdet blir false om det är null
-            matchesCustomer = customer?.Name.Contains(searchText, StringComparison.CurrentCultureIgnoreCase) == true;
+            matchesCustomer = ticket.CustomerTicket?.Name.Contains(searchText, StringComparison.CurrentCultureIgnoreCase) == true;
 
             if (matchesTitle || matchesCustomer)
                 result.Add(ticket);
@@ -52,7 +46,6 @@ public class TicketOverviewService(IJsonTicketRegistrationRepository supporticke
         result.Sort((first, second) => second.TicketCreationDate.CompareTo(first.TicketCreationDate));
 
         return result;
-
     }
     public async Task <TicketStatusCount> GetTicketStatusCountsAsync()
     {
