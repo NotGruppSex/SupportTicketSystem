@@ -73,15 +73,31 @@ public class TicketModel
     }
 
     // Uppdaterar statusen på ett befintligt ärende.
+    // Ett pågående eller stängt ärende måste ha en tilldelad handläggare.
     public void UpdateStatus(TicketStatus status)
     {
+        if ((status == TicketStatus.InProgress || status == TicketStatus.Closed)
+            && string.IsNullOrWhiteSpace(TechnichianAssigned))
+        {
+            throw new InvalidOperationException(
+                "A technician must be assigned before changing the status.");
+        }
+
         TicketStatus = status;
     }
 
     // Tilldelar eller byter handläggare på ett befintligt ärende.
+    // Handläggaren får inte tas bort om ärendet är pågående eller stängt.
     public void UpdateTechnichianAssigned(string technichianAssigned)
     {
-        TechnichianAssigned = technichianAssigned;
+        if ((TicketStatus == TicketStatus.InProgress || TicketStatus == TicketStatus.Closed)
+            && string.IsNullOrWhiteSpace(technichianAssigned))
+        {
+            throw new InvalidOperationException(
+                "A technician cannot be removed from an in progress or closed ticket.");
+        }
+
+        TechnichianAssigned = technichianAssigned?.Trim() ?? string.Empty;
     }
 
     // Lägger till en kommentar på ett befintligt ärende.
