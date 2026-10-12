@@ -31,6 +31,7 @@ public class NavigationService : INavigationService
             AppPage.Overview => typeof(OverviewPage),
             AppPage.Customers => typeof(CustomerPage),
             AppPage.Tickets => typeof(TicketRegistrationPage),
+            AppPage.EditTicket => typeof(TicketEditorPage),
 
             _ => throw new ArgumentOutOfRangeException($"Unable to navigate to {page}.")
         };

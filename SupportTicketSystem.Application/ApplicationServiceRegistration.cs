@@ -3,6 +3,7 @@ using SupportTicketSystem.Application.Features.Customers;
 using SupportTicketSystem.Application.Features.Overviews.Services;
 using SupportTicketSystem.Application.Features.TicketRegistration.TicketRegistrationServices;
 using SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationInterfaces;
+using SupportTicketSystem.Application.Features.TicketEditor;
 
 namespace SupportTicketSystem.Application;
 
@@ -14,6 +15,8 @@ public static class ApplicationServiceRegistration
         services.AddTransient<ITicketRegistrationService, TicketRegistrationService>();
 
         services.AddTransient<ITicketOverviewService, TicketOverviewService>();
+
+        services.AddTransient<ITicketEditorService, TicketEditorService>();
 
         return services;
     }
