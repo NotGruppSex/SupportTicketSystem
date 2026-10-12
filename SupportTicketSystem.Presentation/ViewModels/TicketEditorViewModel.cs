@@ -70,6 +70,14 @@ namespace SupportTicketSystem.Presentation.ViewModels
             "William"
         ];
 
+        // Prioriteter som användaren kan välja mellan.
+        public IReadOnlyList<TicketPriority> Priorities { get; } =
+            Enum.GetValues<TicketPriority>();
+
+        // Statusar som användaren kan välja mellan.
+        public IReadOnlyList<TicketStatus> Statuses { get; } =
+            Enum.GetValues<TicketStatus>();
+
         // Laddar ett ärende med hjälp av dess ID och fyller ViewModelen med ärendets information.
         public async Task LoadTicketAsync(Guid ticketId)
         {
