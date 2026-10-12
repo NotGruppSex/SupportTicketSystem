@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using SupportTicketSystem.Domain.Features.TicketEditor;
 using static SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationEnums.TicketPriorityEnum;
 using static SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationEnums.TicketStatusEnum;
 namespace SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationModels;
@@ -26,7 +27,7 @@ public class TicketModel
     [JsonInclude]
     public string TechnichianAssigned { get; private set; }
     [JsonInclude]
-    public List<string> TicketComments { get; private set; }
+    public List<TicketComment> TicketComments { get; private set; }
 
     //Parameterlös konstruktor för deserialisering av Json - annars krash
     public TicketModel() { } 
@@ -52,8 +53,62 @@ public class TicketModel
         TicketStatus = TicketStatus.New;
         TicketCreationDate = DateTime.Now;
         TechnichianAssigned = string.Empty;
-        TicketComments = new List<string>();
+        TicketComments = new List<TicketComment>();
     }
+
+    // Validerar och uppdaterar titel och beskrivning på ett befintligt ärende. (Möjliggör det samtidigt som private set behålls i modellen.)
+    public void UpdateTitleAndDescription(string title, string description)
+    {
+        InputTitleValidation(title);
+        InputDescriptionValidation(description);
+
+        TicketTitle = TrimInput(title);
+        TicketDescription = TrimInput(description);
+    }
+
+    // Uppdaterar prioriteten på ett befintligt ärende.
+    public void UpdatePriority(TicketPriority priority)
+    {
+        Priority = priority;
+    }
+
+    // Uppdaterar statusen på ett befintligt ärende.
+    // Ett pågående eller stängt ärende måste ha en tilldelad handläggare.
+    public void UpdateStatus(TicketStatus status)
+    {
+        if ((status == TicketStatus.InProgress || status == TicketStatus.Closed)
+            && string.IsNullOrWhiteSpace(TechnichianAssigned))
+        {
+            throw new InvalidOperationException(
+                "A technician must be assigned before changing the status.");
+        }
+
+        TicketStatus = status;
+    }
+
+    // Tilldelar eller byter handläggare på ett befintligt ärende.
+    // Handläggaren får inte tas bort om ärendet är pågående eller stängt.
+    public void UpdateTechnichianAssigned(string technichianAssigned)
+    {
+        if ((TicketStatus == TicketStatus.InProgress || TicketStatus == TicketStatus.Closed)
+            && string.IsNullOrWhiteSpace(technichianAssigned))
+        {
+            throw new InvalidOperationException(
+                "A technician cannot be removed from an in progress or closed ticket.");
+        }
+
+        TechnichianAssigned = technichianAssigned?.Trim() ?? string.Empty;
+    }
+
+    // Lägger till en kommentar på ett befintligt ärende.
+    public void AddComment(string comment)
+    {
+        if (string.IsNullOrWhiteSpace(comment))
+            throw new ArgumentException("Comment cannot be empty.");
+
+        TicketComments.Add(new TicketComment(comment.Trim()));
+    }
+
 
 
     //___________________Validerings- och trimmetoder___________________//

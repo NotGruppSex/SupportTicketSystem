@@ -34,6 +34,7 @@ public sealed partial class MainWindow : Window
             "overview" => AppPage.Overview,
             "customers" => AppPage.Customers,
             "ticketregistration" => AppPage.Tickets,
+            "editticket" => AppPage.EditTicket,
             _ => null,
         };
         if (page is AppPage destination)
