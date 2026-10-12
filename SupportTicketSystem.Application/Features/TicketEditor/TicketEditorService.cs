@@ -11,6 +11,7 @@ namespace SupportTicketSystem.Application.Features.TicketEditor;
 
 public class TicketEditorService : ITicketEditorService
 {
+    // Repository som används för att hämta och spara ärenden i JSON-filen.
     private readonly IJsonTicketRegistrationRepository _ticketRepository;
 
     public TicketEditorService(IJsonTicketRegistrationRepository ticketRepository)
@@ -18,6 +19,7 @@ public class TicketEditorService : ITicketEditorService
         _ticketRepository = ticketRepository;
     }
 
+    // Hämtar ett specifikt ärende med hjälp av dess ID.
     public async Task<TicketModel> GetTicketByIdAsync(Guid ticketId)
     {
         var tickets = await _ticketRepository.GetAllTicketsAsync();
@@ -26,6 +28,7 @@ public class TicketEditorService : ITicketEditorService
             ?? throw new ArgumentException("Ticket not found.");
     }
 
+    // Hittar ärendet, uppdaterar titel och beskrivning och sparar ändringarna.
     public async Task UpdateTitleAndDescriptionAsync(
         Guid ticketId,
         string title,
@@ -40,6 +43,7 @@ public class TicketEditorService : ITicketEditorService
         await _ticketRepository.SaveAllTicketsAsync(tickets);
     }
 
+    // Hittar ärendet, uppdaterar prioritet och sparar ändringarna.
     public async Task UpdatePriorityAsync(Guid ticketId, TicketPriority priority)
     {
         var tickets = await _ticketRepository.GetAllTicketsAsync();
@@ -51,6 +55,7 @@ public class TicketEditorService : ITicketEditorService
         await _ticketRepository.SaveAllTicketsAsync(tickets);
     }
 
+    // Hittar ärendet, uppdaterar status och sparar ändringarna.
     public async Task UpdateStatusAsync(Guid ticketId, TicketStatus status)
     {
         var tickets = await _ticketRepository.GetAllTicketsAsync();
@@ -62,6 +67,7 @@ public class TicketEditorService : ITicketEditorService
         await _ticketRepository.SaveAllTicketsAsync(tickets);
     }
 
+    // Hittar ärendet, tilldelar eller byter handläggare och sparar ändringarna.
     public async Task UpdateTechnichianAssignedAsync(
         Guid ticketId,
         string technichianAssigned)
@@ -75,6 +81,7 @@ public class TicketEditorService : ITicketEditorService
         await _ticketRepository.SaveAllTicketsAsync(tickets);
     }
 
+    // Hittar ärendet, lägger till en ny kommentar och sparar ändringarna.
     public async Task AddCommentAsync(Guid ticketId, string comment)
     {
         var tickets = await _ticketRepository.GetAllTicketsAsync();
