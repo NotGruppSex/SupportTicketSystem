@@ -60,6 +60,10 @@ namespace SupportTicketSystem.Presentation.ViewModels
         [ObservableProperty]
         public partial IReadOnlyList<TicketComment> Comments { get; set; } = [];
 
+        // Felmeddelande som visas om en ändring av ärendet inte kan genomföras.
+        [ObservableProperty]
+        public partial string ErrorMessage { get; set; } = string.Empty;
+
 
         // Fördefinierade handläggare som användaren kan välja mellan.
         public IReadOnlyList<string> Technichians { get; } =
@@ -100,53 +104,99 @@ namespace SupportTicketSystem.Presentation.ViewModels
         // Sparar ändringar i ärendets titel och beskrivning.
         public async Task UpdateTitleAndDescriptionAsync()
         {
-            await _ticketEditorService.UpdateTitleAndDescriptionAsync(
-                TicketID,
-                Title,
-                Description);
+            try
+            {
+                ErrorMessage = string.Empty;
+
+                await _ticketEditorService.UpdateTitleAndDescriptionAsync(
+                    TicketID,
+                    Title,
+                    Description);
+            }
+            catch (Exception ex)
+            {
+                ErrorMessage = ex.Message;
+            }
         }
 
         [RelayCommand]
         // Uppdaterar ärendets prioritet.
         public async Task UpdatePriorityAsync()
         {
-            await _ticketEditorService.UpdatePriorityAsync(
-                TicketID,
-                Priority);
+            try
+            {
+                ErrorMessage = string.Empty;
+
+                await _ticketEditorService.UpdatePriorityAsync(
+                    TicketID,
+                    Priority);
+            }
+            catch (Exception ex)
+            {
+                ErrorMessage = ex.Message;
+            }
         }
 
         [RelayCommand]
         // Uppdaterar ärendets status.
         public async Task UpdateStatusAsync()
         {
-            await _ticketEditorService.UpdateStatusAsync(
-                TicketID,
-                Status);
+            try
+            {
+                ErrorMessage = string.Empty;
+
+                await _ticketEditorService.UpdateStatusAsync(
+                    TicketID,
+                    Status);
+            }
+            catch (Exception ex)
+            {
+                ErrorMessage = ex.Message;
+            }
         }
 
         [RelayCommand]
         // Tilldelar eller byter handläggare på ärendet.
         public async Task UpdateTechnichianAssignedAsync()
         {
-            await _ticketEditorService.UpdateTechnichianAssignedAsync(
-                TicketID,
-                AssignedTechnichian);
+            try
+            {
+                ErrorMessage = string.Empty;
+
+                await _ticketEditorService.UpdateTechnichianAssignedAsync(
+                    TicketID,
+                    AssignedTechnichian);
+            }
+            catch (Exception ex)
+            {
+                ErrorMessage = ex.Message;
+            }
         }
 
         [RelayCommand]
         // Lägger till en ny kommentar på ärendet.
         public async Task AddCommentAsync()
         {
-            await _ticketEditorService.AddCommentAsync(
-                TicketID,
-                NewComment);
+            try
+            {
+                ErrorMessage = string.Empty;
 
-            var ticket = await _ticketEditorService.GetTicketByIdAsync(TicketID);
-            Comments = ticket.TicketComments
-                .OrderBy(comment => comment.CommentDate)
-                .ToList();
+                await _ticketEditorService.AddCommentAsync(
+                    TicketID,
+                    NewComment);
 
-            NewComment = string.Empty;
+                var ticket = await _ticketEditorService.GetTicketByIdAsync(TicketID);
+
+                Comments = ticket.TicketComments
+                    .OrderBy(comment => comment.CommentDate)
+                    .ToList();
+
+                NewComment = string.Empty;
+            }
+            catch (Exception ex)
+            {
+                ErrorMessage = ex.Message;
+            }
         }
 
     }
