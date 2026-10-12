@@ -1,6 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using SupportTicketSystem.Application.Features.TicketEditor;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using static SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationEnums.TicketPriorityEnum;
 using static SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationEnums.TicketStatusEnum;
@@ -80,9 +82,13 @@ namespace SupportTicketSystem.Presentation.ViewModels
             Status = ticket.TicketStatus;
             AssignedTechnichian = ticket.TechnichianAssigned;
             CustomerName = ticket.CustomerTicket.Name;
-            Comments = ticket.TicketComments;
+            Comments = ticket.TicketComments
+                .OrderBy(comment => comment.CommentDate)
+                .ToList();
         }
 
+
+        [RelayCommand]
         // Sparar ändringar i ärendets titel och beskrivning.
         public async Task UpdateTitleAndDescriptionAsync()
         {
@@ -92,6 +98,7 @@ namespace SupportTicketSystem.Presentation.ViewModels
                 Description);
         }
 
+        [RelayCommand]
         // Uppdaterar ärendets prioritet.
         public async Task UpdatePriorityAsync()
         {
@@ -100,6 +107,7 @@ namespace SupportTicketSystem.Presentation.ViewModels
                 Priority);
         }
 
+        [RelayCommand]
         // Uppdaterar ärendets status.
         public async Task UpdateStatusAsync()
         {
@@ -108,6 +116,7 @@ namespace SupportTicketSystem.Presentation.ViewModels
                 Status);
         }
 
+        [RelayCommand]
         // Tilldelar eller byter handläggare på ärendet.
         public async Task UpdateTechnichianAssignedAsync()
         {
@@ -116,6 +125,7 @@ namespace SupportTicketSystem.Presentation.ViewModels
                 AssignedTechnichian);
         }
 
+        [RelayCommand]
         // Lägger till en ny kommentar på ärendet.
         public async Task AddCommentAsync()
         {
@@ -124,7 +134,9 @@ namespace SupportTicketSystem.Presentation.ViewModels
                 NewComment);
 
             var ticket = await _ticketEditorService.GetTicketByIdAsync(TicketID);
-            Comments = ticket.TicketComments;
+            Comments = ticket.TicketComments
+                .OrderBy(comment => comment.CommentDate)
+                .ToList();
 
             NewComment = string.Empty;
         }
