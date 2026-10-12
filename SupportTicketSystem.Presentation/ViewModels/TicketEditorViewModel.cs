@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using SupportTicketSystem.Application.Features.TicketEditor;
 using System;
+using System.Threading.Tasks;
 using static SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationEnums.TicketPriorityEnum;
 using static SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationEnums.TicketStatusEnum;
 
@@ -40,7 +41,6 @@ namespace SupportTicketSystem.Presentation.ViewModels
         public partial TicketPriority Priority { get; set; }
 
         // Ärendets status.
-
         [ObservableProperty]
         public partial TicketStatus Status { get; set; }
 
@@ -51,6 +51,19 @@ namespace SupportTicketSystem.Presentation.ViewModels
         // Texten för en ny kommentar.
         [ObservableProperty]
         public partial string NewComment { get; set; } = string.Empty;
+
+        // Hämtar ett ärende och fyller ViewModelen med ärendets information.
+        public async Task LoadTicketAsync(Guid ticketId)
+        {
+            var ticket = await _ticketEditorService.GetTicketByIdAsync(ticketId);
+
+            TicketID = ticket.TicketID;
+            Title = ticket.TicketTitle;
+            Description = ticket.TicketDescription;
+            Priority = ticket.Priority;
+            Status = ticket.TicketStatus;
+            AssignedTechnichian = ticket.TechnichianAssigned;
+        }
 
     }
 }
