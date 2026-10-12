@@ -65,5 +65,14 @@ namespace SupportTicketSystem.Presentation.ViewModels
             AssignedTechnichian = ticket.TechnichianAssigned;
         }
 
+        // Sparar ändringar i ärendets titel och beskrivning.
+        public async Task UpdateTitleAndDescriptionAsync()
+        {
+            await _ticketEditorService.UpdateTitleAndDescriptionAsync(
+                TicketID,
+                Title,
+                Description);
+        }
+
     }
 }
