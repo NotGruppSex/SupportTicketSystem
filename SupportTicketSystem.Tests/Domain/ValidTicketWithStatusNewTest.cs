@@ -8,13 +8,16 @@ namespace SupportTicketSystem.Tests.Domain;
 
 public class TicketModelTests
 {
-    [Fact]
-    public void Constructor_WithEmptyTitle_ThrowsArgumentException()
+    [Theory]
+    [InlineData(null)]
+    [InlineData("")]
+    [InlineData("   ")]
+    public void Constructor_WithEmptyTitle_ThrowsArgumentException(string? title)
     {
         var customer = new Customer("Dog Dogsson", "dog@example.com");
 
         Assert.Throws<ArgumentException>(() => new TicketModel(
-            "   ",
+            title,
             "Giltig beskrivning",
             customer,
             TicketPriority.Medium));
