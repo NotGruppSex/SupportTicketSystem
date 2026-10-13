@@ -27,10 +27,7 @@
                            FontSize="14"
                            Foreground="Gray"/>
 
-                <TextBlock Text="{x:Bind ViewModel.ErrorMessage, Mode=OneWay}"
-                           Foreground="Red"
-                           TextWrapping="Wrap"/>
-
+                
 
                 <!-- Kund -->
                 <TextBlock Text="Kund"
@@ -138,6 +135,16 @@
                         Command="{x:Bind ViewModel.SaveTicketChangesCommand}"
                         Style="{StaticResource PageButtonStyle}"
                         HorizontalAlignment="Left"/>
+
+                <!-- Visar bekräftelse när ärendet har sparats -->
+                <TextBlock Text="{x:Bind ViewModel.SuccessMessage, Mode=OneWay}"
+                        Foreground="Green"
+                        TextWrapping="Wrap"/>
+
+                <!-- Visar felmeddelande om sparningen misslyckas -->
+                <TextBlock Text="{x:Bind ViewModel.ErrorMessage, Mode=OneWay}"
+                        Foreground="Red"
+                        TextWrapping="Wrap"/>
 
 
             </StackPanel>

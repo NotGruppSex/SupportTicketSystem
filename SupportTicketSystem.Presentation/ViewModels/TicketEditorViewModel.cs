@@ -65,10 +65,15 @@ namespace SupportTicketSystem.Presentation.ViewModels
         [ObservableProperty]
         public partial string ErrorMessage { get; set; } = string.Empty;
 
+        // Bekräftelse som visas när ärendets ändringar har sparats.
+        [ObservableProperty]
+        public partial string SuccessMessage { get; set; } = string.Empty;
+
 
         // Fördefinierade handläggare som användaren kan välja mellan.
         public IReadOnlyList<string> Technichians { get; } =
         [
+            "",
             "Emilia",
             "Love",
             "Tomas",
@@ -192,7 +197,6 @@ namespace SupportTicketSystem.Presentation.ViewModels
                     .OrderBy(comment => comment.CommentDate)
                     .ToList();
 
-                NewComment = string.Empty;
             }
             catch (Exception ex)
             {
@@ -206,6 +210,7 @@ namespace SupportTicketSystem.Presentation.ViewModels
             try
             {
                 ErrorMessage = string.Empty;
+                SuccessMessage = string.Empty;
 
                 var request = new SaveTicketChangesRequest(
                     TicketID,
@@ -223,9 +228,13 @@ namespace SupportTicketSystem.Presentation.ViewModels
                 Comments = ticket.TicketComments
                     .OrderBy(comment => comment.CommentDate)
                     .ToList();
+
+                NewComment = string.Empty;
+                SuccessMessage = "ändringarna sparades";
             }
             catch (Exception ex)
             {
+                SuccessMessage = string.Empty;
                 ErrorMessage = ex.Message;
             }
         }
