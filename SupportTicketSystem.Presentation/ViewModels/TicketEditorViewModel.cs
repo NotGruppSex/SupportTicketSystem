@@ -105,105 +105,6 @@ namespace SupportTicketSystem.Presentation.ViewModels
                 .ToList();
         }
 
-
-        [RelayCommand]
-        // Sparar ändringar i ärendets titel och beskrivning.
-        public async Task UpdateTitleAndDescriptionAsync()
-        {
-            try
-            {
-                ErrorMessage = string.Empty;
-
-                await _ticketEditorService.UpdateTitleAndDescriptionAsync(
-                    TicketID,
-                    Title,
-                    Description);
-            }
-            catch (Exception ex)
-            {
-                ErrorMessage = ex.Message;
-            }
-        }
-
-        [RelayCommand]
-        // Uppdaterar ärendets prioritet.
-        public async Task UpdatePriorityAsync()
-        {
-            try
-            {
-                ErrorMessage = string.Empty;
-
-                await _ticketEditorService.UpdatePriorityAsync(
-                    TicketID,
-                    Priority);
-            }
-            catch (Exception ex)
-            {
-                ErrorMessage = ex.Message;
-            }
-        }
-
-        [RelayCommand]
-        // Uppdaterar ärendets status.
-        public async Task UpdateStatusAsync()
-        {
-            try
-            {
-                ErrorMessage = string.Empty;
-
-                await _ticketEditorService.UpdateStatusAsync(
-                    TicketID,
-                    Status);
-            }
-            catch (Exception ex)
-            {
-                ErrorMessage = ex.Message;
-            }
-        }
-
-        [RelayCommand]
-        // Tilldelar eller byter handläggare på ärendet.
-        public async Task UpdateTechnichianAssignedAsync()
-        {
-            try
-            {
-                ErrorMessage = string.Empty;
-
-                await _ticketEditorService.UpdateTechnichianAssignedAsync(
-                    TicketID,
-                    AssignedTechnichian);
-            }
-            catch (Exception ex)
-            {
-                ErrorMessage = ex.Message;
-            }
-        }
-
-        [RelayCommand]
-        // Lägger till en ny kommentar på ärendet.
-        public async Task AddCommentAsync()
-        {
-            try
-            {
-                ErrorMessage = string.Empty;
-
-                await _ticketEditorService.AddCommentAsync(
-                    TicketID,
-                    NewComment);
-
-                var ticket = await _ticketEditorService.GetTicketByIdAsync(TicketID);
-
-                Comments = ticket.TicketComments
-                    .OrderBy(comment => comment.CommentDate)
-                    .ToList();
-
-            }
-            catch (Exception ex)
-            {
-                ErrorMessage = ex.Message;
-            }
-        }
-
         [RelayCommand]
         public async Task SaveTicketChangesAsync()
         {
@@ -230,7 +131,7 @@ namespace SupportTicketSystem.Presentation.ViewModels
                     .ToList();
 
                 NewComment = string.Empty;
-                SuccessMessage = "ändringarna sparades";
+                SuccessMessage = "Changes saved!";
             }
             catch (Exception ex)
             {
