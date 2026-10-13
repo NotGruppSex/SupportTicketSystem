@@ -203,16 +203,31 @@ namespace SupportTicketSystem.Presentation.ViewModels
         [RelayCommand]
         public async Task SaveTicketChangesAsync()
         {
-            var request = new SaveTicketChangesRequest(
-                 TicketID,
-                 Title,
-                 Description,
-                 Priority,
-                 Status,
-                 AssignedTechnichian,
-                 NewComment);
+            try
+            {
+                ErrorMessage = string.Empty;
 
-            await _ticketEditorService.SaveTicketChangesAsync(request);
+                var request = new SaveTicketChangesRequest(
+                    TicketID,
+                    Title,
+                    Description,
+                    Priority,
+                    Status,
+                    AssignedTechnichian,
+                    NewComment);
+
+                await _ticketEditorService.SaveTicketChangesAsync(request);
+
+                var ticket = await _ticketEditorService.GetTicketByIdAsync(TicketID);
+
+                Comments = ticket.TicketComments
+                    .OrderBy(comment => comment.CommentDate)
+                    .ToList();
+            }
+            catch (Exception ex)
+            {
+                ErrorMessage = ex.Message;
+            }
         }
     }
 

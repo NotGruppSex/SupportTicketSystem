@@ -57,10 +57,7 @@
                          TextWrapping="Wrap"
                          MinHeight="100"/>
 
-                <Button Content="Spara rubrik och beskrivning"
-                        Command="{x:Bind ViewModel.UpdateTitleAndDescriptionCommand}"
-                        Style="{StaticResource PageButtonStyle}"
-                        HorizontalAlignment="Left"/>
+         
 
 
                 <!-- Prioritet -->
@@ -71,10 +68,7 @@
                           SelectedItem="{x:Bind ViewModel.Priority, Mode=TwoWay}"
                           HorizontalAlignment="Stretch"/>
 
-                <Button Content="Spara prioritet"
-                        Command="{x:Bind ViewModel.UpdatePriorityCommand}"
-                        Style="{StaticResource PageButtonStyle}"
-                        HorizontalAlignment="Left"/>
+              
 
 
                 <!-- Status -->
@@ -85,10 +79,6 @@
                           SelectedItem="{x:Bind ViewModel.Status, Mode=TwoWay}"
                           HorizontalAlignment="Stretch"/>
 
-                <Button Content="Spara status"
-                        Command="{x:Bind ViewModel.UpdateStatusCommand}"
-                        Style="{StaticResource PageButtonStyle}"
-                        HorizontalAlignment="Left"/>
 
 
                 <!-- Handläggare -->
@@ -100,11 +90,7 @@
                           PlaceholderText="Välj handläggare"
                           HorizontalAlignment="Stretch"/>
 
-                <Button Content="Spara handläggare"
-                        Command="{x:Bind ViewModel.UpdateTechnichianAssignedCommand}"
-                        Style="{StaticResource PageButtonStyle}"
-                        HorizontalAlignment="Left"/>
-
+               
 
                 <!-- Tidigare kommentarer -->
                 <TextBlock Text="Kommentarer"
@@ -147,10 +133,12 @@
                          TextWrapping="Wrap"
                          MinHeight="80"/>
 
-                <Button Content="Lägg till kommentar"
-                        Command="{x:Bind ViewModel.AddCommentCommand}"
+                <!-- Sparar alla ändringar i ärendet -->
+                <Button Content="Spara ändringar"
+                        Command="{x:Bind ViewModel.SaveTicketChangesCommand}"
                         Style="{StaticResource PageButtonStyle}"
                         HorizontalAlignment="Left"/>
+
 
             </StackPanel>
 
