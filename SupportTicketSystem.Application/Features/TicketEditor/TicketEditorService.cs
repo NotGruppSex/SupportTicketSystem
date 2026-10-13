@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using static SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationEnums.TicketPriorityEnum;
 using static SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationEnums.TicketStatusEnum;
+using SupportTicketSystem.Domain.Features.TicketEditor.TicketEditorDtos;
 
 namespace SupportTicketSystem.Application.Features.TicketEditor;
 
@@ -90,6 +91,41 @@ public class TicketEditorService : ITicketEditorService
 
         ticket.AddComment(comment);
 
+        await _ticketRepository.SaveAllTicketsAsync(tickets);
+    }
+
+    public async Task SaveTicketChangesAsync(SaveTicketChangesRequest request)
+    {
+        var tickets = await _ticketRepository.GetAllTicketsAsync();
+        var ticket = tickets.FirstOrDefault(ticket => ticket.TicketID == request.TicketID)
+            ?? throw new ArgumentException("Ticket not found.");
+
+        ticket.InputTitleValidation(request.TicketTitle);
+        ticket.InputDescriptionValidation(request.TicketDescription);
+
+        if ((request.Status == TicketStatus.InProgress ||
+               request.Status == TicketStatus.Closed) &&
+               string.IsNullOrWhiteSpace(request.TechnichianAssigned))
+        {
+            throw new InvalidOperationException(
+                "A technician must be assigned before changing the status.");
+        }
+        ticket.UpdateTitleAndDescription(request.TicketTitle, request.TicketDescription);
+        ticket.UpdatePriority(request.Priority);
+        if (request.Status == TicketStatus.New)
+        {
+            ticket.UpdateStatus(request.Status);
+            ticket.UpdateTechnichianAssigned(request.TechnichianAssigned);
+        }
+        else
+        {
+            ticket.UpdateTechnichianAssigned(request.TechnichianAssigned);
+            ticket.UpdateStatus(request.Status);
+        }
+        if (!string.IsNullOrWhiteSpace(request.CommentText))
+        {
+            ticket.AddComment(request.CommentText);
+        }
         await _ticketRepository.SaveAllTicketsAsync(tickets);
     }
 }

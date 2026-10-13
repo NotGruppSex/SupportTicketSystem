@@ -8,6 +8,7 @@ using static SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegist
 using static SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationEnums.TicketStatusEnum;
 using SupportTicketSystem.Domain.Features.TicketEditor;
 using System.Collections.Generic;
+using SupportTicketSystem.Domain.Features.TicketEditor.TicketEditorDtos;
 
 
 namespace SupportTicketSystem.Presentation.ViewModels
@@ -199,5 +200,20 @@ namespace SupportTicketSystem.Presentation.ViewModels
             }
         }
 
+        [RelayCommand]
+        public async Task SaveTicketChangesAsync()
+        {
+            var request = new SaveTicketChangesRequest(
+                 TicketID,
+                 Title,
+                 Description,
+                 Priority,
+                 Status,
+                 AssignedTechnichian,
+                 NewComment);
+
+            await _ticketEditorService.SaveTicketChangesAsync(request);
+        }
     }
-}
+
+}   
