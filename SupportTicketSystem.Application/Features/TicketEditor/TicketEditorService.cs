@@ -4,7 +4,6 @@ using SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationM
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using static SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationEnums.TicketPriorityEnum;
 using static SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationEnums.TicketStatusEnum;
 using SupportTicketSystem.Domain.Features.TicketEditor.TicketEditorDtos;
 
@@ -27,71 +26,6 @@ public class TicketEditorService : ITicketEditorService
 
         return tickets.FirstOrDefault(ticket => ticket.TicketID == ticketId)
             ?? throw new ArgumentException("Ticket not found.");
-    }
-
-    // Hittar ärendet, uppdaterar titel och beskrivning och sparar ändringarna.
-    public async Task UpdateTitleAndDescriptionAsync(
-        Guid ticketId,
-        string title,
-        string description)
-    {
-        var tickets = await _ticketRepository.GetAllTicketsAsync();
-        var ticket = tickets.FirstOrDefault(ticket => ticket.TicketID == ticketId)
-            ?? throw new ArgumentException("Ticket not found.");
-
-        ticket.UpdateTitleAndDescription(title, description);
-
-        await _ticketRepository.SaveAllTicketsAsync(tickets);
-    }
-
-    // Hittar ärendet, uppdaterar prioritet och sparar ändringarna.
-    public async Task UpdatePriorityAsync(Guid ticketId, TicketPriority priority)
-    {
-        var tickets = await _ticketRepository.GetAllTicketsAsync();
-        var ticket = tickets.FirstOrDefault(ticket => ticket.TicketID == ticketId)
-            ?? throw new ArgumentException("Ticket not found.");
-
-        ticket.UpdatePriority(priority);
-
-        await _ticketRepository.SaveAllTicketsAsync(tickets);
-    }
-
-    // Hittar ärendet, uppdaterar status och sparar ändringarna.
-    public async Task UpdateStatusAsync(Guid ticketId, TicketStatus status)
-    {
-        var tickets = await _ticketRepository.GetAllTicketsAsync();
-        var ticket = tickets.FirstOrDefault(ticket => ticket.TicketID == ticketId)
-            ?? throw new ArgumentException("Ticket not found.");
-
-        ticket.UpdateStatus(status);
-
-        await _ticketRepository.SaveAllTicketsAsync(tickets);
-    }
-
-    // Hittar ärendet, tilldelar eller byter handläggare och sparar ändringarna.
-    public async Task UpdateTechnichianAssignedAsync(
-        Guid ticketId,
-        string technichianAssigned)
-    {
-        var tickets = await _ticketRepository.GetAllTicketsAsync();
-        var ticket = tickets.FirstOrDefault(ticket => ticket.TicketID == ticketId)
-            ?? throw new ArgumentException("Ticket not found.");
-
-        ticket.UpdateTechnichianAssigned(technichianAssigned);
-
-        await _ticketRepository.SaveAllTicketsAsync(tickets);
-    }
-
-    // Hittar ärendet, lägger till en ny kommentar och sparar ändringarna.
-    public async Task AddCommentAsync(Guid ticketId, string comment)
-    {
-        var tickets = await _ticketRepository.GetAllTicketsAsync();
-        var ticket = tickets.FirstOrDefault(ticket => ticket.TicketID == ticketId)
-            ?? throw new ArgumentException("Ticket not found.");
-
-        ticket.AddComment(comment);
-
-        await _ticketRepository.SaveAllTicketsAsync(tickets);
     }
 
     public async Task SaveTicketChangesAsync(SaveTicketChangesRequest request)
