@@ -10,7 +10,12 @@ public static class TicketRegistrationServiceRegistration
 {
     public static IServiceCollection AddTicketRegistrationInfrastructure(this IServiceCollection services)
     {
-        services.AddTransient<IJsonTicketRegistrationRepository, JsonTicketRegistrationRepository>();
+        // Anger vilken fil appen ska använda för lagring av ärenden.
+        var filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),"SupportTicketSystem","tickets.json");
+
+        // Skapar repositoryt med den sökväg som konstruktorn kräver.
+        services.AddTransient<IJsonTicketRegistrationRepository>(_ => new JsonTicketRegistrationRepository(filePath));
+
         return services;
     }
 }
