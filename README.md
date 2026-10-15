@@ -176,6 +176,10 @@ Fel som behöver följas upp registreras som GitHub issues med en kort beskrivni
 ## TicketEditing
  //FYLL PÅ
 
-## Overview 
- //FYLL PÅ
+## Overview
+- Använt Codex som stöd för att diskutera och förklara testning av översiktsfunktionen.
+- Fått kodförslag till xUnit-tester och sök/filterfunktioner (LINQ).
+- Fått hjälp att tolka byggfel och testresultat samt formulera commitmeddelanden och pull request-beskrivning.
+- Bollat om bästa möjliga metod för olika problem.
+- Bett om feedback för förbättring eller möjliga missar i koden/funktioner.
 
