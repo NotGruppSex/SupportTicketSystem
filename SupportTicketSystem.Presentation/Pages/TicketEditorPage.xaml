@@ -11,141 +11,177 @@
 
     <Grid Padding="30">
 
-        <ScrollViewer>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled">
 
+            <!-- Formuläret får extra utrymme till höger för scrollbaren -->
             <StackPanel Spacing="16"
-                        MaxWidth="800"
-                        HorizontalAlignment="Left">
+                        Margin="0,0,20,0">
 
-                <!-- Sidans rubrik -->
-                <TextBlock Text="Ärendedetaljer"
-                           FontSize="28"
-                           FontWeight="Bold"/>
+                <!-- Sidans rubrik och ärendets ID -->
+                <StackPanel Spacing="4">
 
-                <TextBlock Text="{x:Bind ViewModel.ErrorMessage, Mode=OneWay}"
-                           Foreground="Red"
-                           TextWrapping="Wrap"/>
+                    <TextBlock Text="Ticket details"
+                               FontSize="28"
+                               FontWeight="Bold" />
 
+                    <TextBlock Text="{x:Bind ViewModel.TicketID, Mode=OneWay}"
+                               FontSize="14"
+                               Foreground="Gray" />
+
+                </StackPanel>
 
                 <!-- Kund -->
-                <TextBlock Text="Kund"
-                           FontWeight="SemiBold"/>
+                <StackPanel Spacing="4">
 
-                <TextBlock Text="{x:Bind ViewModel.CustomerName, Mode=OneWay}"/>
+                    <TextBlock Text="Customer"
+                               FontWeight="SemiBold" />
 
+                    <TextBlock Text="{x:Bind ViewModel.CustomerName, Mode=OneWay}" />
+
+                </StackPanel>
 
                 <!-- Rubrik -->
-                <TextBlock Text="Rubrik"
-                           FontWeight="SemiBold"/>
+                <StackPanel Spacing="4">
 
-                <TextBox Text="{x:Bind ViewModel.Title, Mode=TwoWay}"
-                         PlaceholderText="Ärendets rubrik"/>
+                    <TextBlock Text="Title"
+                               FontWeight="SemiBold" />
 
+                    <TextBox Text="{x:Bind ViewModel.Title, Mode=TwoWay}"
+                             PlaceholderText="Ticket title"
+                             HorizontalAlignment="Stretch" />
+
+                </StackPanel>
 
                 <!-- Beskrivning -->
-                <TextBlock Text="Beskrivning"
-                           FontWeight="SemiBold"/>
+                <StackPanel Spacing="4">
 
-                <TextBox Text="{x:Bind ViewModel.Description, Mode=TwoWay}"
-                         PlaceholderText="Ärendets beskrivning"
-                         AcceptsReturn="True"
-                         TextWrapping="Wrap"
-                         MinHeight="100"/>
+                    <TextBlock Text="Description"
+                               FontWeight="SemiBold" />
 
-                <Button Content="Spara rubrik och beskrivning"
-                        Command="{x:Bind ViewModel.UpdateTitleAndDescriptionCommand}"
-                        Style="{StaticResource PageButtonStyle}"
-                        HorizontalAlignment="Left"/>
+                    <TextBox Text="{x:Bind ViewModel.Description, Mode=TwoWay}"
+                             PlaceholderText="Ticket description"
+                             AcceptsReturn="True"
+                             TextWrapping="Wrap"
+                             MinHeight="100"
+                             HorizontalAlignment="Stretch" />
 
+                </StackPanel>
 
                 <!-- Prioritet -->
-                <TextBlock Text="Prioritet"
-                           FontWeight="SemiBold"/>
+                <StackPanel Spacing="4">
 
-                <ComboBox ItemsSource="{x:Bind ViewModel.Priorities}"
-                          SelectedItem="{x:Bind ViewModel.Priority, Mode=TwoWay}"
-                          HorizontalAlignment="Stretch"/>
+                    <TextBlock Text="Priority"
+                               FontWeight="SemiBold" />
 
-                <Button Content="Spara prioritet"
-                        Command="{x:Bind ViewModel.UpdatePriorityCommand}"
-                        Style="{StaticResource PageButtonStyle}"
-                        HorizontalAlignment="Left"/>
+                    <ComboBox ItemsSource="{x:Bind ViewModel.Priorities}"
+                              SelectedItem="{x:Bind ViewModel.Priority, Mode=TwoWay}"
+                              HorizontalAlignment="Stretch" />
 
+                </StackPanel>
 
-                <!-- Status -->
-                <TextBlock Text="Status"
-                           FontWeight="SemiBold"/>
+                <!-- Status och handläggare -->
+                <Grid ColumnSpacing="16">
 
-                <ComboBox ItemsSource="{x:Bind ViewModel.Statuses}"
-                          SelectedItem="{x:Bind ViewModel.Status, Mode=TwoWay}"
-                          HorizontalAlignment="Stretch"/>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
 
-                <Button Content="Spara status"
-                        Command="{x:Bind ViewModel.UpdateStatusCommand}"
-                        Style="{StaticResource PageButtonStyle}"
-                        HorizontalAlignment="Left"/>
+                    <!-- Status -->
+                    <StackPanel Grid.Column="0"
+                                Spacing="4">
 
+                        <TextBlock Text="Status"
+                                   FontWeight="SemiBold" />
 
-                <!-- Handläggare -->
-                <TextBlock Text="Handläggare"
-                           FontWeight="SemiBold"/>
+                        <ComboBox ItemsSource="{x:Bind ViewModel.Statuses}"
+                                  SelectedItem="{x:Bind ViewModel.Status, Mode=TwoWay}"
+                                  HorizontalAlignment="Stretch" />
 
-                <ComboBox ItemsSource="{x:Bind ViewModel.Technichians}"
-                          SelectedItem="{x:Bind ViewModel.AssignedTechnichian, Mode=TwoWay}"
-                          PlaceholderText="Välj handläggare"
-                          HorizontalAlignment="Stretch"/>
+                    </StackPanel>
 
-                <Button Content="Spara handläggare"
-                        Command="{x:Bind ViewModel.UpdateTechnichianAssignedCommand}"
-                        Style="{StaticResource PageButtonStyle}"
-                        HorizontalAlignment="Left"/>
+                    <!-- Handläggare -->
+                    <StackPanel Grid.Column="1"
+                                Spacing="4">
 
+                        <TextBlock Text="Technician"
+                                   FontWeight="SemiBold" />
+
+                        <ComboBox ItemsSource="{x:Bind ViewModel.Technichians}"
+                                  SelectedItem="{x:Bind ViewModel.AssignedTechnichian, Mode=TwoWay}"
+                                  PlaceholderText="Choose a technician"
+                                  HorizontalAlignment="Stretch" />
+
+                    </StackPanel>
+
+                </Grid>
 
                 <!-- Tidigare kommentarer -->
-                <TextBlock Text="Kommentarer"
-                           FontSize="20"
-                           FontWeight="Bold"
-                           Margin="0,16,0,0"/>
+                <StackPanel Spacing="8">
 
-                <ListView ItemsSource="{x:Bind ViewModel.Comments, Mode=OneWay}"
-                          MaxHeight="300">
+                    <TextBlock Text="Comments"
+                               FontSize="20"
+                               FontWeight="Bold"
+                               Margin="0,8,0,0" />
 
-                    <ListView.ItemTemplate>
+                    <ListView ItemsSource="{x:Bind ViewModel.Comments, Mode=OneWay}"
+                              MaxHeight="300"
+                              Padding="0"
+                              HorizontalAlignment="Stretch">
 
-                        <DataTemplate>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
 
-                            <StackPanel Margin="0,6">
+                                <!-- Litet indrag för kommentarernas innehåll -->
+                                <StackPanel Spacing="4"
+                                            Padding="8,8,0,8">
 
-                                <TextBlock Text="{Binding CommentText}"
-                                           TextWrapping="Wrap"/>
+                                    <TextBlock Text="{Binding CommentText}"
+                                               TextWrapping="Wrap" />
 
-                                <TextBlock Text="{Binding CommentDate}"
-                                           FontSize="12"
-                                           Opacity="0.7"/>
+                                    <TextBlock Text="{Binding CommentDate}"
+                                               FontSize="12"
+                                               Opacity="0.7" />
 
-                            </StackPanel>
+                                </StackPanel>
 
-                        </DataTemplate>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
 
-                    </ListView.ItemTemplate>
+                    </ListView>
 
-                </ListView>
-
+                </StackPanel>
 
                 <!-- Ny kommentar -->
-                <TextBlock Text="Ny kommentar"
-                           FontWeight="SemiBold"/>
+                <StackPanel Spacing="4">
 
-                <TextBox Text="{x:Bind ViewModel.NewComment, Mode=TwoWay}"
-                         PlaceholderText="Skriv en kommentar"
-                         AcceptsReturn="True"
-                         TextWrapping="Wrap"
-                         MinHeight="80"/>
+                    <TextBlock Text="New comment"
+                               FontWeight="SemiBold" />
 
-                <Button Content="Lägg till kommentar"
-                        Command="{x:Bind ViewModel.AddCommentCommand}"
+                    <TextBox Text="{x:Bind ViewModel.NewComment, Mode=TwoWay}"
+                             PlaceholderText="Write a comment"
+                             AcceptsReturn="True"
+                             TextWrapping="Wrap"
+                             MinHeight="80"
+                             HorizontalAlignment="Stretch" />
+
+                </StackPanel>
+
+                <!-- Sparar alla ändringar -->
+                <Button Content="Save changes"
+                        Command="{x:Bind ViewModel.SaveTicketChangesCommand}"
                         Style="{StaticResource PageButtonStyle}"
-                        HorizontalAlignment="Left"/>
+                        HorizontalAlignment="Left" />
+
+                <!-- Bekräftelse -->
+                <TextBlock Text="{x:Bind ViewModel.SuccessMessage, Mode=OneWay}"
+                           Foreground="Green"
+                           TextWrapping="Wrap" />
+
+                <!-- Felmeddelande -->
+                <TextBlock Text="{x:Bind ViewModel.ErrorMessage, Mode=OneWay}"
+                           Foreground="Red"
+                           TextWrapping="Wrap" />
 
             </StackPanel>
 

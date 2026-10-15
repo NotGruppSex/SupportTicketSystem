@@ -8,6 +8,7 @@ using static SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegist
 using static SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationEnums.TicketStatusEnum;
 using SupportTicketSystem.Domain.Features.TicketEditor;
 using System.Collections.Generic;
+using SupportTicketSystem.Domain.Features.TicketEditor.TicketEditorDtos;
 
 
 namespace SupportTicketSystem.Presentation.ViewModels
@@ -64,10 +65,15 @@ namespace SupportTicketSystem.Presentation.ViewModels
         [ObservableProperty]
         public partial string ErrorMessage { get; set; } = string.Empty;
 
+        // Bekräftelse som visas när ärendets ändringar har sparats.
+        [ObservableProperty]
+        public partial string SuccessMessage { get; set; } = string.Empty;
+
 
         // Fördefinierade handläggare som användaren kan välja mellan.
         public IReadOnlyList<string> Technichians { get; } =
         [
+            "",
             "Emilia",
             "Love",
             "Tomas",
@@ -99,91 +105,24 @@ namespace SupportTicketSystem.Presentation.ViewModels
                 .ToList();
         }
 
-
         [RelayCommand]
-        // Sparar ändringar i ärendets titel och beskrivning.
-        public async Task UpdateTitleAndDescriptionAsync()
+        public async Task SaveTicketChangesAsync()
         {
             try
             {
                 ErrorMessage = string.Empty;
+                SuccessMessage = string.Empty;
 
-                await _ticketEditorService.UpdateTitleAndDescriptionAsync(
+                var request = new SaveTicketChangesRequest(
                     TicketID,
                     Title,
-                    Description);
-            }
-            catch (Exception ex)
-            {
-                ErrorMessage = ex.Message;
-            }
-        }
-
-        [RelayCommand]
-        // Uppdaterar ärendets prioritet.
-        public async Task UpdatePriorityAsync()
-        {
-            try
-            {
-                ErrorMessage = string.Empty;
-
-                await _ticketEditorService.UpdatePriorityAsync(
-                    TicketID,
-                    Priority);
-            }
-            catch (Exception ex)
-            {
-                ErrorMessage = ex.Message;
-            }
-        }
-
-        [RelayCommand]
-        // Uppdaterar ärendets status.
-        public async Task UpdateStatusAsync()
-        {
-            try
-            {
-                ErrorMessage = string.Empty;
-
-                await _ticketEditorService.UpdateStatusAsync(
-                    TicketID,
-                    Status);
-            }
-            catch (Exception ex)
-            {
-                ErrorMessage = ex.Message;
-            }
-        }
-
-        [RelayCommand]
-        // Tilldelar eller byter handläggare på ärendet.
-        public async Task UpdateTechnichianAssignedAsync()
-        {
-            try
-            {
-                ErrorMessage = string.Empty;
-
-                await _ticketEditorService.UpdateTechnichianAssignedAsync(
-                    TicketID,
-                    AssignedTechnichian);
-            }
-            catch (Exception ex)
-            {
-                ErrorMessage = ex.Message;
-            }
-        }
-
-        [RelayCommand]
-        // Lägger till en ny kommentar på ärendet.
-        public async Task AddCommentAsync()
-        {
-            try
-            {
-                ErrorMessage = string.Empty;
-
-                await _ticketEditorService.AddCommentAsync(
-                    TicketID,
+                    Description,
+                    Priority,
+                    Status,
+                    AssignedTechnichian,
                     NewComment);
+
+                await _ticketEditorService.SaveTicketChangesAsync(request);
 
                 var ticket = await _ticketEditorService.GetTicketByIdAsync(TicketID);
 
@@ -192,12 +131,14 @@ namespace SupportTicketSystem.Presentation.ViewModels
                     .ToList();
 
                 NewComment = string.Empty;
+                SuccessMessage = "Changes saved!";
             }
             catch (Exception ex)
             {
+                SuccessMessage = string.Empty;
                 ErrorMessage = ex.Message;
             }
         }
-
     }
-}
+
+}   
