@@ -160,8 +160,8 @@ Fel som behöver följas upp registreras som GitHub issues med en kort beskrivni
 # AI-användning + kontroll
 
 ## Customer
- Använt Codex som stöd för att förstå och föklara:
- -Projektets struktur, DDD vs Clean Architecture
+-Använt Codex som stöd för att förstå och föklara:
+-Projektets struktur, DDD vs Clean Architecture
 -Kodgranskning för förbättringsförslag
 -Under utvecklingens gång, genererat xUnit tester för att kontrollera så allt fungerar. Disukterat evetuella fel
 -Ingen färdig generad kod
