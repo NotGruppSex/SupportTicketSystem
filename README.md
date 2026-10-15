@@ -9,22 +9,7 @@ Applikationen är en kund- och ärendehanteringsapplikation som hjälper använd
 - Emilia - Ärendehantering - för att uppdatera ett ärende, tilldelning av handläggare osv.             
 - Tomas  - Översikt - skapar överblick över samtliga ärenden och dess kunder/handläggare samt navigering av applikationen. 
 
-## Kontrollista
-- [x] Översiktssidan laddas vid start
-- [x] Navigeringsbaren syns och knapparna funkar
-- [x] Styles för knappar och headings funkar
-- [x] Felmeddelanden om properties saknad när man skapar kund
-- [x] Kan skapa en kund och informationen sparas
-- [x] Ny kund syns på lista nedan
-- [x] Felmeddelanden om properties saknas när man skapar nytt ärende
-- [x] Kan välja mellan sparade kunder
-- [x] Kan välja mellan prioriteter
-- [x] Meddelande om lyckad sparning av ärende
-- [ ] LÄGG TILL EMILIAS DELAR
-- [x] Räkning av antal ärenden funkar
-- [x] Alla ärenden och dess information syns i en lista på översikten
-- [x] Sökning funkar
-- [x] Filter funkar
+
 
 ### Uppfyllda krav
 **Kundhantering**
@@ -142,21 +127,26 @@ Innehåller applikationens modeller, enums, DTOs och vissa av applikationens int
 Kunderna sparas i c:\Users\<användarnamn>\AppData\Local\ som tempfiler.
 
 **Ärenden (tickets)**
-Tanken är att ärenden ska sparas i en folder benämnt SupportTicketSystem och filen heter tickets.json
-
-Fullständig sökväg ärenden:
-C:\Users\<användarnamn>\AppData\Local\SupportTicketSystem\tickets.json
-
-Dock verkar windows ta över vid sparning och de hamnar någon annan stans.
+Tanken är att ärenden ska sparas i en folder benämnt SupportTicketSystem och filen heter tickets.json. Den SKA sparas till: C:\Users\<Username>\AppData\Local\SupportTicketSystem\tickets.json men den hamnar automatiskt pga operativsystemet(?) till C:\Users\<Username>\AppData\Local\Packages\<folder with a lot of numbers and letters>\LocalCache\Local\SupportTicketSystem
 
 # Resultat av manuell kontroll
-       //Lägg till!
+## Kontrollista
+- [x] Översiktssidan laddas vid start
+- [x] Navigeringsbaren syns och knapparna funkar
+- [x] Styles för knappar och headings funkar
+- [x] Felmeddelanden om properties saknad när man skapar kund
+- [x] Kan skapa en kund och informationen sparas
+- [x] Ny kund syns på lista nedan
+- [x] Felmeddelanden om properties saknas när man skapar nytt ärende
+- [x] Kan välja mellan sparade kunder
+- [x] Kan välja mellan prioriteter
+- [x] Meddelande om lyckad sparning av ärende
+- [ ] LÄGG TILL EMILIAS DELAR
+- [x] Räkning av antal ärenden funkar
+- [x] Alla ärenden och dess information syns i en lista på översikten
+- [x] Sökning funkar
+- [x] Filter funkar
 
-       // Beskrivning från uppgiften: Kontrollera också hela arbetsflödet i gränssnittet: registrera kund, skapa ärende, navigera till detaljer, tilldela handläggare, ändra status, kommentera, söka och filtrera. Starta om applikationen och kontrollera att informationen finns kvar.
-
-Sammanfatta resultatet i en kort checklista i README.md. Ni behöver inte skriva en separat rapport med tio manuella testfall.
-
-Fel som behöver följas upp registreras som GitHub issues med en kort beskrivning av hur de uppstår och hur de rättades. Komplettera relevanta tester när ni rättar fel i testbar logik.
 # AI-användning + kontroll
 
 ## Customer
