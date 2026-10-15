@@ -4,7 +4,7 @@ using SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationM
 using static SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationEnums.TicketStatusEnum;
 using static SupportTicketSystem.Domain.Features.TicketRegistration.TicketRegistrationEnums.TicketPriorityEnum;
 
-namespace SupportTicketSystem.Tests.Domain;
+namespace SupportTicketSystem.Tests;
 
 public class TicketModelTests
 {
