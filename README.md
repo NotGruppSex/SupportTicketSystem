@@ -155,7 +155,7 @@ Tanken är att ärenden ska sparas i en folder benämnt SupportTicketSystem och 
 - Kodgranskning för förbättringsförslag.
 - Under utvecklingens gång, genererat xUnit tester för att kontrollera så allt fungerar. Disukterat evetuella fel.
 - Ingen färdig generad kod. 
-
+- Hjälp vid formulering av commitmeddelanden och pull request-beskrivningar.
 ## TicketRegistration:
 - Använt som bollande verktyg: "Jag vill göra X, tipsa/guida hur jag kan göra det?"
 - Följdfrågor och specificeringar, förklaringar.
