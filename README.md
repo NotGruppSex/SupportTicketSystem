@@ -150,11 +150,11 @@ Tanken är att ärenden ska sparas i en folder benämnt SupportTicketSystem och 
 # AI-användning + kontroll
 
 ## Customer
--Använt Codex som stöd för att förstå och föklara:
--Projektets struktur, DDD vs Clean Architecture
--Kodgranskning för förbättringsförslag
--Under utvecklingens gång, genererat xUnit tester för att kontrollera så allt fungerar. Disukterat evetuella fel
--Ingen färdig generad kod
+- Använt Codex som stöd för att förstå och föklara:
+- Projektets struktur, DDD vs Clean Architecture.
+- Kodgranskning för förbättringsförslag.
+- Under utvecklingens gång, genererat xUnit tester för att kontrollera så allt fungerar. Disukterat evetuella fel.
+- Ingen färdig generad kod. 
 
 ## TicketRegistration:
 - Använt som bollande verktyg: "Jag vill göra X, tipsa/guida hur jag kan göra det?"
