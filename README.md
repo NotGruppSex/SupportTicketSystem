@@ -68,7 +68,63 @@ Applikationen är en kund- och ärendehanteringsapplikation som hjälper använd
 - Inget felmeddelande av sökfunktionen för om det lyckas eller ej
 
 # Installation
-       //När klart - lös ev packetering inför installation
+
+## Förutsättningar
+
+- Windows 10 version 1809 (build 17763) eller senare / Windows 11
+- [Visual Studio 2022](https://visualstudio.microsoft.com/) med arbetsbelastningen **.NET Multi-Platform App UI / WinUI 3** ("Universal Windows Platform development" eller "Desktop development with C++" krävs ej, men ".NET desktop development" rekommenderas)
+- [.NET 10 SDK](https://dotnet.microsoft.com/download/dotnet/10.0)
+- Git
+
+## Bygga applikationen
+
+Klona repot:
+
+```bash
+git clone https://github.com/NotGruppSex/SupportTicketSystem.git
+cd SupportTicketSystem
+```
+
+Öppna lösningen `Support-Ticket-System.slnx` i Visual Studio, eller bygg från terminalen:
+
+```bash
+dotnet build Support-Ticket-System.slnx -c Release
+```
+
+## Starta applikationen
+
+**Visual Studio:**
+1. Välj `SupportTicketSystem.Presentation` som startprojekt (högerklicka → *Set as Startup Project*).
+2. Välj plattform **x64** i verktygsfältet.
+3. Tryck **F5** (med felsökning) eller **Ctrl+F5** (utan felsökning).
+
+**Terminal (OS-aware rekommenderas för WinUI):**
+
+```bash
+dotnet build Support-Ticket-System.slnx -c Debug -p:Platform=x64
+dotnet run --project SupportTicketSystem.Presentation -c Debug
+```
+
+> **OBS:** Applikationen är utvecklad i WinUI 3 och kan därför bara byggas och köras på Windows.
+
+## Köra testerna
+
+Testerna använder xUnit och finns i projekten `SupportTicketSystem.Tests` och `TestProject1`.
+
+**Visual Studio:** öppna *Test Explorer* (Test → Test Explorer) och kör *Run All Tests*, eller högerklicka på testprojektet → *Run Tests*.
+
+**Terminal:**
+
+```bash
+dotnet test Support-Ticket-System.slnx
+```
+
+Eller per projekt:
+
+```bash
+dotnet test SupportTicketSystem.Tests/SupportTicketSystem.Tests.csproj
+dotnet test TestProject1/TestProject1.csproj
+```
 
 # Gruppens regler
 
@@ -174,7 +230,6 @@ Tanken är att ärenden ska sparas i en folder benämnt SupportTicketSystem och 
 - Bett den kika på min feature och mina lösningar och komma med förbättringsförslag och hitta brister 
 
 ## TicketEditing
-**## TicketEditing**
 - Använt som bollplank och för att förstå projektets struktur, DDD och Clean Architecture.
 - Fått stegvis vägledning kring ViewModel, Service, interface, DTO och dependency injection.
 - Bett AI granska kod, föreslå förbättringar och hjälpa till med felsökning.
