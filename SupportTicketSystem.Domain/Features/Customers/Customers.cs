@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Mail;
+using System.Text.Json.Serialization;
 
 namespace SupportTicketSystem.Domain.Features.Customers;
 
@@ -15,7 +16,8 @@ public class Customer
     
     }
 
-    private Customer(Guid id, string name, string email)
+    [JsonConstructor]
+    public Customer(Guid id, string name, string email)
     {
         if (id == Guid.Empty)
         {

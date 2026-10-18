@@ -21,6 +21,10 @@ public class JsonTicketRegistrationRepository : IJsonTicketRegistrationRepositor
         );
 
     //Förbereder innehållet inför sparande i Json. Gör fin + c-insensitive, konvertera enums till text istället för siffror.
+    public JsonTicketRegistrationRepository(string filePath)
+    {
+        _filePath = Path.GetFullPath(filePath);
+    } // Låter testet använda en egen tillfällig fil utan att påverka appens data.
     private readonly JsonSerializerOptions _options = new JsonSerializerOptions
     {
         WriteIndented = true,

@@ -9,30 +9,6 @@ Applikationen är en kund- och ärendehanteringsapplikation som hjälper använd
 - Emilia - Ärendehantering - för att uppdatera ett ärende, dess status och tilldelning av handläggare enligt krav.             
 - Tomas  - Översikt - skapar överblick över samtliga ärenden och dess kunder/handläggare samt navigering av applikationen. 
 
-## Kontrollista
-- [x] Översiktssidan laddas vid start
-- [x] Navigeringsbaren syns och knapparna funkar
-- [x] Styles för knappar och headings funkar
-- [x] Felmeddelanden om properties saknad när man skapar kund
-- [x] Kan skapa en kund och informationen sparas
-- [x] Ny kund syns på lista nedan
-- [x] Felmeddelanden om properties saknas när man skapar nytt ärende
-- [x] Kan välja mellan sparade kunder
-- [x] Kan välja mellan prioriteter
-- [x] Meddelande om lyckad sparning av ärende
-- [x] Kan öppna ett befintligt ärende och se ärende- och kundinformation
-- [x] Kan redigera rubrik, beskrivning, prioritet, status och handläggare
-- [x] Kan lägga till kommentarer med datum och tid samt se tidigare kommentarer
-- [x] Alla ändringar sparas med en Save-knapp i JSON
-- [x] Felmeddelande visas vid ogiltiga ändringar
-- [x] Statusändring till InProgress eller Closed kräver handläggare
-- [x] Bekräftelsemeddelande visas vid lyckad sparning
-- [x] Två enhetstester för statusändringar är godkända
-- [x] Räkning av antal ärenden funkar
-- [x] Alla ärenden och dess information syns i en lista på översikten
-- [x] Sökning funkar
-- [x] Filter funkar
-
 ### Uppfyllda krav
 **Kundhantering**
 - Registrera kund med namn och epost
@@ -154,30 +130,42 @@ Innehåller applikationens modeller, enums, DTOs och vissa av applikationens int
 Kunderna sparas i c:\Users\<användarnamn>\AppData\Local\ som tempfiler.
 
 **Ärenden (tickets)**
-Tanken är att ärenden ska sparas i en folder benämnt SupportTicketSystem och filen heter tickets.json
-
-Fullständig sökväg ärenden:
-C:\Users\<användarnamn>\AppData\Local\SupportTicketSystem\tickets.json
-
-Dock verkar windows ta över vid sparning och de hamnar någon annan stans.
+Tanken är att ärenden ska sparas i en folder benämnt SupportTicketSystem och filen heter tickets.json. Den SKA sparas till: C:\Users\<Username>\AppData\Local\SupportTicketSystem\tickets.json men den hamnar automatiskt pga operativsystemet(?) till C:\Users\<Username>\AppData\Local\Packages\<folder with a lot of numbers and letters>\LocalCache\Local\SupportTicketSystem
 
 # Resultat av manuell kontroll
-       //Lägg till!
+## Kontrollista
+- [x] Översiktssidan laddas vid start
+- [x] Navigeringsbaren syns och knapparna funkar
+- [x] Styles för knappar och headings funkar
+- [x] Felmeddelanden om properties saknad när man skapar kund
+- [x] Kan skapa en kund och informationen sparas
+- [x] Ny kund syns på lista nedan
+- [x] Felmeddelanden om properties saknas när man skapar nytt ärende
+- [x] Kan välja mellan sparade kunder
+- [x] Kan välja mellan prioriteter
+- [x] Meddelande om lyckad sparning av ärende
+- [x] Kan öppna ett befintligt ärende och se ärende- och kundinformation
+- [x] Kan redigera rubrik, beskrivning, prioritet, status och handläggare
+- [x] Kan lägga till kommentarer med datum och tid samt se tidigare kommentarer
+- [x] Alla ändringar sparas med en Save-knapp i JSON
+- [x] Felmeddelande visas vid ogiltiga ändringar
+- [x] Statusändring till InProgress eller Closed kräver handläggare
+- [x] Bekräftelsemeddelande visas vid lyckad sparning
+- [x] Två enhetstester för statusändringar är godkända
+- [x] Räkning av antal ärenden funkar
+- [x] Alla ärenden och dess information syns i en lista på översikten
+- [x] Sökning funkar
+- [x] Filter funkar
 
-       // Beskrivning från uppgiften: Kontrollera också hela arbetsflödet i gränssnittet: registrera kund, skapa ärende, navigera till detaljer, tilldela handläggare, ändra status, kommentera, söka och filtrera. Starta om applikationen och kontrollera att informationen finns kvar.
-
-Sammanfatta resultatet i en kort checklista i README.md. Ni behöver inte skriva en separat rapport med tio manuella testfall.
-
-Fel som behöver följas upp registreras som GitHub issues med en kort beskrivning av hur de uppstår och hur de rättades. Komplettera relevanta tester när ni rättar fel i testbar logik.
 # AI-användning + kontroll
 
 ## Customer
- Använt Codex som stöd för att förstå och föklara:
- -Projektets struktur, DDD vs Clean Architecture
--Kodgranskning för förbättringsförslag
--Under utvecklingens gång, genererat xUnit tester för att kontrollera så allt fungerar. Disukterat evetuella fel
--Ingen färdig generad kod
-
+- Använt Codex som stöd för att förstå och föklara:
+- Projektets struktur, DDD vs Clean Architecture.
+- Kodgranskning för förbättringsförslag.
+- Under utvecklingens gång, genererat xUnit tester för att kontrollera så allt fungerar. Disukterat evetuella fel.
+- Ingen färdig generad kod. 
+- Hjälp vid formulering av commitmeddelanden och pull request-beskrivningar.
 ## TicketRegistration:
 - Använt som bollande verktyg: "Jag vill göra X, tipsa/guida hur jag kan göra det?"
 - Följdfrågor och specificeringar, förklaringar.
@@ -195,6 +183,10 @@ Fel som behöver följas upp registreras som GitHub issues med en kort beskrivni
 - Kontrollerat AI-förslag genom kodgranskning.
 - Använt AI till att få förklaringar av kod och tekniska begrepp.
 
-## Overview 
- //FYLL PÅ
+## Overview
+- Använt Codex som stöd för att diskutera och förklara testning av översiktsfunktionen.
+- Fått kodförslag till xUnit-tester och sök/filterfunktioner (LINQ).
+- Fått hjälp att tolka byggfel och testresultat samt formulera commitmeddelanden och pull request-beskrivning.
+- Bollat om bästa möjliga metod för olika problem.
+- Bett om feedback för förbättring eller möjliga missar i koden/funktioner.
 
