@@ -37,6 +37,12 @@ public class TicketEditorService : ITicketEditorService
         ticket.InputTitleValidation(request.TicketTitle);
         ticket.InputDescriptionValidation(request.TicketDescription);
 
+        if (!string.IsNullOrEmpty(request.CommentText) &&
+        string.IsNullOrWhiteSpace(request.CommentText))
+        {
+            throw new ArgumentException("Comment cannot contain only spaces.");
+        }
+
         if ((request.Status == TicketStatus.InProgress ||
                request.Status == TicketStatus.Closed) &&
                string.IsNullOrWhiteSpace(request.TechnichianAssigned))

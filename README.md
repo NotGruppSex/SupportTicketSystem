@@ -6,10 +6,8 @@ Applikationen är en kund- och ärendehanteringsapplikation som hjälper använd
 
 - William - Kundhantering - för att registrera och uppdatera kunder. Filsparning JSON.                               
 - Love - Ärenderegistrering - för att registrera ärenden kopplat till kunden. Filsparning JSON.         
-- Emilia - Ärendehantering - för att uppdatera ett ärende, tilldelning av handläggare osv.             
+- Emilia - Ärendehantering - för att uppdatera ett ärende, dess status och tilldelning av handläggare enligt krav.             
 - Tomas  - Översikt - skapar överblick över samtliga ärenden och dess kunder/handläggare samt navigering av applikationen. 
-
-
 
 ### Uppfyllda krav
 **Kundhantering**
@@ -28,10 +26,13 @@ Applikationen är en kund- och ärendehanteringsapplikation som hjälper använd
 
 **Ärendehantering**
 - Ärendehanteringsvy vid hantering av ärenden
-- Kunna ändra samtlig data i ärendet förutom statiska properties som t.ex. ID.
+- Kunna ändra samtlig data i ärendet förutom statiska properties som t.ex. ID
 - Tilldelning och ändring av handläggare
-- Validering av ???
--        Ev fyll på med Emilia
+- Validering av obligatoriska uppgifter, exempelvis rubrik och beskrivning
+- Validering av att handläggare krävs vid status InProgress eller Closed
+- Möjlighet att lägga till kommentarer med datum och tid
+- Visa tidigare kommentarer i kronologisk ordning
+- Spara ändringar så att informationen finns kvar
 
 **Översikt**
 - Ärendelista så man ser alla ärenden samtidigt
@@ -58,7 +59,9 @@ Applikationen är en kund- och ärendehanteringsapplikation som hjälper använd
 - Ser ej registrerat ärende i samma vy som det skapades när man registrerat det. 
 
 **Ärendehantering**
-- dsa
+- Tidigare kommentarer kan inte redigeras eller raderas.
+- Ingen historik över tidigare ändringar av status, prioritet eller handläggare.
+- Ingen möjlighet att ångra ändringar efter att de har sparats.
 
 **Översikt**
 - Ökad flexibilitet genom att kunna trycka på varje ärende och komma direkt till hanteringen av det ärendet.
@@ -141,7 +144,14 @@ Tanken är att ärenden ska sparas i en folder benämnt SupportTicketSystem och 
 - [x] Kan välja mellan sparade kunder
 - [x] Kan välja mellan prioriteter
 - [x] Meddelande om lyckad sparning av ärende
-- [ ] LÄGG TILL EMILIAS DELAR
+- [x] Kan öppna ett befintligt ärende och se ärende- och kundinformation
+- [x] Kan redigera rubrik, beskrivning, prioritet, status och handläggare
+- [x] Kan lägga till kommentarer med datum och tid samt se tidigare kommentarer
+- [x] Alla ändringar sparas med en Save-knapp i JSON
+- [x] Felmeddelande visas vid ogiltiga ändringar
+- [x] Statusändring till InProgress eller Closed kräver handläggare
+- [x] Bekräftelsemeddelande visas vid lyckad sparning
+- [x] Två enhetstester för statusändringar är godkända
 - [x] Räkning av antal ärenden funkar
 - [x] Alla ärenden och dess information syns i en lista på översikten
 - [x] Sökning funkar
@@ -164,7 +174,14 @@ Tanken är att ärenden ska sparas i en folder benämnt SupportTicketSystem och 
 - Bett den kika på min feature och mina lösningar och komma med förbättringsförslag och hitta brister 
 
 ## TicketEditing
- //FYLL PÅ
+**## TicketEditing**
+- Använt som bollplank och för att förstå projektets struktur, DDD och Clean Architecture.
+- Fått stegvis vägledning kring ViewModel, Service, interface, DTO och dependency injection.
+- Bett AI granska kod, föreslå förbättringar och hjälpa till med felsökning.
+- Fått kodförslag för bland annat Save-funktionen, validering och xUnit-tester.
+- Använt AI för att förstå och skapa två enhetstester för statusändringar.
+- Kontrollerat AI-förslag genom kodgranskning.
+- Använt AI till att få förklaringar av kod och tekniska begrepp.
 
 ## Overview
 - Använt Codex som stöd för att diskutera och förklara testning av översiktsfunktionen.
