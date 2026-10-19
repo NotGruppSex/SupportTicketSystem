@@ -19,9 +19,9 @@ Applikationen är en kund- och ärendehanteringsapplikation som hjälper använd
 
 **Ärenderegistrering**
 - Registrera ett nytt ärende med krav på titel, beskrivning, prioritet och aktuell kund
-- Validering och trimning inmatning från användaren
-- Ärendevy vid registrering
-- Spara kunder i JSON
+- Validering och trimning av inmatning från användaren
+- Ärendevy och funktionalitet vid registrering
+- Sparar ärenden i JSON
 - Gemensam funktion: designa styles för gemensamma buttons och headings
 
 **Ärendehantering**
@@ -41,7 +41,6 @@ Applikationen är en kund- och ärendehanteringsapplikation som hjälper använd
 - Sammanställning t.ex. av antal ärenden
 - Felhantering vid sökning/filtrering
 - Separation detaljinformation
--        LÄGG TILL EDITSIDAN
 - Gemensam funktion: Skapa navigeringsbaren och dess knappar till separata pages
   
 ### Kända begränsningar
